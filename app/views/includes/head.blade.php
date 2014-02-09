@@ -12,38 +12,38 @@
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
 		<!-- Libs CSS -->
-		<link rel="stylesheet" href="css/bootstrap.css">
-		<link rel="stylesheet" href="css/fonts/font-awesome/css/font-awesome.css">
-		<link rel="stylesheet" href="vendor/owl-carousel/owl.carousel.css" media="screen">
-		<link rel="stylesheet" href="vendor/owl-carousel/owl.theme.css" media="screen">
-		<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" media="screen">
+		<link rel="stylesheet" href="<?php echo ('css/bootstrap.css')?>">
+		<link rel="stylesheet" href="<?php echo ('css/fonts/font-awesome/css/font-awesome.css')?>">
+		<link rel="stylesheet" href="<?php echo ('vendor/owl-carousel/owl.carousel.css')?>" media="screen">
+		<link rel="stylesheet" href="<?php echo ('vendor/owl-carousel/owl.theme.css')?>" media="screen">
+		<link rel="stylesheet" href="<?php echo ('vendor/magnific-popup/magnific-popup.css')?>" media="screen">
 
 		<!-- Theme CSS -->
-		<link rel="stylesheet" href="css/theme.css">
-		<link rel="stylesheet" href="css/theme-elements.css">
-		<link rel="stylesheet" href="css/theme-animate.css">
+		<link rel="stylesheet" href="<?php echo ('css/theme.css')?>">
+		<link rel="stylesheet" href="<?php echo ('css/theme-elements.css')?>">
+		<link rel="stylesheet" href="<?php echo ('css/theme-animate.css')?>">
 
 		<!-- Current Page Styles -->
-		<link rel="stylesheet" href="vendor/rs-plugin/css/settings.css" media="screen">
-		<link rel="stylesheet" href="vendor/circle-flip-slideshow/css/component.css" media="screen">
+		<link rel="stylesheet" href="<?php echo ('vendor/rs-plugin/css/settings.css')?>" media="screen">
+		<link rel="stylesheet" href="<?php echo ('vendor/circle-flip-slideshow/css/component.css')?>" media="screen">
 
 		<!-- Skin CSS -->
-		<link rel="stylesheet" href="css/skins/blue.css">
+		<link rel="stylesheet" href="<?php echo ('css/skins/blue.css')?>">
 
 		<!-- Custom CSS -->
-		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="<?php echo ('css/custom.css')?>">
 
 		<!-- Responsive CSS -->
-		<link rel="stylesheet" href="css/theme-responsive.css" />
+		<link rel="stylesheet" href="<?php echo ('css/theme-responsive.css')?>" />
 
 		<!-- Head Libs -->
-		<script src="vendor/modernizr.js"></script>
+		<script src="<?php echo ('vendor/modernizr.js')?>"></script>
 
 		<!--[if IE]>
-			<link rel="stylesheet" href="css/ie.css">
+			<link rel="stylesheet" href="<?php echo ('css/ie.css')?>">
 		<![endif]-->
 
 		<!--[if lte IE 8]>
-			<script src="vendor/respond.js"></script>
+			<script src="<?php echo ('vendor/respond.js')?>"></script>
 		<![endif]-->
 
