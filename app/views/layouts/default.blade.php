@@ -5,6 +5,7 @@
 <html> <!--<![endif]-->
 	<head>
 		@include('includes.head')
+		@yield('meta')
 		<title>
 			@yield('title')
 		</title>
@@ -16,6 +17,10 @@
 				@include('includes.header')
 			</header>	
 			@yield('content')
+
+			<footer id="footer">
+				@include('includes.footer')
+			</footer>
 		</div>
 	</body>
 </html>

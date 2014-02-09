@@ -1,7 +1,7 @@
 <div class="container">
 					<h1 class="logo">
-						<a href="index.html">
-							<img alt="Porto" src="img/logo.png">
+						<a href="{{URL::to('/')}}">
+							<img alt="CBA" src="img/logo.png">
 						</a>
 					</h1>
 					<div class="search">
@@ -37,7 +37,7 @@
 							<ul class="social-icons">
 								<li class="facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook">Facebook</a></li>
 								<li class="twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter">Twitter</a></li>
-								<li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin">Linkedin</a></li>
+								<li class="instragram"><a href="http://www.instragram.com/" target="_blank" title="Instragram">Instragram</a></li>
 							</ul>
 						</div>
 						<nav class="nav-main mega-menu">
@@ -45,32 +45,18 @@
 								<li class="dropdown active">
 									<a class="dropdown-toggle" href="#">
 										Home
-										<i class="icon icon-angle-down"></i>
 									</a>
-									<ul class="dropdown-menu">
-										<li class="dropdown-submenu">
-											<a href="#">Sliders</a>
-											<ul class="dropdown-menu">
-												<li><a href="index.html">Revolution Slider</a></li>
-												<li><a href="index-slider-2.html">Nivo Slider</a></li>
-											</ul>
-										</li>
-										<li><a href="index.html">Home - Version 1</a></li>
-										<li><a href="index-2.html">Home - Version 2</a></li>
-										<li><a href="index-3.html">Home - Version 3</a></li>
-										<li><a href="index-one-page.html">One Page Website</a></li>
-									</ul>
 								</li>
 								<li>
 									<a href="shortcodes.html">Shortcodes</a>
 								</li>
 								<li class="dropdown">
 									<a class="dropdown-toggle" href="#">
-										About Us
+										Shop
 										<i class="icon icon-angle-down"></i>
 									</a>
 									<ul class="dropdown-menu">
-										<li><a href="about-us.html">About Us</a></li>
+										<li><a href="about-us.html">test</a></li>
 										<li><a href="about-us-basic.html">About Us - Basic</a></li>
 										<li><a href="about-me.html">About Me</a></li>
 									</ul>
