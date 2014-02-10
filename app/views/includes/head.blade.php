@@ -26,7 +26,7 @@
 		<link rel="stylesheet" href="<?php echo asset('vendor/circle-flip-slideshowasset/css/component.css')?>" media="screen">
 
 		<!-- Skin CSS -->
-		<link rel="stylesheet" href="<?php echo asset('css/skins/green.css')?>">
+		<link rel="stylesheet" href="<?php echo asset('css/skins/pome.css')?>">
 
 		<!-- Custom CSS -->
 		<link rel="stylesheet" href="<?php echo asset('css/custom.css')?>">
