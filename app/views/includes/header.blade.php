@@ -33,13 +33,7 @@
 				</div>
 				<div class="navbar-collapse nav-main-collapse collapse">
 					<div class="container">
-						<div class="social-icons">
-							<ul class="social-icons">
-								<li class="facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook">Facebook</a></li>
-								<li class="twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter">Twitter</a></li>
-								<li class="instragram"><a href="http://www.instragram.com/" target="_blank" title="Instragram">Instragram</a></li>
-							</ul>
-						</div>
+
 						<nav class="nav-main mega-menu">
 							<ul class="nav nav-pills nav-main" id="mainMenu">
 								<li class="dropdown active">

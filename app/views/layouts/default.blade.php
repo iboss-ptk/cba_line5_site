@@ -13,14 +13,18 @@
 	</head>
 	<body>
 		<div class="body">
+			
 			<header>
 				@include('includes.header')
-			</header>	
-			@yield('content')
-
+			</header>
+			<div role="main" class="main">	
+				
+				@yield('content')
+			</div>
 			<footer id="footer">
 				@include('includes.footer')
 			</footer>
+
 		</div>
 		@include('includes.libs')
 	</body>

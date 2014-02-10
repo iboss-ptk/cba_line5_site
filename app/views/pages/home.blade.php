@@ -11,6 +11,7 @@
 @stop
 
 @section('content')
+				@include('frac.test')
 				<div class="container">
 
 					<div class="row center">
@@ -33,5 +34,5 @@
 
 					<hr class="tall" />
 				</div>
-				@include('frac.test')
+				
 @stop
