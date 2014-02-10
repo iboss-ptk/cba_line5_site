@@ -5,8 +5,9 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-		"zizaco/confide": "3.1.*",
-		"zizaco/entrust": "dev-master"
+		"laravelbook/ardent": "2.4.*",
+		"zizaco/confide": "3.1.x",
+		"zizaco/entrust": "1.1.*"
 	},
 	"autoload": {
 		"classmap": [
