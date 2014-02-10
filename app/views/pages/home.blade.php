@@ -33,5 +33,5 @@
 
 					<hr class="tall" />
 				</div>
-
+				@include('frac.test')
 @stop

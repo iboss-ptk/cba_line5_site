@@ -22,5 +22,6 @@
 				@include('includes.footer')
 			</footer>
 		</div>
+		@include('includes.libs')
 	</body>
 </html>
