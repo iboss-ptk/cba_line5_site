@@ -1000,6 +1000,8 @@ div.slider div.tp-bannertimer {
 
 div.slider-container {
 	background: #171717;
+	z-index: -1;
+	position: relative;
 }
 
 div.slider-container div.tp-caption {
