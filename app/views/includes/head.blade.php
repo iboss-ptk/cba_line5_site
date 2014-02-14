@@ -44,4 +44,5 @@
 		<!--[if lte IE 8]>
 			<script src="<?php echo asset('vendor/respond.js')?>"></script>
 		<![endif]-->
-
+		<!--load angular-->
+		<script src="http://code.angularjs.org/1.2.6/angular.js"></script> 

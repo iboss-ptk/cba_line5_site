@@ -30,7 +30,7 @@
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla non <span class="alternative-font">metus.</span> pulvinar. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut eu risus enim, ut pulvinar lectus. Sed hendrerit nibh.
 							</p>
 							<button class="btn btn-primary btn-lg push-top push-bottom" data-toggle="modal" data-target="#loginModal">
-								Launch demo modal
+								Login
 							</button>
 
 							<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -41,12 +41,33 @@
 											<h4 class="modal-title" id="myModalLabel">Login</h4>
 										</div>
 										<div class="modal-body">
-											<!--login form-->
-											{}
+											
+    
+    <!-- PAGE HEADER -->
+    <div class="page-header"><h1>Login</h1></div>
+   
+    <!-- FORM -->
+    <form name="userForm" ng-submit="submitForm()" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+
+        <!-- USERNAME -->
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" ng-model="user.username" ng-minlength="3" ng-maxlength="8">
+        </div>
+        
+        <!-- EMAIL -->
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" ng-model="email">
+        </div>
+        
+        
+    </form>
+
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Login</button>
+											<button type="submit" class="btn btn-primary">Login</button>
 										</div>
 									</div>
 								</div>
