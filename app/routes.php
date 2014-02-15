@@ -14,9 +14,11 @@
 Route::get('/', function()
 {
 	return View::make('pages.home');
+
 });
 
 // Confide routes
+
 Route::get( 'user/create',                 'UserController@create');
 Route::post('user',                        'UserController@store');
 Route::get( 'user/login',                  'UserController@login');
@@ -27,3 +29,8 @@ Route::post('user/forgot_password',        'UserController@do_forgot_password');
 Route::get( 'user/reset_password/{token}', 'UserController@reset_password');
 Route::post('user/reset_password',         'UserController@do_reset_password');
 Route::get( 'user/logout',                 'UserController@logout');
+
+
+Route::get('userdata',function(){
+	return View::make('pages.userData')->with('username',Auth::user()->username);
+});
