@@ -27,11 +27,11 @@ CBA -- Forgot password
         @endif
 
         @if ( Session::get('notice') )
-        <div class="alert">{{ Session::get('notice') }}</div>
+        <div class="alert alert-info">{{ Session::get('notice') }}</div>
         @endif
 
 
-        <form method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
+        <form method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8" id="usrform">
             <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
             
             <div class="form-group">
@@ -50,18 +50,33 @@ CBA -- Forgot password
                 <label for="password_confirmation">{{{ Lang::get('confide::confide.password_confirmation') }}}</label>
                 <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation">
             </div>
+            <div class="form-group">
+                <label for="firstname">Firstname</label>
+                <input class="form-control" placeholder="Firstname" type="text" name="firstname" id="firstname" value="{{{ Input::old('firstname') }}}">
+            </div>
+            <div class="form-group">
+                <label for="lastname">Lastname</label>
+                <input class="form-control" placeholder="Lastname" type="text" name="lastname" id="lastname" value="{{{ Input::old('lastname') }}}">
+            </div>
+            <div class="form-group">
+                <label for="mobilephonenumber">Mobilephone</label>
+                <input class="form-control" placeholder="08xxxxxxxx" type="text" name="mobilephonenumber" id="mobilephonenumber" value="{{{ Input::old('mobilephonenumber') }}}">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea class="form-control" name="address" id="address" form="usrform" placeholder="Address">{{{ Input::old('address') }}}</textarea>
+            </div>
 
 
-
-            <div class="form-actions form-group">
-                <button type="submit" class="btn btn-primary btn-block btn-lg">{{{ Lang::get('confide::confide.signup.submit') }}}</button>
-          </div>
-
-          
-      </form>
+                <div class="form-actions form-group">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">{{{ Lang::get('confide::confide.signup.submit') }}}</button>
+                </div>
 
 
-  </div>
-</div>
-<hr class="tall" />
-@stop
+            </form>
+
+
+        </div>
+    </div>
+    <hr class="tall" />
+    @stop

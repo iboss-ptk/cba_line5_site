@@ -32,5 +32,10 @@ Route::get( 'user/logout',                 'UserController@logout');
 
 
 Route::get('userdata',function(){
-	return View::make('pages.userData')->with('username',Auth::user()->username);
+	$name = Confide::user()->username;
+	$email = Confide::user()->email;
+	return View::make('pages.userData')->with('username',$name);
 });
+
+
+Route::post('images/save',                'ImageController@upload');

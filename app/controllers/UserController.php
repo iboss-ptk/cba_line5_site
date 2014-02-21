@@ -33,6 +33,10 @@ class UserController extends BaseController {
         $user->username = Input::get( 'username' );
         $user->email = Input::get( 'email' );
         $user->password = Input::get( 'password' );
+        $user->firstname = Input::get( 'firstname' );
+        $user->lastname = Input::get( 'lastname' );
+        $user->mobilephonenumber = Input::get( 'mobilephonenumber' );
+        $user->address = Input::get( 'address' );
 
         // The password confirmation will be removed from model
         // before saving. This field will be used in Ardent's

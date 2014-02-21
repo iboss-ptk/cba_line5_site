@@ -24,7 +24,7 @@ CBA -- Login
 		@endif
 
 		@if ( Session::get('notice') )
-		<div class="alert alert-warning">{{{ Session::get('notice') }}}</div>
+		<div class="alert alert-success">{{{ Session::get('notice') }}}</div>
 		@endif
 		<!--login form-->
 
@@ -47,6 +47,8 @@ CBA -- Login
 
 					<input class="form-control" tabindex="2" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password">
 				</div>
+
+
 				<div class="form-group">
 					<label for="remember" class="checkbox">{{{ Lang::get('confide::confide.login.remember') }}}
 						<input type="hidden" name="remember" value="0">
@@ -54,22 +56,27 @@ CBA -- Login
 					</label>
 				</div>
 
+
+
+
 				<div class="form-group">
 					<button tabindex="3" type="submit" class="btn btn-primary btn-lg btn-block">{{{ Lang::get('confide::confide.login.submit') }}}</button>
 				</div>
 			</fieldset>
 		</form>
 
-
+		<div>
+			Don't have an account? <a href="{{{ URL::to('user/create')}}}">Resgister now.</a>
+		</div>
 
 
 
 	</div>
 
 </div>
-</div>
+
 
 <hr class="tall" />
-</div>
+
 
 @stop
