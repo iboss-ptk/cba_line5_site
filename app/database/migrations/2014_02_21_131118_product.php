@@ -32,7 +32,6 @@ class Product extends Migration {
             $table->boolean('use_url')->default(true);
             $table->string('url')->nullable();
             $table->string('file_path')->nullable();
-            
             $table->timestamps();
         });
 
@@ -40,7 +39,7 @@ class Product extends Migration {
         Schema::create('brands', function($table)
         {
             $table->increments('id')->unsigned();
-            $table->string('name')
+            $table->string('name');
             $table->timestamps();
         });
 
@@ -48,7 +47,7 @@ class Product extends Migration {
         Schema::create('categories', function($table)
         {
             $table->increments('id')->unsigned();
-            $table->string('name')
+            $table->string('name');
             $table->timestamps();
         });
 
@@ -61,7 +60,16 @@ class Product extends Migration {
 	 */
 	public function down()
 	{
-		//
+        Schema::table('products', function(Blueprint $table) {
+            $table->dropForeign('products_brand_id_foreign');
+            $table->dropForeign('products_category_id_foreign');
+            $table->dropForeign('products_product_pic ะำพ_id_foreign');
+        });
+
+		Schema::drop('products');
+        Schema::drop('product_pics');
+        Schema::drop('brands');
+        Schema::drop('categories');
 	}
 
 }
