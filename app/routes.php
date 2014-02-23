@@ -31,6 +31,11 @@ Route::post('user/reset_password',         'UserController@do_reset_password');
 Route::get( 'user/logout',                 'UserController@logout');
 
 
+Route::resource('product', 'ProductController');
+
+
 Route::get('userdata',function(){
-	return View::make('pages.userData')->with('username',Auth::user()->username);
+	$name = Confide::user()->username;
+	$email = Confide::user()->email;
+	return View::make('pages.userData')->with('username',$name);
 });

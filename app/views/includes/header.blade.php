@@ -14,7 +14,18 @@
 			</div>
 		</form>
 	</div>
-	
+
+	@if(Auth::check())
+	<nav>
+		<ul class="nav nav-top">
+			<li>
+				<a href="#">สวัสดีจ้า  	<b>{{ Confide::user()->username }}</b></a> 
+			</li>
+			
+		</ul>
+	</nav>
+
+	@endif
 	<button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
 		<i class="icon icon-bars"></i>
 	</button>
@@ -30,9 +41,6 @@
 					</a>
 				</li>
 
-				<li>
-					<a href="shortcodes.html">Shortcodes</a>
-				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" href="#">
 						Shop
@@ -118,6 +126,18 @@
 						</li>
 					</ul>
 				</li>
+				@if(Auth::check())
+				<li>
+					<a href="{{URL::to('user/profile')}}">
+						Profile
+					</a>
+				</li>
+				<li>
+					<a href="{{URL::to('user/logout')}}">
+						Logout
+					</a>
+				</li>
+				@else
 				<li class="dropdown">
 					<a class="dropdown-toggle" href="#">
 						Login
@@ -126,10 +146,9 @@
 					<ul class="dropdown-menu">
 						<li><a href="{{URL::to('user/login')}}">Login</a></li>
 						<li><a href="{{URL::to('user/create')}}">Register</a></li>
-						<li><a href="{{URL::to('user/confirm')}}">SP Confirmation</a></li>
-						
 					</ul>
 				</li>
+				@endif
 				
 			</ul>
 		</nav>
