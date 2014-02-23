@@ -38,7 +38,8 @@ header {
 }
 
 header > .navbar-collapse > .container {
-	position: relative
+	position: relative;
+	z-index: 1001;
 }
 
 header div.header-top {
