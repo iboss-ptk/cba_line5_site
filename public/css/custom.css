@@ -12,7 +12,8 @@ header {
 	background: linear-gradient(to bottom,  #ecf0f1 0%,#ecf0f1 100%);
 	min-height: 100px;
 	padding: 8px 0;
-	opacity: .9;
 }
 
-
+header div.container{
+	opacity: 0.9;
+}
