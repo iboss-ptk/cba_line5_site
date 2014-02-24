@@ -9,7 +9,7 @@ class ProductController extends \BaseController {
 	 */
 	public function index()
 	{
-		$products = json_encode(Product::All());
+		$products = Product::All();
 		return View::make('pages.product.index')
 			->with('products', $products);
 	}
@@ -21,7 +21,9 @@ class ProductController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$brand_all = Brand::All();
+		$category_all = Category::All();
+		return View::make('pages.product.create',array( 'brand_all' => $brand_all, 'category_all' => $category_all ) );
 	}
 
 	/**
@@ -31,7 +33,31 @@ class ProductController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$rules = array(
+			'name'       => 'required',
+
+		);
+		$validator = Validator::make(Input::all(), $rules);
+
+		// process the login
+		if ($validator->fails()) {
+			return Redirect::to('product/create')
+				->withErrors($validator)
+				->withInput();
+		} else {
+			// store
+			$product = new product;
+			$product->name          = Input::get('name');
+			$product->price         = Input::get('price');
+			$product->brand_id      = Input::get('brand');
+			$product->category_id   = Input::get('category');
+			$product->save();
+
+			// redirect
+			Session::flash('message', 'Successfully created product!');
+			return Redirect::to('product');
+		}
+
 	}
 
 	/**
@@ -42,7 +68,11 @@ class ProductController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$products = Product::All();
+
+		return View::make('pages.product.show')
+			->with('product', $product);
+
 	}
 
 	/**

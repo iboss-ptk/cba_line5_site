@@ -7,7 +7,7 @@
 @stop
 
 @section('title')
-test
+CBA -- Home
 @stop
 
 @section('content')
