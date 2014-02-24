@@ -7,7 +7,7 @@
 @stop
 
 @section('title')
-CBA -- Forgot password
+CBA -- Sign up
 @stop
 
 @section('content')

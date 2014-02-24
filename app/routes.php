@@ -32,6 +32,13 @@ Route::get( 'user/logout',                 'UserController@logout');
 
 
 Route::resource('product', 'ProductController');
+Route::get( 'product/toggle/{id}' ,function ($id)
+	{
+		$product = Prod::find($id);
+		$product->availability = !$product->availability;
+		$product->save();
+		return Redirect::to('product#'.$id);
+	});
 
 
 Route::get('userdata',function(){

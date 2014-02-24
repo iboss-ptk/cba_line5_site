@@ -48,10 +48,9 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="{{URL::to('/')}}">All</a></li>
-						<li><a href="{{URL::to('/')}}">Cosmetic</a></li>
-						<li><a href="{{URL::to('/')}}">Costume</a></li>
-						<li><a href="{{URL::to('/')}}">Glasses</a></li>
-						<li><a href="{{URL::to('/')}}">For men</a></li>
+						@foreach(Category::All() as $category)
+						<li><a href="{{URL::to('/')}}">{{$category->name }}</a></li>
+						@endforeach
 						
 					</ul>
 				</li>

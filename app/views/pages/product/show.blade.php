@@ -24,8 +24,8 @@ CBA -- {{ $product->name }}
 				 PIC<br>
 				<strong>Name:</strong> {{ $product->name }}  <br>
 				<strong>Price:</strong> {{ $product->price }} ฿<br>
-				<strong>Brand:</strong> {{{ Brand::find($value->brand_id)->name }}}<br>
-				<strong>Category:</strong> {{{ Brand::find($value->brand_id) }}}<br>
+				<strong>Brand:</strong> {{{ Brand::find($product->brand_id)->name }}}<br>
+				<strong>Category:</strong> {{{ Category::find($product->category_id)->name }}}<br>
 			</p>
 		</div>
 

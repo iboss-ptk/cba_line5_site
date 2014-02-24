@@ -14,6 +14,8 @@ header {
 	padding: 8px 0;
 }
 
-header div.container{
+
+body.sticky-menu-active div header{
 	opacity: 0.9;
 }
+

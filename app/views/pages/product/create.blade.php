@@ -14,7 +14,7 @@ CBA -- Forgot password
 <div class="container">
 
 
-@include('frac.prod_admin_nav')
+@include('pages.product.frac.nav')
 
         <div class="col-md-6 col-md-offset-3" style="margin-top:10px">
             <h1>Create a Product</h1>
