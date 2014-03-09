@@ -15,15 +15,6 @@ class ProductController extends \BaseController {
 		return View::make('pages.product.index',array( 'products'=> $products, 'brand_all' => $brand_all, 'category_all' => $category_all ) );
 	}
 
-	public function getIndex($brand, $category=null )
-	{
-		$products = Prod::All();	
-		$brand_all = Brand::All();
-		$category_all = Category::All();
-		var_dump($brand);
-		return View::make('pages.product.index',array( 'products'=> $products, 'brand_all' => $brand_all, 'category_all' => $category_all ) );
-	}
-
 
 	/**
 	 * Show the form for creating a new resource.
@@ -145,8 +136,8 @@ class ProductController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$nerd = Prod::find($id);
-		$nerd->delete();
+		$product = Prod::find($id);
+		$product->delete();
 
 		// redirect
 		Session::flash('message', 'Successfully deleted the product!');

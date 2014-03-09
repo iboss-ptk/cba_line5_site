@@ -11,7 +11,7 @@ CBA -- Products
 @stop
 
 @section('content')
-<div class="container">
+<div class="container" ng-app="product_manager">
 
 
     @include('pages.product.frac.nav')
@@ -71,7 +71,8 @@ CBA -- Products
 <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered"  ng-controller="ProductCtrl">
+    <input ng-model="test"> 
     <thead>
         <tr>
             <td>ID</td>
@@ -85,39 +86,35 @@ CBA -- Products
         </tr>
     </thead>
     <tbody>
-        @foreach($products as $key => $value)
-        <tr id="{{ $value->id}}" class="anchor <?php if(!$value->availability) echo "warning";?>">
-            <td>{{ $value->id }}</td>
-            <td>{{ $value->name }}</td>
+        <tr class="" ng-repeat="product in products | filter:test"> <!-- add class warning -->
+            <td>@{{ product.id }}</td>
+            <td>@{{ product.name }}</td>
             <td>pic</td> <!--pic-->
-            <td>{{{ Brand::find($value->brand_id)->name }}}</td>
-            <td>{{{ Category::find($value->category_id)->name }}}</td>
-            <td>{{ $value->price}}</td>
+            <td>@{{ product.brand }}</td>
+            <td>@{{ product.category }}</td>
+            <td>@{{ product.price}}</td>
             <td>
-                <a href="{{URL::to('product/toggle/' . $value->id)}}">
-                    @if($value->availability)
-                    <button class="btn btn-small btn-default btn-block anchor"><b>O</b></button>
-                    @else
-                    <button class="btn btn-small btn-primary btn-block anchor"><b>X</b></button>
-                    @endif
+                <a ng-href="product/toggle/@{{product.id}}">
+
+                    <button ng-if="product.available===0" class="btn btn-small btn-default btn-block anchor"><b>O</b></button>
+
+                    <button ng-if="product.available===1" class="btn btn-small btn-primary btn-block anchor"><b>X</b></button>
+
                 </a>
             </td>
 
             <td>
 
 
+                
+                <a class="btn btn-success btn-block" ng-href="product/@{{product.id}}" target="_blank">Show</a>
 
-                {{ Form::open(array('url' => 'product/' . $value->id)) }}
-                {{ Form::hidden('_method', 'DELETE') }}
-                <a class="btn btn-success btn-block" href="{{ URL::to('product/' . $value->id) }}" target="_blank">Show</a>
-
-                <!-- edit this nerd (uses the edit method found at GET /product/{id}/edit -->
-                <a class="btn btn-info  btn-block" href="{{ URL::to('product/' . $value->id . '/edit') }}" target="_blank">Edit</a>
-                {{ Form::submit('Delete', array('class' => 'btn btn-warning btn-block')) }}
-                {{ Form::close() }}
+                <a class="btn btn-info  btn-block" ng-href="product/@{{product.id}}/edit" target="_blank">Edit</a>
+                
+                <a class="btn btn-warning  btn-block" ng-click="delete_product(product.id)">Delete</a>
             </td>
         </tr>
-        @endforeach
+        <!-- end ng-reapeat -->
     </tbody>
 </table>
 
@@ -125,5 +122,6 @@ CBA -- Products
 </div>
 <hr class="tall" />
 <script src="<?php echo asset('vendor/angular.min.js')?>"></script>
-<script src="<?php echo asset('js/admin_product.js')?>"></script>
+<script src="<?php echo asset('js/product_manager.js')?>"></script>
+
 @stop

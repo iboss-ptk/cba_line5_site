@@ -30,7 +30,7 @@ Route::get( 'user/reset_password/{token}', 'UserController@reset_password');
 Route::post('user/reset_password',         'UserController@do_reset_password');
 Route::get( 'user/logout',                 'UserController@logout');
 
-
+Route::controller('productrest', 'ProductRestController');
 Route::resource('product', 'ProductController');
 Route::get( 'product/toggle/{id}' ,function ($id)
 	{
