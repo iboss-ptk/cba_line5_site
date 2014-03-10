@@ -32,6 +32,9 @@ Route::get( 'user/logout',                 'UserController@logout');
 
 Route::controller('productrest', 'ProductRestController');
 Route::resource('product', 'ProductController');
+Route::resource('brand', 'BrandController');
+Route::resource('category', 'CategoryController');
+
 Route::get( 'product/toggle/{id}' ,function ($id)
 	{
 		$product = Prod::find($id);
