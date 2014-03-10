@@ -15,7 +15,7 @@ class ProductTableSeeder extends Seeder
 				'price'    => rand(100,3000),
 				'brand_id' => rand(1,10),
 				'category_id' => rand(1,10),
-				'product_pic_id' => rand(1,10)
+				'product_pic' => 'NULL'
 				));
 		}
 

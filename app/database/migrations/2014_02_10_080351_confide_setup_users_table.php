@@ -19,6 +19,8 @@ class ConfideSetupUsersTable extends Migration {
             $table->string('password');
             $table->string('confirmation_code');
             $table->boolean('confirmed')->default(false);
+            $table->boolean('admin')->default(0);
+            $table->boolean('sp')->default(0);
             $table->timestamps();
         });
 

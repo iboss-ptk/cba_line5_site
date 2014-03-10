@@ -22,7 +22,7 @@ CBA -- Forgot password
             <!-- if there are creation errors, they will show here -->
             {{ HTML::ul($errors->all()) }}
 
-            {{ Form::open(array('url' => 'product')) }}
+            {{ Form::open(array('url' => 'product','files'=>true ))}}
 
             <div class="form-group">
                 {{ Form::label('name', 'Name') }}
@@ -30,8 +30,8 @@ CBA -- Forgot password
             </div>
 
             <div class="form-group">
-                {{ Form::label('picture', 'Picture') }}
-                {{ Form::text('picture', Input::old('picture'), array('class' => 'form-control')) }}
+                {{ Form::label('product_pic', 'Choose an image') }}
+                 {{ Form::file('product_pic', Input::old('product_pic'), array('class' => 'form-control'))}}
             </div>
             <div class="form-group">
                 {{ Form::label('price', 'Price') }}

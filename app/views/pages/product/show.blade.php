@@ -21,7 +21,7 @@ CBA -- {{ $product->name }}
 		<div class="jumbotron text-center">
 			<h2>{{ $product->name }}</h2>
 			<p>
-				 PIC<br>
+				 <strong>Pic:</strong>{{ HTML::image($product->product_pic, $product->name, array('width'=>'50')) }} <br>
 				<strong>Name:</strong> {{ $product->name }}  <br>
 				<strong>Price:</strong> {{ $product->price }} ฿<br>
 				<strong>Brand:</strong> {{{ Brand::find($product->brand_id)->name }}}<br>
