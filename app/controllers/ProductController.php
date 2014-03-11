@@ -57,9 +57,10 @@ class ProductController extends BaseController {
 			$product->brand_id      = Input::get('brand');
 			$product->category_id   = Input::get('category');
 			$image = Input::file('product_pic');
-			$filename = date('Y-m-d-H:i:s')."-".$image->getClientOriginalName();
+			$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
 			Image::make($image->getRealPath())->resize(468,249)->save(public_path().'/img/products/'.$filename);
-			$product->product_pic = 'img/products/'.$filename;
+
+			$product->product_pic = '/img/products/'.$filename;
 			$product->save();
 
 			// redirect
@@ -127,10 +128,12 @@ class ProductController extends BaseController {
 			$product->price         = Input::get('price');
 			$product->brand_id      = Input::get('brand');
 			$product->category_id   = Input::get('category');
+			File::delete(public_path().$product->image);
+
 			$image = Input::file('product_pic');
-			$filename = date('Y-m-d-H:i:s')."-".$image->getClientOriginalName();
+			$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
 			Image::make($image->getRealPath())->resize(468,249)->save(public_path().'/img/products/'.$filename);
-			$product->product_pic = 'img/products/'.$filename;
+			$product->product_pic = '/img/products/'.$filename;
 			$product->save();
 
 			// redirect
@@ -149,7 +152,7 @@ class ProductController extends BaseController {
 	{
 		$product = Prod::find($id);
 		if ($product) {
-			File::delete('public/'.$product->image);
+			File::delete(public_path().$product->image);
 			$product->delete();
 			Session::flash('message', 'Successfully deleted the product!');
 		return Redirect::to('product');
