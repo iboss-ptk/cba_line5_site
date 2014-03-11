@@ -33,4 +33,6 @@ class ProductRestController extends \BaseController {
 		return $categories;
 	}
 
+	
+
 }

@@ -23,27 +23,47 @@ CBA -- Brands
         <hr>
         <div ng-repeat="brand in brands | filter:bname">
             <p>
-                <span id="@{{brand.id}}">@{{ brand.name }}</span>
-                <span class="pull-right" ng-if="brand !== NULL">
-                    <a><i class="fa fa-pencil-square fa-2x" ng-click="edit(brand.id)"></i></a>
-                    <a><i class="fa fa-minus-square fa-2x" ng-click="delete(brand.id)"></i></a>
+                <span>@{{ brand.name }}</span>
+                <span class="pull-right">
+                    <a data-toggle="modal" data-target="#@{{brand.id}}"><i class="fa fa-pencil-square fa-2x" ng-click="edit(brand.id,brand.name)"></i></a>
+                    <a><i class="fa fa-minus-square fa-2x" ng-click="delete(brand.id,brand.name)"></i></a>
                 </span>
             </p>
+
+            <div class="modal fade" id="@{{brand.id}}" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="filterLabel">Edit name</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="edit">
+                        <input class="form-control" value="@{{brand.name}}"> 
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" data-dismiss="modal" form="edit" class="btn btn-primary" ng-click="edit(brand.id, brand.name)">Submit</button>
+                </div>
+            </div>
         </div>
-
-        <hr>
-    <div class="input-group">
-      <input type="text" class="col-md-7" ng-model="new_brand">
-      <span class="input-group-btn">
-        <button class="btn btn-default btn-sm" type="button" ng-click="add()">ADD!</button>
-      </span>
     </div>
+</div>
+
+<hr>
+<div class="input-group">
+    <input type="text" name="name" class="col-md-7" ng-model="new_brand">
+  <span class="input-group-btn">
+    <button class="btn btn-default btn-sm" type="button" ng-click="add()">ADD!</button>
+</span>
+</div>
 
 
 
-    </div>
+</div>
 
-    <script src="<?php echo asset('vendor/angular.min.js')?>"></script>
-    <script src="<?php echo asset('js/brand_manager.js')?>"></script>
+<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
+<script src="<?php echo asset('js/brand_manager.js')?>"></script>
 
-    @stop
+@stop
