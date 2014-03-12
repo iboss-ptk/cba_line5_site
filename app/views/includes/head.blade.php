@@ -26,7 +26,8 @@
 
 		<!-- Current Page Styles -->
 		<link rel="stylesheet" href="<?php echo asset('vendor/rs-plugin/css/settings.css')?>" media="screen">
-		<link rel="stylesheet" href="<?php echo asset('vendor/circle-flip-slideshowasset/css/component.css')?>" media="screen">
+
+	<!-- <link rel="stylesheet" href="<?php echo asset('vendor/circle-flip-slideshowasset/css/component.css')?>" media="screen"> -->
 
 		<!-- Skin CSS -->
 		<link rel="stylesheet" href="<?php echo asset('css/skins/pome.css')?>">

@@ -66,7 +66,9 @@ class BrandController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$brand = Brand::find($id);
+		$brand->name = Input::get('name');
+		$brand->save();
 	}
 
 	/**
@@ -77,7 +79,9 @@ class BrandController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$brand = Brand::find($id);
+		Prod::where('brand_id', '=', $id)->delete();
+		$brand->delete();
 	}
 
 }

@@ -9,7 +9,7 @@ class CategoryController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('pages.product.category');
 	}
 
 	/**
@@ -29,7 +29,11 @@ class CategoryController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$category = new Category;
+		$category->name = Input::get('name');
+		$category->save();
+
+		return Response::json(array('name' =>Input::get('name')));
 	}
 
 	/**
@@ -62,7 +66,9 @@ class CategoryController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$category = Category::find($id);
+		$category->name = Input::get('name');
+		$category->save();
 	}
 
 	/**
@@ -73,7 +79,9 @@ class CategoryController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$category = Category::find($id);
+		Prod::where('brand_id', '=', $id)->delete();
+		$category->delete();
 	}
 
 }
