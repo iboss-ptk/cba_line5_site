@@ -73,12 +73,16 @@ Route::group(array('before' => 'setcookie'),function()
 
 Route::controller('productrest', 'ProductRestController');
 Route::resource('product', 'ProductController');
+Route::resource('brand', 'BrandController');
+Route::resource('category', 'CategoryController');
+
 Route::get( 'product/toggle/{id}' ,function ($id)
 	{
 		$product = Prod::find($id);
 		$product->availability = !$product->availability;
 		$product->save();
-		return Redirect::to('product#'.$id);
+		$products = Prod::paginate($limit = 10)->toJson();
+		return $products;
 	});
 
 
