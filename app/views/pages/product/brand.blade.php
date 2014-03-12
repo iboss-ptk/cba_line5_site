@@ -11,14 +11,14 @@ CBA -- Brands
 @stop
 
 @section('content')
-<div class="container" ng-app="brand_manager" ng-controller="BrandCtrl">
+<div class="container" ng-app="brand_manager">
 
 
     @include('pages.product.frac.nav')
     <h1>Brand</h1>
     <br>
-
-    <div class="col-md-6 col-md-offset-3">
+    <div ng-controller="BrandCtrl">
+    <div class="col-md-6 col-md-offset-3" >
         <input  ng-model="bname.name" placeholder="brand.." class="form-control" >
         <hr>
         <div ng-repeat="brand in brands | filter:bname">
@@ -58,7 +58,7 @@ CBA -- Brands
     <button class="btn btn-default btn-sm" type="button" ng-click="add()">ADD!</button>
 </span>
 </div>
-
+</div>
 
 
 </div>

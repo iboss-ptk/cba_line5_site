@@ -29,8 +29,11 @@ class BrandController extends \BaseController {
 	 */
 	public function store()
 	{
-		$brand       = new Brand;
+		$brand = new Brand;
 		$brand->name = Input::get('name');
+		$brand->save();
+
+		return Response::json(array('name' =>Input::get('name')));
 	}
 
 	/**

@@ -17,7 +17,7 @@ app.service('brandService',function($http){
 });
 
 
-controllers.BrandCtrl = function($scope, brandService){
+controllers.BrandCtrl = function($scope, $http, brandService){
 
 	function getById(arr, id) {
 		for (var d = 0, len = arr.length; d < len; d += 1) {
@@ -33,27 +33,25 @@ controllers.BrandCtrl = function($scope, brandService){
 	});
 
 	$scope.add = function(){
-		if($scope.new_brand.trim() !=='') $scope.brands.push({name:$scope.new_brand});
-		$http.get('/brand').success(function(){
+		if($scope.new_brand.trim() !=='') {
+			$scope.brands.push({name:$scope.new_brand});
+
+			// $http.post('brand',{'name':$scope.new_brand})
+			// .success(function(data) {
+			// 	console.log(data);
+			// });
 			
-		});
+		 $http.post('brand', {'name':$scope.new_brand})
+            .success(function(data) {
+            	console.log(data)
+            });
 
-		$http({
-        method  : 'POST',
-        url     : '/brand',
-        data    : $.param($scope.new_brand),  // pass in data as strings
-        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-    	})
-        .success(function(data) {
-            console.log(data);
-        });
-
-		$scope.new_brand='';
+			$scope.new_brand='';
 		// ajax store
-
+		}
 	}
 
-	$scope.edit = function(){
+$scope.edit = function(){
 
 		// ajax edit
 	}
