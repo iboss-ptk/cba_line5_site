@@ -10,6 +10,10 @@
 */
 
 class UserController extends BaseController {
+    public function tryCook($cc){
+        return '$cc';
+
+    }
 
     /**
      * Displays the form for account creation
