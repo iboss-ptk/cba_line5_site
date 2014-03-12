@@ -11,26 +11,23 @@ CBA -- Products
 @stop
 
 @section('content')
-<div class="container" ng-app="product_manager">
+<div class="container" ng-app="product_manager"  ng-controller="ProductCtrl">
 
 
     @include('pages.product.frac.nav')
     <h1>All the product</h1>
     <!-- Button trigger modal -->
 
-    <button class="btn btn-primary btn-small " data-toggle="modal" data-target="#myModal">
-      filter option
-  </button>
 
-  <br>
+    <br>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Filter option</h4>
+            <h4 class="modal-title" id="filterLabel">Filter option</h4>
         </div>
         <div class="modal-body">
             <form class="form-horizontal" id="filter" role="form" method="get" action="{{URL::to('product')}}">
@@ -71,51 +68,64 @@ CBA -- Products
 <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
 
-<table class="table table-striped table-bordered"  ng-controller="ProductCtrl">
-    <input ng-model="test"> 
-    <thead>
-        <tr>
-            <td>ID</td>
-            <td>Name</td>
-            <td>Picture</td>
-            <td>Brand</td>
-            <td>Category</td>
-            <td>Price</td>
-            <td>Availability</td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="" ng-repeat="product in products | filter:test"> <!-- add class warning -->
-            <td>@{{ product.id }}</td>
-            <td>@{{ product.name }}</td>
-            <td>@{{ product.product_pic }}</td> <!--pic-->
-            <td>@{{ product.brand }}</td>
-            <td>@{{ product.category }}</td>
-            <td>@{{ product.price}}</td>
-            <td>
-                <a ng-href="product/toggle/@{{product.id}}">
+<table class="table table-striped table-bordered">
+ <a class=" pull-right" data-toggle="modal" data-target="#filterModal">
+  filter option
+</a>
+<input ng-model="search" placeholder="product name..." class="form-control" >
+<hr>
+<thead>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Picture</td>
+        <td>Brand</td>
+        <td>Category</td>
+        <td>Price</td>
+        <td>Availability</td>
+        <td></td>
+    </tr>
+</thead>
+<tbody>
+    <tr class="" ng-repeat="product in products"> <!-- add class warning -->
+        <td>@{{ product.id }}</td>
+        <td>@{{ product.name }}</td>
+        <td>@{{ product.product_pic }}</td> <!--pic-->
+        <td>@{{ product.brand }}</td>
+        <td>@{{ product.category }}</td>
+        <td>@{{ product.price}}</td>
+        <td>
+            <a ng-click="toggle(product.id, $index)">
 
-                    <button ng-if="product.available===0" class="btn btn-small btn-default btn-block anchor"><b>O</b></button>
+                <button ng-if="product.availability===1" class="btn btn-small btn-default btn-block"><b>O</b></button>
 
-                    <button ng-if="product.available===1" class="btn btn-small btn-primary btn-block anchor"><b>X</b></button>
+                <button ng-if="product.availability===0" class="btn btn-small btn-primary btn-block"><b>X</b></button>
 
-                </a>
-            </td>
+            </a>
+        </td>
 
-            <td>
+        <td>
 
 
-                
-                <a class="btn btn-success btn-block" ng-href="product/@{{product.id}}" target="_blank">Show</a>
 
-                <a class="btn btn-info  btn-block" ng-href="product/@{{product.id}}/edit" target="_blank">Edit</a>
-                
-                <a class="btn btn-warning  btn-block" ng-click="delete_product(product.id)">Delete</a>
-            </td>
-        </tr>
-        <!-- end ng-reapeat -->
-    </tbody>
+            <a class="btn btn-success btn-block" ng-href="product/@{{product.id}}" target="_blank">Show</a>
+
+            <a class="btn btn-info  btn-block" ng-href="product/@{{product.id}}/edit" target="_blank">Edit</a>
+
+            <a class="btn btn-warning  btn-block" ng-click="delete_product(product.id)">Delete</a>
+
+            
+        </td>
+    </tr>
+    <!-- end ng-reapeat -->
+    <div>
+       <ul class="pager">
+          <li class="previous" ng-click="prev()"><a href="">&larr; Previous</a></li>
+          <li>Pages : @{{currentPage}} / @{{total}} </li>
+          <li class="next" ng-click="next()"><a href="">Next &rarr;</a></li>
+      </ul>
+  </div>
+</tbody>
 </table>
 
 

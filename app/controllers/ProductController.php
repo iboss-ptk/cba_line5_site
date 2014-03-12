@@ -58,11 +58,11 @@ class ProductController extends BaseController {
 			$product->category_id   = Input::get('category');
 			$image = Input::file('product_pic');
 			$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
-			Image::make($image->getRealPath())->resize(468,249)->save(public_path().'/img/products/'.$filename);
+			Image::make($image->getRealPath())->save(public_path().'/img/products/'.$filename);
 
-			$product->product_pic = '/img/products/'.$filename;
+			$product->product_pic = $filename;
 			$product->save();
-
+			var_dump($product);
 			// redirect
 			Session::flash('message', 'Successfully created product!');
 			return Redirect::to('product');
@@ -132,8 +132,8 @@ class ProductController extends BaseController {
 
 			$image = Input::file('product_pic');
 			$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
-			Image::make($image->getRealPath())->resize(468,249)->save(public_path().'/img/products/'.$filename);
-			$product->product_pic = '/img/products/'.$filename;
+			Image::make($image->getRealPath())->save(public_path().'/img/products/'.$filename);
+			$product->product_pic = $filename;
 			$product->save();
 
 			// redirect

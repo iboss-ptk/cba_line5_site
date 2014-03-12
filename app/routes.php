@@ -32,12 +32,24 @@ Route::get( 'user/logout',                 'UserController@logout');
 
 Route::controller('productrest', 'ProductRestController');
 Route::resource('product', 'ProductController');
+Route::resource('brand', 'BrandController');
+Route::resource('category', 'CategoryController');
+Route::get('image/{src}/{w?}/{h?}',function($src,$w=100,$h=100){
+	//intervention image cache
+
+	//closure and coping anoymous function
+	$cacheimage = Image::cache(function($image) use ($src,$w,$h){
+		return $image->make('img/products/'.$src)->resize($w,$h);			
+	},10,true);
+	return Response::make($cacheimage,200,array('Content-Type'=>'image/jpeg'));
+});
 Route::get( 'product/toggle/{id}' ,function ($id)
 	{
 		$product = Prod::find($id);
 		$product->availability = !$product->availability;
 		$product->save();
-		return Redirect::to('product#'.$id);
+		$products = Prod::paginate($limit = 10)->toJson();
+		return $products;
 	});
 
 

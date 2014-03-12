@@ -9,6 +9,9 @@
 		<!-- Web Fonts  -->
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
+		<!--icon -->
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
 		<!-- Libs CSS -->
 		<link rel="stylesheet" href="<?php echo asset('css/bootstrap.css')?>">
 		<link rel="stylesheet" href="<?php echo asset('css/fonts/font-awesome/css/font-awesome.css')?>">
