@@ -46,11 +46,65 @@ app.service('categoryService',function($http){
 });
 
 
+
+
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
+
 controllers.ProductCtrl = function($scope, $http, productService , brandService, categoryService, searchService){
 	
+console.log('test');
+productService.getProducts().success(function(data){
+      $scope.currentPage = 1;
+      $scope.products = data.data;
+      $scope.total = data.last_page;
 
-  $scope.delete_product = function(prodID){
-    var confirm_deletion = confirm("Deleting "+prodID+". Are you sure?");
+      console.log($scope.products);
+      brandService.getBrands().success(function(data){
+        var brand_list = {};
+
+        for (var i = 0; i<data.length; i++) {
+          var obj =data[i];
+          brand_list[obj.id] = obj.name;
+        }
+
+        for (var i = $scope.products.length - 1; i >= 0; i--) {
+          $scope.products[i].brand = brand_list[$scope.products[i].brand_id];
+        };
+
+      });
+
+      categoryService.getCategories().success(function(data){
+        var category_list = {};
+
+        for (var i = 0; i<data.length; i++) {
+          var obj =data[i];
+          category_list[obj.id] = obj.name;
+        }
+
+        for (var i = $scope.products.length - 1; i >= 0; i--) {
+          $scope.products[i].category = category_list[$scope.products[i].category_id];
+        };
+
+      });
+    });
+
+
+
+  function getById(arr, id) {
+    for (var d = 0, len = arr.length; d < len; d += 1) {
+      if (arr[d].id === id) {
+        return d;
+      }
+    }
+  }
+
+  $scope.delete_product = function(prodID, name){
+    var confirm_deletion = confirm("Deleting "+name+". Are you sure?");
 
     if(confirm_deletion){
 
@@ -61,7 +115,14 @@ controllers.ProductCtrl = function($scope, $http, productService , brandService,
       error(function(data) {
       });
 
-      document.location.reload(true);
+
+
+      var index = getById($scope.products, prodID);
+      console.log(index);
+      $scope.products.remove(index);
+
+      $scope.message = name + ' is deleted.';
+
     }
 
 
@@ -141,7 +202,7 @@ controllers.ProductCtrl = function($scope, $http, productService , brandService,
   }
 
 
- 
+
   $scope.$watch('search',function(){
 
     searchService.getProducts($scope.search,1).success(function(data){
@@ -183,34 +244,8 @@ controllers.ProductCtrl = function($scope, $http, productService , brandService,
 
 
     $http.get('product/toggle/'+product).success(function(data){
-      $scope.products = data.data;
-      brandService.getBrands().success(function(data){
-        var brand_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          brand_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].brand = brand_list[$scope.products[i].brand_id];
-        };
-
-      });
-
-      categoryService.getCategories().success(function(data){
-        var category_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          category_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].category = category_list[$scope.products[i].category_id];
-        };
-
-      });
+      $scope.products[index].availability = !($scope.products[index].availability);
+      console.log( $scope.products[index].availability);
     });
 
 

@@ -1,4 +1,4 @@
-var app = angular.module('brand_manager', []);
+var app = angular.module('category_manager', []);
 var controllers = {};
 
 Array.prototype.remove = function(from, to) {
@@ -7,17 +7,17 @@ Array.prototype.remove = function(from, to) {
 	return this.push.apply(this, rest);
 };
 
-app.service('brandService',function($http){
+app.service('categoryService',function($http){
 
 	return {
-		getBrands: function() {
-			return $http.get('productrest/brand');
+		getCategories: function() {
+			return $http.get('productrest/category');
 		}
 	};
 });
 
 
-controllers.BrandCtrl = function($scope, $http, brandService){
+controllers.CategoryCtrl = function($scope, $http, categoryService){
 
 	function getById(arr, id) {
 		for (var d = 0, len = arr.length; d < len; d += 1) {
@@ -27,53 +27,53 @@ controllers.BrandCtrl = function($scope, $http, brandService){
 		}
 	}
 
-	brandService.getBrands().success(function(data){
-		$scope.brands = data;
+	categoryService.getCategories().success(function(data){
+		$scope.categories = data;
 	});
 
 	$scope.editname = {};
 
 	$scope.open_editor = function(id,name){
-		var index = getById($scope.brands, id);
+		var index = getById($scope.categories, id);
 		$scope.temp = name;
-		console.log($scope.brands[index].name);
-		$scope.editname[id] = $scope.brands[index].name;
+		console.log($scope.categories[index].name);
+		$scope.editname[id] = $scope.categories[index].name;
 	}
 
 
 	$scope.add = function(){
-		if($scope.new_brand.trim() !=='') {
-			$scope.brands.push({name:$scope.new_brand});
+		if($scope.new_category.trim() !=='') {
+			$scope.categories.push({name:$scope.new_category});
 
-			$http.post('brand', {'name':$scope.new_brand})
+			$http.post('category', {'name':$scope.new_category})
 			.success(function(data) {
 				console.log(data)
 			});
 
-			$scope.new_brand='';
+			$scope.new_category='';
 		}
 	}
 
 	$scope.edit = function(id){
 
-		var index = getById($scope.brands, id);
+		var index = getById($scope.categories, id);
 
 		if($scope.editname[id].trim()!=='') {
 
-			console.log($scope.brands[index].name);
+			console.log($scope.categories[index].name);
 
-			$scope.brands[index].name = $scope.editname[id];
+			$scope.categories[index].name = $scope.editname[id];
 			var new_name = $scope.editname[id];
 
-			$http.put('brand/'+id,{'name':new_name}).success(function(data){
+			$http.put('category/'+id,{'name':new_name}).success(function(data){
 				console.log(data);
 			}).error(function(){
 				console.log('shit, my bad.')
 			});
 
-
+			
 		}else{
-			$scope.brands[index].name = $scope.temp;
+			$scope.categories[index].name = $scope.temp;
 		}
 
 	}
@@ -81,11 +81,11 @@ controllers.BrandCtrl = function($scope, $http, brandService){
 	$scope.delete = function(id, name){
 		if(confirm('Deleting '+name+'.\n\n****Caution****\n\nThis will delete all the product in '+name+'. Proceed?'))
 		{
-			var index = getById($scope.brands, id);
-			$scope.brands.remove(index);
+			var index = getById($scope.categories, id);
+			$scope.categories.remove(index);
 			//ajax destroy
 
-			$http.delete('brand/'+id).success(function(data){
+			$http.delete('category/'+id).success(function(data){
 				console.log(data);
 			});
 
