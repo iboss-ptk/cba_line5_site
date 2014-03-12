@@ -48,6 +48,8 @@ app.service('categoryService',function($http){
 
 
 
+
+
 Array.prototype.remove = function(from, to) {
   var rest = this.slice((to || from) + 1 || this.length);
   this.length = from < 0 ? this.length + from : from;
@@ -58,42 +60,7 @@ Array.prototype.remove = function(from, to) {
 controllers.ProductCtrl = function($scope, $http, productService , brandService, categoryService, searchService){
 	
 console.log('test');
-productService.getProducts().success(function(data){
-      $scope.currentPage = 1;
-      $scope.products = data.data;
-      $scope.total = data.last_page;
-
-      console.log($scope.products);
-      brandService.getBrands().success(function(data){
-        var brand_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          brand_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].brand = brand_list[$scope.products[i].brand_id];
-        };
-
-      });
-
-      categoryService.getCategories().success(function(data){
-        var category_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          category_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].category = category_list[$scope.products[i].category_id];
-        };
-
-      });
-    });
-
-
+$scope.search = '';
 
   function getById(arr, id) {
     for (var d = 0, len = arr.length; d < len; d += 1) {
@@ -163,6 +130,8 @@ productService.getProducts().success(function(data){
       });
     });
 
+    $scope.message = '';
+
 
   }
 
@@ -199,11 +168,15 @@ productService.getProducts().success(function(data){
 
       });
     });
+    $scope.message = '';
   }
 
 
 
   $scope.$watch('search',function(){
+
+    console.log($scope.search);
+    $scope.message = '';
 
     searchService.getProducts($scope.search,1).success(function(data){
       $scope.products = data.data;
@@ -248,14 +221,13 @@ productService.getProducts().success(function(data){
       console.log( $scope.products[index].availability);
     });
 
+    $scope.message = '';
+
 
   }
 
 
 }
-
-
-
 
 
 app.controller(controllers);
