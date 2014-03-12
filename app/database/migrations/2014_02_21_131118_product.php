@@ -17,7 +17,7 @@ class Product extends Migration {
         {
             $table->increments('id')->unsigned();
             $table->string('name')->unique();
-            $table->integer('price');
+            $table->decimal('price', 6, 2);
             $table->integer('brand_id')->references('id')->on('brands');
             $table->integer('category_id')->references('id')->on('categories');
             $table->boolean('availability')->default(true);
