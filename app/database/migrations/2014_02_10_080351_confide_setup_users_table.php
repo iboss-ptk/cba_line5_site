@@ -10,6 +10,59 @@ class ConfideSetupUsersTable extends Migration {
      */
     public function up()
     {
+        // Creates the products table
+        Schema::create('products', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name')->unique();
+            $table->decimal('price', 6, 2);
+            $table->integer('brand_id')->references('id')->on('brands');
+            $table->integer('category_id')->references('id')->on('categories');
+            $table->boolean('availability')->default(true);
+            $table->string('product_pic');
+            $table->timestamps();
+        });
+
+        // Creates the attributes table
+        Schema::create('attributes', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name')->unique();
+            $table->integer('attribute_type_id')->references('id')->on('attribute_types');
+            $table->timestamps();
+        });
+
+        // Creates the attribute_types table
+        Schema::create('attribute_types', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name')->unique();
+            $table->timestamps();
+        });
+
+         // Creates the attribute_links table
+        Schema::create('attribute_links', function($table)
+        {
+            $table->integer('product_id')->references('id')->on('products');
+            $table->integer('attribute_id')->references('id')->on('attributes');
+        });
+
+
+        // Creates the brands table
+        Schema::create('brands', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        // Creates the categories table
+        Schema::create('categories', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name');
+            $table->timestamps();
+        });
         // Creates the users table
         Schema::create('users', function($table)
         {
@@ -21,7 +74,11 @@ class ConfideSetupUsersTable extends Migration {
             $table->boolean('confirmed')->default(false);
             $table->boolean('isadmin')->default(0);
             $table->boolean('issp')->default(0);
-            $table->boolean('banned')->default(0);
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->integer('mobilephonenumber')->unsigned();
+            $table->text('address');
+            $table->boolean('banned')->default(false);
             $table->timestamps();
         });
          Schema::create('sales',function($table)
@@ -51,7 +108,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->increments('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('confirmed')->default(0);
-            $table->string('image.path'); 
+            $table->string('image_path'); 
         });
          Schema::create('order_lists',function($table)
         {
@@ -79,7 +136,29 @@ class ConfideSetupUsersTable extends Migration {
      * @return void
      */
     public function down()
-    {
+    {   
+        Schema::table('products', function(Blueprint $table) {
+            $table->dropForeign('products_brand_id_foreign');
+            $table->dropForeign('products_category_id_foreign');
+            $table->dropForeign('products_product_pic_id_foreign');
+        });
+
+        Schema::table('attributes', function(Blueprint $table) {
+            $table->dropForeign('attributes_attribute_type_id_foreign');
+
+        });
+
+        Schema::table('attribute_links', function(Blueprint $table) {
+            $table->dropForeign('attribute_links_product_id_foreign');
+            $table->dropForeign('attribute_links_attribute_id_foreign');
+        });
+
+        Schema::drop('products');
+        Schema::drop('brands');
+        Schema::drop('categories');
+        Schema::drop('attributes');
+        Schema::drop('attribute_types');
+        Schema::drop('attribute_links');
         Schema::drop('password_reminders');
         Schema::drop('users');
         Schema::drop('sales');
