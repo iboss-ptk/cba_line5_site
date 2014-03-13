@@ -50,13 +50,22 @@ controllers.AttCtrl = function($scope){
 
 	$scope.types = [];
 
-	// $scope.types = [{'name':'test','data':['asdff','asdasd','asasd']},{'name':'test2','data':['assaeff','abbbasd','asdfasd']}];
+	$scope.types = [{'name':'test','data':['asdff','asdasd','asasd']},{'name':'test2','data':['assaeff','abbbasd','asdfasd']}];
 	// $scope.atts = {};
 
 
 
 	$scope.add_type = function(){
+
 		var type = prompt('Enter new type.');
+		var has;
+		for (var d = 0, len = $scope.types.length; d < len; d += 1) {
+			if ($scope.types[d].name === type) {
+				has = d;
+			}
+		}
+
+		if(type.trim()!=='' &&  has===undefined)
 		$scope.types.push({'name':type,'data':[]});
 	}
 
@@ -64,7 +73,10 @@ controllers.AttCtrl = function($scope){
 		console.log(type_name+'  '+name)
 		var index = getByName($scope.types,type_name);
 		var att = getByVal($scope.types[index].data, name);
-		if(!att) $scope.types[index].data.push(name);
+		if(att===undefined && name.trim()!=='') {
+			$scope.types[index].data.push(name);
+		}
+			
 
 	}
 

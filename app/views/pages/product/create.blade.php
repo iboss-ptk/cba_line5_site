@@ -22,16 +22,18 @@ CBA -- Forgot password
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
 
-        {{ Form::open(array('url' => 'product')) }}
+
+        {{ Form::open(array('url' => 'product','files'=>true ))}}
 
         <div class="form-group">
             {{ Form::label('name', 'Name') }}
             {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
         </div>
 
+
         <div class="form-group">
-            {{ Form::label('picture', 'Picture') }}
-            {{ Form::text('picture', Input::old('picture'), array('class' => 'form-control')) }}
+            {{ Form::label('product_pic', 'Choose an image') }}
+            {{ Form::file('product_pic', Input::old('product_pic'), array('class' => 'form-control'))}}
         </div>
         <div class="form-group">
             {{ Form::label('price', 'Price') }}
@@ -39,7 +41,9 @@ CBA -- Forgot password
                 {{ Form::text('price', Input::old('price'), array('class' => 'form-control')) }}
                 <span class="input-group-addon">฿</span>
             </div>
+
         </div>
+
 
         <div class="form-group">
             {{ Form::label('brand', 'Brand') }}
@@ -63,21 +67,21 @@ CBA -- Forgot password
 
         <div ng-controller="AttCtrl">
 
-        <div ng-repeat="type in types">
-            <h5>@{{type.name}}</h5>
-            <input type="hidden" name="@{{type.name+'_'+$index}}">
-            <div ng-repeat="att in type.data">
-                <a><i class="fa fa-times" ng-click="delete(type.name,att)"></i></a> @{{att}} <br>
-                <input type="hidden" name="@{{type.name+'_'+att+'_'+$index}}">
+            <div ng-repeat="type in types">
+                <h5>@{{type.name}}</h5>
+                <input type="hidden" name="@{{type.name+'_'+$index}}">
+                <div ng-repeat="att in type.data">
+                    <a><i class="fa fa-times" ng-click="delete(type.name,att)"></i></a> @{{att}} <br>
+                    <input type="hidden" name="@{{type.name+'_'+att+'_'+$index}}">
+                </div>
+                <input type="text" ng-model="new_att" ng-enter="add_att(type.name,new_att); new_att='';">
+                <a><i class="fa fa-plus-circle fa-lg" ng-click="add_att(type.name,new_att); new_att='';"></i></a>
+                <br><br>
             </div>
-        <input type="text" ng-model="new_att" ng-enter="add_att(type.name,new_att); new_att='';">
-        <a><i class="fa fa-plus-circle fa-lg" ng-click="add_att(type.name,new_att); new_att='';"></i></a>
-        <br><br>
-        </div>
 
-        <a ng-click="add_type()">new type</a>
+            <a ng-click="add_type()">new property</a>
 
-        <hr>
+            <hr>
 
         </div>
         {{ Form::submit('Create', array('class' => 'btn btn-primary btn-lg btn-block')) }}

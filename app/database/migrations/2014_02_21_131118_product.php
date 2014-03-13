@@ -17,11 +17,11 @@ class Product extends Migration {
         {
             $table->increments('id')->unsigned();
             $table->string('name')->unique();
-            $table->integer('price');
+            $table->decimal('price', 6, 2);
             $table->integer('brand_id')->references('id')->on('brands');
             $table->integer('category_id')->references('id')->on('categories');
             $table->boolean('availability')->default(true);
-            $table->integer('product_pic_id')->references('id')->on('product_pics');
+            $table->string('product_pic');
             $table->timestamps();
         });
 
@@ -51,14 +51,6 @@ class Product extends Migration {
             $table->timestamps();
         });
 
-        // Creates the product_pics table
-        Schema::create('product_pics', function($table)
-        {
-            $table->increments('id')->unsigned();
-            $table->boolean('use_url')->default(true);
-            $table->string('url')->nullable();
-            $table->timestamps();
-        });
 
         // Creates the brands table
         Schema::create('brands', function($table)
@@ -98,7 +90,6 @@ class Product extends Migration {
         });
 
 		Schema::drop('products');
-        Schema::drop('product_pics');
         Schema::drop('brands');
         Schema::drop('categories');
         Schema::drop('attributes');

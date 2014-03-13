@@ -22,7 +22,7 @@ CBA -- Edit
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
 
-        {{ Form::model($product, array('route' => array('product.update', $product->id), 'method' => 'PUT')) }}
+        {{ Form::model($product, array('route' => array('product.update', $product->id), 'method' => 'PUT', 'files'=> true)) }}
 
         <div class="form-group">
             {{ Form::label('name', 'Name') }}
@@ -30,8 +30,9 @@ CBA -- Edit
         </div>
 
         <div class="form-group">
-            {{ Form::label('picture', 'Picture') }}
-            {{ Form::text('picture', Input::old('picture'), array('class' => 'form-control')) }}
+           
+           {{ Form::label('product_pic', 'Choose an image') }}
+           {{ Form::file('product_pic' , Input::old('product_pic'), array('class' => 'form-control'))}}
         </div>
         <div class="form-group">
             {{ Form::label('price', 'Price') }}
