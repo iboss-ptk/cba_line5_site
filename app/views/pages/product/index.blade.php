@@ -91,7 +91,7 @@ CBA -- Products
     <tr ng-repeat="product in products"> <!-- add class warning -->
         <td>@{{ product.id }}</td>
         <td>@{{ product.name }}</td>
-        <td><img ng-src="image/@{{product.product_pic}}/200/200"/></td> <!--pic-->
+        <td><img ng-src="image/@{{product.product_pic}}/200"/></td> <!--pic-->
         <td>@{{ product.brand }}</td>
         <td>@{{ product.category }}</td>
         <td>@{{ product.price}}</td>

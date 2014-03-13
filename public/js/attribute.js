@@ -50,7 +50,7 @@ controllers.AttCtrl = function($scope){
 
 	$scope.types = [];
 
-	$scope.types = [{'name':'test','data':['asdff','asdasd','asasd']},{'name':'test2','data':['assaeff','abbbasd','asdfasd']}];
+	// $scope.types = [{'name':'test','data':['asdff','asdasd','asasd']},{'name':'test2','data':['assaeff','abbbasd','asdfasd']}];
 	// $scope.atts = {};
 
 

@@ -66,8 +66,7 @@ class ProductController extends BaseController {
 
 			//waiting for edit
 
-			$x = '';
-
+			
 			for ($i=0; Input::has('type_'.$i); $i++) { 
 				for ($j=0; Input::has('att_'.$i.$j); $j++) { 
 					$att = new Attribute;
@@ -75,15 +74,13 @@ class ProductController extends BaseController {
 					$att->type = Input::get('type_'.$i);
 					$att->product_id = $product->id;
 					$att->save();
-
-					$x = $x.' '.Input::get('att_'.$i.$j).' '.Input::get('type_'.$i).' || ';
 				}
 			}
 
 
 
 
-			Session::flash('message', 'Successfully created product!'.$x.$att);
+			Session::flash('message', 'Successfully created product!');
 			return Redirect::to('product');
 		}
 
@@ -98,7 +95,6 @@ class ProductController extends BaseController {
 	public function show($id)
 	{	Attribute::unguard();
 		$product = Prod::find($id);
-		// $temp = Attribute::where('product_id', '=', $id)->attributes->get();
 		$temp = Attribute::where('product_id', '=', $id)
 		->get()
 		->toJson();
@@ -106,10 +102,18 @@ class ProductController extends BaseController {
 		$temp = json_decode($temp);
 		$atts = array();
 		foreach ($temp as $value) {
-			$atts[$value->type] = array('name' => $value->type );
+			$index = count($atts);
+			for ($i=0; $i <count($atts) ; $i++) { 
+				if($value->type == $atts[$i]['name']) {
+					$index = $i;
+					break;
+				}
+			}
+
+			if($index == count($atts)) $atts[] = array('name' => $value->type, 'data' => array( $value->name) );
+			else $atts[$index]['data'][] = $value->name;
 
 		}
-		var_dump($temp);
 
 		return View::make('pages.product.show')
 		->with(array('product'=> $product, 'atts'=>$atts ));
@@ -129,7 +133,29 @@ class ProductController extends BaseController {
 		$brand_all = Brand::All();
 		$category_all = Category::All();
 
-		return View::make('pages.product.edit',array( 'product'=> $product, 'brand_all' => $brand_all, 'category_all' => $category_all ) );
+
+		$temp = Attribute::where('product_id', '=', $id)
+		->get()
+		->toJson();
+
+		$temp = json_decode($temp);
+		$atts = array();
+		foreach ($temp as $value) {
+			$index = count($atts);
+			for ($i=0; $i <count($atts) ; $i++) { 
+				if($value->type == $atts[$i]['name']) {
+					$index = $i;
+					break;
+				}
+			}
+
+			if($index == count($atts)) $atts[] = array('name' => $value->type, 'data' => array( $value->name) );
+			else $atts[$index]['data'][] = $value->name;
+
+		}
+
+		// var_dump(json_encode($atts));
+		return View::make('pages.product.edit',array( 'product'=> $product, 'brand_all' => $brand_all, 'category_all' => $category_all, 'atts' => $atts ) );
 
 	}
 
@@ -161,11 +187,29 @@ class ProductController extends BaseController {
 			$product->category_id   = Input::get('category');
 			File::delete(public_path().$product->image);
 
-			$image = Input::file('product_pic');
-			$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
-			Image::make($image->getRealPath())->save(public_path().'/img/products/'.$filename);
-			$product->product_pic = $filename;
+			if(Input::hasFile('product_pic')){
+				$image = Input::file('product_pic');
+				$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
+				Image::make($image->getRealPath())->save(public_path().'/img/products/'.$filename);
+				$product->product_pic = $filename;
+			}
+
 			$product->save();
+
+
+			for ($i=0; Input::has('type_'.$i); $i++) { 
+				for ($j=0; Input::has('att_'.$i.$j); $j++) { 
+					$att = new Attribute;
+					$att->name = Input::get('att_'.$i.$j);
+					$att->type = Input::get('type_'.$i);
+					$att->product_id = $product->id;
+					if(!Attribute::where('name','=',$att->name)
+						->where('type','=',$att->type)
+						->where('product_id','=',$att->product_id))
+						$att->save();
+				}
+			}
+
 
 			// redirect
 			Session::flash('message', 'Successfully update product!');

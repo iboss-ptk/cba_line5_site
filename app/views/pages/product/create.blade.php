@@ -69,10 +69,10 @@ CBA -- Forgot password
 
             <div ng-repeat="type in types">
                 <h5>@{{type.name}}</h5>
-                <input type="text" name="@{{'type_'+$index}}" value="@{{type.name}}">
+                <input type="hidden" name="@{{'type_'+$index}}" value="@{{type.name}}">
                 <div ng-repeat="att in type.data">
                     <a><i class="fa fa-times" ng-click="delete(type.name,att)"></i></a> @{{att}} <br>
-                    <input type="text" name="@{{'att_'+$parent.$index+$index}}" value="@{{att}}">@{{'att_'+$parent.$index+$index}}
+                    <input type="hidden" name="@{{'att_'+$parent.$index+$index}}" value="@{{att}}">
                 </div>
                 <input type="text" ng-model="new_att" ng-enter="add_att(type.name,new_att); new_att='';">
                 <a><i class="fa fa-plus-circle fa-lg" ng-click="add_att(type.name,new_att); new_att='';"></i></a>
@@ -88,6 +88,7 @@ CBA -- Forgot password
 
         {{ Form::close() }}
     </div>
+
 
 </div>
 <hr class="tall" />

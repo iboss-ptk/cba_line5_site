@@ -26,11 +26,12 @@ CBA -- {{ $product->name }}
 				<strong>Price:</strong> {{ $product->price }} ฿<br>
 				<strong>Brand:</strong> {{{ Brand::find($product->brand_id)->name }}}<br>
 				<strong>Category:</strong> {{{ Category::find($product->category_id)->name }}}<br>
+				<br>
 				@foreach($atts as $att)
-					<strong>{{$att->name}}</strong>
-					<ul>
-						@foreach($att->data as $value)
-							<li>{{$value->name}}</li>
+					<strong>{{$att['name']}} :</strong>
+					<ul class="list-inline">
+						@foreach($att['data'] as $value)
+							<li>{{$value}}</li>
 						@endforeach
 					</ul>
 				@endforeach
