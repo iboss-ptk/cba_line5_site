@@ -2,6 +2,7 @@
 
 class ProductController extends BaseController {
 
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -41,14 +42,14 @@ class ProductController extends BaseController {
 		$rules = array(
 			'name'       => 'required',
 
-		);
+			);
 		$validator = Validator::make(Input::all(), $rules);
 
 		// process the login
 		if ($validator->fails()) {
 			return Redirect::to('product/create')
-				->withErrors($validator)
-				->withInput();
+			->withErrors($validator)
+			->withInput();
 		} else {
 			// store
 			$product = new prod;
@@ -62,9 +63,27 @@ class ProductController extends BaseController {
 
 			$product->product_pic = $filename;
 			$product->save();
-			var_dump($product);
-			// redirect
-			Session::flash('message', 'Successfully created product!');
+
+			//waiting for edit
+
+			$x = '';
+
+			for ($i=0; Input::has('type_'.$i); $i++) { 
+				for ($j=0; Input::has('att_'.$i.$j); $j++) { 
+					$att = new Attribute;
+					$att->name = Input::get('att_'.$i.$j);
+					$att->type = Input::get('type_'.$i);
+					$att->product_id = $product->id;
+					$att->save();
+
+					$x = $x.' '.Input::get('att_'.$i.$j).' '.Input::get('type_'.$i).' || ';
+				}
+			}
+
+
+
+
+			Session::flash('message', 'Successfully created product!'.$x.$att);
 			return Redirect::to('product');
 		}
 
@@ -77,11 +96,23 @@ class ProductController extends BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{
+	{	Attribute::unguard();
 		$product = Prod::find($id);
+		// $temp = Attribute::where('product_id', '=', $id)->attributes->get();
+		$temp = Attribute::where('product_id', '=', $id)
+		->get()
+		->toJson();
+
+		$temp = json_decode($temp);
+		$atts = array();
+		foreach ($temp as $value) {
+			$atts[$value->type] = array('name' => $value->type );
+
+		}
+		var_dump($temp);
 
 		return View::make('pages.product.show')
-			->with('product', $product);
+		->with(array('product'=> $product, 'atts'=>$atts ));
 
 	}
 
@@ -113,14 +144,14 @@ class ProductController extends BaseController {
 		$rules = array(
 			'name'       => 'required',
 
-		);
+			);
 		$validator = Validator::make(Input::all(), $rules);
 
 		// process the login
 		if ($validator->fails()) {
 			return Redirect::to('product/create')
-				->withErrors($validator)
-				->withInput();
+			->withErrors($validator)
+			->withInput();
 		} else {
 			// store
 			$product = Prod::find($id);
@@ -155,7 +186,7 @@ class ProductController extends BaseController {
 			File::delete(public_path().$product->image);
 			$product->delete();
 			Session::flash('message', 'Successfully deleted the product!');
-		return Redirect::to('product');
+			return Redirect::to('product');
 		}
 		
 

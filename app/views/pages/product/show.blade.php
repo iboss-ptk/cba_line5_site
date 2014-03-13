@@ -26,6 +26,14 @@ CBA -- {{ $product->name }}
 				<strong>Price:</strong> {{ $product->price }} ฿<br>
 				<strong>Brand:</strong> {{{ Brand::find($product->brand_id)->name }}}<br>
 				<strong>Category:</strong> {{{ Category::find($product->category_id)->name }}}<br>
+				@foreach($atts as $att)
+					<strong>{{$att->name}}</strong>
+					<ul>
+						@foreach($att->data as $value)
+							<li>{{$value->name}}</li>
+						@endforeach
+					</ul>
+				@endforeach
 			</p>
 		</div>
 
