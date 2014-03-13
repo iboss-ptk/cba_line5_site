@@ -39,11 +39,11 @@ Route::get('testCookie',function(){
 /// create cookie if don't set sp , sp_value will be 0 and it will not create cookie.
 Route::filter('setcookie',function(){
 
-		$sp_value = Input::get('sp',0);
-		if($sp_value>0){
+		$sp_value = Input::get('sp');
+
+		if(!is_null($sp_value)){
 			Cookie::queue('sp_code', $sp_value,'forever');
 		}
-		
 });
 
 ///all route that have to set cookie
@@ -67,7 +67,14 @@ Route::group(array('before' => 'setcookie'),function()
 
 });
 
+//round2
+	Route::get( 'allpost',function(){
+		return View::make('pages.allpost');
+	});
+	Route::resource('posts', 'PostController');
+
 ///end cos is coming to town.
+
 
 
 
