@@ -73,7 +73,7 @@ CBA -- Products
    <a class=" pull-right" data-toggle="modal" data-target="#filterModal">
       filter option
   </a>
-  <input ng-model="search" placeholder="product name..." class="form-control" >
+  <input id="search" ng-focus="" ng-model="search" placeholder="product name..." class="form-control" >
   <hr>
   <thead>
     <tr>
