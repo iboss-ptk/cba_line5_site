@@ -31,6 +31,7 @@ class Product extends Migration {
             $table->increments('id')->unsigned();
             $table->string('name')->unique();
             $table->integer('attribute_type_id')->references('id')->on('attribute_types');
+            $table->integer('product_id')->references('id')->on('products');
             $table->timestamps();
         });
 
@@ -42,11 +43,12 @@ class Product extends Migration {
             $table->timestamps();
         });
 
-         // Creates the attribute_links table
-        Schema::create('attribute_links', function($table)
+         // Creates the attribute_list table
+        Schema::create('attribute_lists', function($table)
         {
-            $table->integer('product_id')->references('id')->on('products');
-            $table->integer('attribute_id')->references('id')->on('attributes');
+            $table->increments('id')->unsigned();
+            $table->string('name')->unique();
+            $table->timestamps();
         });
 
         // Creates the product_pics table
@@ -91,12 +93,8 @@ class Product extends Migration {
 
         Schema::table('attributes', function(Blueprint $table) {
             $table->dropForeign('attributes_attribute_type_id_foreign');
+            $table->dropForeign('attributes_product_id_foreign');
 
-        });
-
-        Schema::table('attribute_links', function(Blueprint $table) {
-            $table->dropForeign('attribute_links_product_id_foreign');
-            $table->dropForeign('attribute_links_attribute_id_foreign');
         });
 
 		Schema::drop('products');
