@@ -188,6 +188,7 @@ class ProductController extends BaseController {
 			File::delete(public_path().$product->image);
 
 			if(Input::hasFile('product_pic')){
+				File::delete(public_path().'/img/products/'.$product->image);
 				$image = Input::file('product_pic');
 				$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
 				Image::make($image->getRealPath())->save(public_path().'/img/products/'.$filename);
@@ -227,7 +228,7 @@ class ProductController extends BaseController {
 	{
 		$product = Prod::find($id);
 		if ($product) {
-			File::delete(public_path().$product->image);
+			File::delete(public_path().'/img/products/'.$product->image);
 			$product->delete();
 			Session::flash('message', 'Successfully deleted the product!');
 			return Redirect::to('product');
