@@ -57,11 +57,20 @@ class ProductController extends BaseController {
 			$product->price         = Input::get('price');
 			$product->brand_id      = Input::get('brand');
 			$product->category_id   = Input::get('category');
-			$image = Input::file('product_pic');
-			$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
-			Image::make($image->getRealPath())->save(public_path().'/img/products/'.$filename);
 
-			$product->product_pic = $filename;
+
+
+			if(Input::hasFile('product_pic')){
+
+				$image = Input::file('product_pic');
+				$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
+				Image::make($image->getRealPath())->save(public_path().'/img/products/'.$filename);
+				$product->product_pic = 'img/products/'.$filename;
+
+			}else if (Input::has('product_pic')) {
+				$product->product_pic = Input::get('product_pic');
+			}
+
 			$product->save();
 
 			//waiting for edit
@@ -81,7 +90,7 @@ class ProductController extends BaseController {
 
 
 			Session::flash('message', 'Successfully created product!');
-			return Redirect::to('product');
+			return Redirect::to('product/create');
 		}
 
 	}
@@ -185,15 +194,22 @@ class ProductController extends BaseController {
 			$product->price         = Input::get('price');
 			$product->brand_id      = Input::get('brand');
 			$product->category_id   = Input::get('category');
-			File::delete(public_path().$product->image);
-
+			
+			
+			
 			if(Input::hasFile('product_pic')){
-				File::delete(public_path().'/img/products/'.$product->image);
+
 				$image = Input::file('product_pic');
 				$filename = date('Y-m-d-H-i-s')."-".$image->getClientOriginalName();
 				Image::make($image->getRealPath())->save(public_path().'/img/products/'.$filename);
-				$product->product_pic = $filename;
+				$product->product_pic = 'img/products/'.$filename;
+
+			}else if (Input::has('product_pic')) {
+				if(File::exists(public_path().$product->product_pic))
+					File::delete(public_path().$product->image);
+				$product->product_pic = Input::get('product_pic');
 			}
+
 
 			$product->save();
 
@@ -228,7 +244,7 @@ class ProductController extends BaseController {
 	{
 		$product = Prod::find($id);
 		if ($product) {
-			File::delete(public_path().'/img/products/'.$product->image);
+			File::delete(public_path().$product->image);
 			$product->delete();
 			Session::flash('message', 'Successfully deleted the product!');
 			return Redirect::to('product');
