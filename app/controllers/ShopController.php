@@ -2,7 +2,7 @@
 
 class ShopController extends \BaseController {
 
-	public function getIndex(){
+	public function shop(){
 
 		$id = Input::get('category_id');
 
@@ -12,6 +12,12 @@ class ShopController extends \BaseController {
 
 		return View::make('pages.shop.main');
 
+	}
+
+	public function cart(){
+
+		
+		
 	}
 
 }
