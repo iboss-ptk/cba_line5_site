@@ -2,16 +2,17 @@
 
 class ProductRestController extends \BaseController {
 
-	public function getData($search=null)
+	public function getData($search=null,$cat=null,$brand=null)
 	{
 		$search = Input::get('search');
 
 		if(!$search){
-			$products = Prod::paginate($limit = 10)->toJson();
+			$products = Prod::paginate($limit = 15)->toJson();
 			return $products;
 		}else{
 			$products = Prod::where('name', 'LIKE', '%'.$search.'%')
-                        ->paginate(10)
+						->where('brand_id','IN','('.$cat.')')
+                        ->paginate(15)
                         ->toJson();
 			return $products;
 		}

@@ -95,8 +95,7 @@ Route::get( 'product/toggle/{id}' ,function ($id)
 	});
 
 
-Route::get('userdata',function(){
-	$name = Confide::user()->username;
-	$email = Confide::user()->email;
-	return View::make('pages.userData')->with('username',$name);
+Route::get('shop',function(){
+	
+	return View::make('pages.shop.main');
 });

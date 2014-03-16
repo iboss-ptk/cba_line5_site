@@ -37,7 +37,7 @@ CBA -- Products
                 <div class="col-sm-10">
 
                     @foreach($brand_all as $brand)
-                    <input type="checkbox" name="brand" value="{{$brand->id}}">{{$brand->name}}<br>
+                    <input type="checkbox" name="brand[]" value="{{$brand->id}}" ng-checked="selection.indexOf({{$brand->id}}) > -1">{{$brand->name}}<br>
                     @endforeach
 
                 </div>
@@ -47,8 +47,8 @@ CBA -- Products
                 <label for="Category" class="col-sm-2 control-label">Category</label>
                 <div class="col-sm-10">
 
-                    @foreach($brand_all as $category)
-                    <input type="checkbox" name="category" value="{{$category->id}}">{{$category->name}}<br>
+                    @foreach($category_all as $category)
+                    <input type="checkbox" name="category[]" value="{{$category->id}}" ng-checked="selection.indexOf({{$category->id}}) > -1">{{$category->name}}<br>
                     @endforeach
 
                 </div>
