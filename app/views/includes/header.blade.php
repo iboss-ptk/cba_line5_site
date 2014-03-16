@@ -51,16 +51,27 @@
 						@foreach(Category::All() as $category)
 						<li><a href="{{URL::to('/shop?category_id='.$category->id)}}">{{$category->name }}</a></li>
 						@endforeach
-						
 					</ul>
 				</li>
 
-				<li class="dropdown mega-menu-item mega-menu-fullwidth">
+				<li>
 					<a class="dropdown-toggle" href="#">
 						Secret Tips
 					</a>
 					
 				</li>
+
+				<li class="dropdown">
+					<a class="dropdown-toggle" href="#">
+						Manage
+						<i class="icon icon-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{{URL::to('user')}}">User</a></li>
+						<li><a href="{{URL::to('product')}}">Product</a></li>
+					</ul>
+				</li>
+
 				@if(Auth::check())
 				<li>
 					<a href="{{URL::to('user/profile')}}">
