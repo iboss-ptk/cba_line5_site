@@ -119,6 +119,26 @@ $scope.search = '';
 
   }
   $scope.toggle = function(user, index){
+    $http.get('user/togglebanned/'+user).success(function(data){
+      $scope.users[index].banned = !($scope.users[index].banned);
+      console.log( $scope.users[index].banned);
+    });
+
+    $scope.message = '';
+
+
+  }
+  $scope.toggle = function(user, index){
+    $http.get('user/toggleconfirmed/'+user).success(function(data){
+      $scope.users[index].confirmed = !($scope.users[index].confirmed);
+      console.log( $scope.users[index].confirmed);
+    });
+
+    $scope.message = '';
+
+
+  }
+  $scope.toggle = function(user, index){
     $http.get('user/toggleisadmin/'+user).success(function(data){
       $scope.users[index].isadmin = !($scope.users[index].isadmin);
       console.log( $scope.users[index].isadmin);
