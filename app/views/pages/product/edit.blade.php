@@ -11,7 +11,7 @@ CBA -- Edit
 @stop
 
 @section('content')
-<div class="container">
+<div class="container" ng-app="attribute">
 
 
     @include('pages.product.frac.nav')
@@ -31,8 +31,12 @@ CBA -- Edit
 
         <div class="form-group">
 
-         {{ Form::label('product_pic', 'Choose an image') }}
-         {{ Form::file('product_pic' , Input::old('product_pic'), array('class' => 'form-control'))}}
+         {{ Form::label('product_pic', 'Image :') }} 
+         <!-- {{ Form::file('product_pic' , Input::old('product_pic'), array('class' => 'form-control'))}} -->
+         <input type="radio" name="img_selc" ng-model="img_selc" value="text" checked="true">  URL &nbsp&nbsp
+         <input type="radio" name="img_selc" ng-model="img_selc" value="file"> Upload <br/>
+         <input ng-if="img_selc=='text'" name="product_pic" type="text" class="form-control" value="{{Input::old('product_pic')}}">
+         <input ng-if="img_selc=='file'" name="product_pic" type="file" class="form-control" value="{{Input::old('product_pic')}}">
      </div>
      <div class="form-group">
         {{ Form::label('price', 'Price') }}
@@ -70,8 +74,8 @@ CBA -- Edit
 
 
 
-            <div ng-app="attribute" ng-controller="AttCtrl" ng-init='types={{json_encode($atts)}}'>
-                <div ng-repeat="type in types">
+            <div ng-controller="AttCtrl" ng-init='types={{json_encode($atts)}}'>
+                <div ng-repeat="type in types"> <a ng-click="delete_type($index)" style="font-size:8px;">(del)</a></h5>
                     <h5>@{{type.name}}</h5>
                     <input type="hidden" name="@{{'type_'+$index}}" value="@{{type.name}}">
                     <div ng-repeat="att in type.data">
