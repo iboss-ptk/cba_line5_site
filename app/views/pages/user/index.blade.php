@@ -58,12 +58,8 @@ CBA -- users
   <thead>
     <tr>
         <td>ID</td>
-        <td>Name</td>
-        <td>Picture</td>
-        <td>Brand</td>
-        <td>Category</td>
-        <td>Price</td>
-        <td>Availability</td>
+        <td>Username</td>
+        <td>Email</td>
         <td></td>
     </tr>
 </thead>

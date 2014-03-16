@@ -18,6 +18,14 @@ class UserController extends BaseController {
 
     }
 
+
+    public function index()
+    {
+        $users = User::All();    
+        return View::make('pages.user.index')
+            ->with('users',$users);
+    }
+
     /**
      * Displays the form for account creation
      *
