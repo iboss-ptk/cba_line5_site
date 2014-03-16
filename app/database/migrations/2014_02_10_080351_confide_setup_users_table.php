@@ -65,21 +65,10 @@ class ConfideSetupUsersTable extends Migration {
             $table->integer('mobilephonenumber')->unsigned();
             $table->text('address');
             $table->boolean('banned')->default(false);
-            $table->timestamps();
-        });
-         Schema::create('sales',function($table)
-        {
-            $table->increments('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedInteger('sp_code')->unique();
+            $table->unsignedInteger('resp_sp_code');
             $table->decimal('point',7,2);
-        });
-          Schema::create('customers',function($table)
-        {
-            $table->increments('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedInteger('resp_sp_id');
-            $table->foreign('resp_sp_id')->references('sp_code')->on('sales')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
         Schema::create('orders',function($table)
         {

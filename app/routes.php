@@ -74,6 +74,8 @@ Route::group(array('before' => 'setcookie'),function()
 
 Route::controller('productrest', 'ProductRestController');
 Route::resource('product', 'ProductController');
+Route::controller('userrest', 'UserRestController');
+Route::resource('user', 'UserController');
 Route::resource('brand', 'BrandController');
 Route::resource('category', 'CategoryController');
 Route::get('image/{src}/{w?}/{h?}',function($src,$w=200,$h=200){
@@ -92,6 +94,22 @@ Route::get( 'product/toggle/{id}' ,function ($id)
 		$product->save();
 		$products = Prod::paginate($limit = 10)->toJson();
 		return $products;
+	});
+Route::get( 'user/toggleissp/{id}' ,function ($id)
+	{
+		$user = User::find($id);
+		$user->issp = !$product->issp;
+		$user->save();
+		$users = User::paginate($limit = 10)->toJson();
+		return $users;
+	});
+Route::get( 'user/toggleisadmin/{id}' ,function ($id)
+	{
+		$user = User::find($id);
+		$user->isadmin = !$product->isadmin;
+		$user->save();
+		$users = User::paginate($limit = 10)->toJson();
+		return $users;
 	});
 
 
