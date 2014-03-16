@@ -80,7 +80,7 @@ class UserController extends BaseController {
 
 
             // redirect
-            Session::flash('message', 'Successfully update user!');
+            Session::flash('message', $user->errors());
             return Redirect::to('user');
         }
     

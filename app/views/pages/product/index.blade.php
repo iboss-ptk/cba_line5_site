@@ -96,7 +96,7 @@ CBA -- Products
         <td>@{{ product.category }}</td>
         <td>@{{ product.price}}</td>
         <td>
-            <a ng-click="toggle(product.id, $index)">
+            <a ng-click="toggleavailability(product.id, $index)">
 
                 <div ng-switch on="product.availability">
                    <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>

@@ -10,7 +10,7 @@ class UserRestController extends \BaseController {
 			$users = User::paginate($limit = 10)->toJson();
 			return $users;
 		}else{
-			$users = User::where('name', 'LIKE', '%'.$search.'%')
+			$users = User::where('username', 'LIKE', '%'.$search.'%')
                         ->paginate(10)
                         ->toJson();
 			return $users;

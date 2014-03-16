@@ -7,7 +7,7 @@
 @stop
 
 @section('title')
-CBA -- users
+CBA -- Users
 @stop
 
 @section('content')
@@ -87,7 +87,7 @@ CBA -- users
         
         <td>@{{ user.resp_sp_code}}</td>
         <td>
-            <a ng-click="toggle(user.id, $index)">
+            <a ng-click="toggleissp(user.id, $index)">
 
                 <div ng-switch on="user.issp">
                    <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
@@ -105,7 +105,7 @@ CBA -- users
     <td>@{{ user.sp_code}}</td>
     <td>@{{ user.point}}</td>
     <td>
-            <a ng-click="toggle(user.id, $index)">
+            <a ng-click="toggleisadmin(user.id, $index)">
 
                 <div ng-switch on="user.isadmin">
                    <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
@@ -121,7 +121,7 @@ CBA -- users
         </a>
     </td>
     <td>
-            <a ng-click="toggle(user.id, $index)">
+            <a ng-click="togglebanned(user.id, $index)">
 
                 <div ng-switch on="user.banned">
                    <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
@@ -137,7 +137,7 @@ CBA -- users
         </a>
     </td>
     <td>
-            <a ng-click="toggle(user.id, $index)">
+            <a ng-click="toggleconfirmed(user.id, $index)">
 
                 <div ng-switch on="user.confirmed">
                    <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
