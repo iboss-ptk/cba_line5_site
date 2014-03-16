@@ -87,7 +87,7 @@ Route::get('image/{src}/{w?}/{h?}',function($src,$w=200,$h=200){
 	},10,true);
 	return Response::make($cacheimage,200,array('Content-Type'=>'image/jpeg'));
 });
-Route::get( 'product/toggle/{id}' ,function ($id)
+Route::get( 'product/toggleavailability/{id}' ,function ($id)
 	{
 		$product = Prod::find($id);
 		$product->availability = !$product->availability;
@@ -98,7 +98,7 @@ Route::get( 'product/toggle/{id}' ,function ($id)
 Route::get( 'user/toggleissp/{id}' ,function ($id)
 	{
 		$user = User::find($id);
-		$user->issp = !$product->issp;
+		$user->issp = !$user->issp;
 		$user->save();
 		$users = User::paginate($limit = 10)->toJson();
 		return $users;
@@ -106,7 +106,7 @@ Route::get( 'user/toggleissp/{id}' ,function ($id)
 Route::get( 'user/togglebanned/{id}' ,function ($id)
 	{
 		$user = User::find($id);
-		$user->banned = !$product->banned;
+		$user->banned = !$user->banned;
 		$user->save();
 		$users = User::paginate($limit = 10)->toJson();
 		return $users;
@@ -114,7 +114,7 @@ Route::get( 'user/togglebanned/{id}' ,function ($id)
 Route::get( 'user/toggleconfirmed/{id}' ,function ($id)
 	{
 		$user = User::find($id);
-		$user->confirmed = !$product->confirmed;
+		$user->confirmed = !$user->confirmed;
 		$user->save();
 		$users = User::paginate($limit = 10)->toJson();
 		return $users;
@@ -122,7 +122,7 @@ Route::get( 'user/toggleconfirmed/{id}' ,function ($id)
 Route::get( 'user/toggleisadmin/{id}' ,function ($id)
 	{
 		$user = User::find($id);
-		$user->isadmin = !$product->isadmin;
+		$user->isadmin = !$user->isadmin;
 		$user->save();
 		$users = User::paginate($limit = 10)->toJson();
 		return $users;
