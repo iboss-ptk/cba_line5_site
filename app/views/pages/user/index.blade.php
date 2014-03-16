@@ -60,7 +60,19 @@ CBA -- users
         <td>ID</td>
         <td>Username</td>
         <td>Email</td>
-        <td></td>
+        <td>Firstname</td>
+        <td>Lastname</td>
+        <td>Mobilephonenumber</td>
+        <td>Address</td>
+        
+        <td>Resp_SP_Code</td>
+        <td>IsSP</td>
+        <td>SP_Code</td>
+        <td>Point</td>
+        <td>IsAdmin</td>
+        <td>Banned</td>
+        <td>Confirmed</td>
+         <td></td>
     </tr>
 </thead>
 <tbody>
@@ -68,6 +80,12 @@ CBA -- users
         <td>@{{ user.id }}</td>
         <td>@{{ user.username }}</td>
         <td>@{{ user.email}}</td>
+        <td>@{{ user.firstname}}</td>
+        <td>@{{ user.lastname}}</td>
+        <td>@{{ user.mobilephonenumber}}</td>
+        <td>@{{ user.address}}</td>
+        
+        <td>@{{ user.resp_sp_code}}</td>
         <td>
             <a ng-click="toggle(user.id, $index)">
 
@@ -75,8 +93,8 @@ CBA -- users
                    <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
                    <button class="btn btn-small btn-block btn-danger" ng-switch-when="false"><b>X</b></button>
                    <div ng-switch-default>
-                    <button ng-if="user.availability===1" class="btn btn-small btn-default btn-block"><b>O</b></button>
-                    <button ng-if="user.availability===0" class="btn btn-small btn-primary btn-block"><b>X</b></button>
+                    <button ng-if="user.issp===1" class="btn btn-small btn-default btn-block"><b>O</b></button>
+                    <button ng-if="user.issp===0" class="btn btn-small btn-primary btn-block"><b>X</b></button>
                 </div>
 
             </div>
@@ -84,16 +102,65 @@ CBA -- users
 
         </a>
     </td>
+    <td>@{{ user.sp_code}}</td>
+    <td>@{{ user.point}}</td>
+    <td>
+            <a ng-click="toggle(user.id, $index)">
 
+                <div ng-switch on="user.isadmin">
+                   <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
+                   <button class="btn btn-small btn-block btn-danger" ng-switch-when="false"><b>X</b></button>
+                   <div ng-switch-default>
+                    <button ng-if="user.isadmin===1" class="btn btn-small btn-default btn-block"><b>O</b></button>
+                    <button ng-if="user.isadmin===0" class="btn btn-small btn-primary btn-block"><b>X</b></button>
+                </div>
+
+            </div>
+
+
+        </a>
+    </td>
+    <td>
+            <a ng-click="toggle(user.id, $index)">
+
+                <div ng-switch on="user.banned">
+                   <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
+                   <button class="btn btn-small btn-block btn-danger" ng-switch-when="false"><b>X</b></button>
+                   <div ng-switch-default>
+                    <button ng-if="user.banned===1" class="btn btn-small btn-default btn-block"><b>O</b></button>
+                    <button ng-if="user.banned===0" class="btn btn-small btn-primary btn-block"><b>X</b></button>
+                </div>
+
+            </div>
+
+
+        </a>
+    </td>
+    <td>
+            <a ng-click="toggle(user.id, $index)">
+
+                <div ng-switch on="user.confirmed">
+                   <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
+                   <button class="btn btn-small btn-block btn-danger" ng-switch-when="false"><b>X</b></button>
+                   <div ng-switch-default>
+                    <button ng-if="user.confirmed===1" class="btn btn-small btn-default btn-block"><b>O</b></button>
+                    <button ng-if="user.confirmed===0" class="btn btn-small btn-primary btn-block"><b>X</b></button>
+                </div>
+
+            </div>
+
+
+        </a>
+    </td>
     <td>
 
 
 
-        <a class="btn btn-success btn-block" ng-href="user/@{{user.id}}" target="_blank">Show</a>
+        
 
         <a class="btn btn-info  btn-block" ng-href="user/@{{user.id}}/edit" target="_blank">Edit</a>
 
-        <a class="btn btn-warning  btn-block" ng-click="delete_user(user.id, user.name)">Delete</a>
+        <a class="btn btn-warning  btn-block" ng-click="delete_user(user.id, user.username)">Delete</a>
 
 
     </td>

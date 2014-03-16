@@ -49,7 +49,7 @@ $scope.search = '';
     }
   }
 
-  $scope.delete_user = function(userID, name){
+  $scope.delete_user = function(userID, username){
     var confirm_deletion = confirm("Deleting "+name+". Are you sure?");
 
     if(confirm_deletion){
