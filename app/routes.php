@@ -113,7 +113,4 @@ Route::get( 'user/toggleisadmin/{id}' ,function ($id)
 	});
 
 
-Route::get('shop',function(){
-	
-	return View::make('pages.shop.main');
-});
+Route::controller('shop', 'ShopController');

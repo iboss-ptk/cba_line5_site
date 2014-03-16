@@ -118,7 +118,7 @@ CBA -- Products
 
         <a class="btn btn-success btn-block" ng-href="product/@{{product.id}}" target="_blank">Show</a>
 
-        <a class="btn btn-info  btn-block" ng-href="product/@{{product.id}}/edit" target="_blank">Edit</a>
+        <a class="btn btn-info  btn-block" ng-href="product/@{{product.id}}/edit">Edit</a>
 
         <a class="btn btn-warning  btn-block" ng-click="delete_product(product.id, product.name)">Delete</a>
 
