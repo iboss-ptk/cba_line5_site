@@ -6,6 +6,8 @@
 		/**
 	     * Validation rules
 	     */
+		protected $table = 'users';
+		protected $fillable = array('username', 'email');
 	    public static $rules = array(
 	    	'username'=> 'required|alpha_dash',
 	        'email' => 'required|email',

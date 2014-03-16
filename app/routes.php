@@ -103,6 +103,22 @@ Route::get( 'user/toggleissp/{id}' ,function ($id)
 		$users = User::paginate($limit = 10)->toJson();
 		return $users;
 	});
+Route::get( 'user/togglebanned/{id}' ,function ($id)
+	{
+		$user = User::find($id);
+		$user->banned = !$product->banned;
+		$user->save();
+		$users = User::paginate($limit = 10)->toJson();
+		return $users;
+	});
+Route::get( 'user/toggleconfirmed/{id}' ,function ($id)
+	{
+		$user = User::find($id);
+		$user->confirmed = !$product->confirmed;
+		$user->save();
+		$users = User::paginate($limit = 10)->toJson();
+		return $users;
+	});
 Route::get( 'user/toggleisadmin/{id}' ,function ($id)
 	{
 		$user = User::find($id);

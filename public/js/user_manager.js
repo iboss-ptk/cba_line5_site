@@ -49,7 +49,7 @@ $scope.search = '';
     }
   }
 
-  $scope.delete_user = function(userID, name){
+  $scope.delete_user = function(userID, username){
     var confirm_deletion = confirm("Deleting "+name+". Are you sure?");
 
     if(confirm_deletion){
@@ -112,6 +112,26 @@ $scope.search = '';
     $http.get('user/toggleissp/'+user).success(function(data){
       $scope.users[index].issp = !($scope.users[index].issp);
       console.log( $scope.users[index].issp);
+    });
+
+    $scope.message = '';
+
+
+  }
+  $scope.toggle = function(user, index){
+    $http.get('user/togglebanned/'+user).success(function(data){
+      $scope.users[index].banned = !($scope.users[index].banned);
+      console.log( $scope.users[index].banned);
+    });
+
+    $scope.message = '';
+
+
+  }
+  $scope.toggle = function(user, index){
+    $http.get('user/toggleconfirmed/'+user).success(function(data){
+      $scope.users[index].confirmed = !($scope.users[index].confirmed);
+      console.log( $scope.users[index].confirmed);
     });
 
     $scope.message = '';

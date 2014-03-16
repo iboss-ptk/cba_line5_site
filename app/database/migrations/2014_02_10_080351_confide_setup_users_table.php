@@ -65,7 +65,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->integer('mobilephonenumber')->unsigned();
             $table->text('address');
             $table->boolean('banned')->default(false);
-            $table->unsignedInteger('sp_code')->unique();
+            $table->unsignedInteger('sp_code');
             $table->unsignedInteger('resp_sp_code');
             $table->decimal('point',7,2);
             $table->timestamps();
