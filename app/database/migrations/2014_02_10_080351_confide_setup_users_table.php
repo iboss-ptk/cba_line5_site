@@ -62,7 +62,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->boolean('issp')->default(0);
             $table->string('firstname');
             $table->string('lastname');
-            $table->integer('mobilephonenumber')->unsigned();
+            $table->string('mobilephonenumber');
             $table->text('address');
             $table->boolean('banned')->default(false);
             $table->unsignedInteger('sp_code')->default(0);

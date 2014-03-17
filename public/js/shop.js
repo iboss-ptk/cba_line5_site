@@ -15,8 +15,8 @@ app.service('productService',function($http){
 app.service('searchService',function($http){
 
   return {
-    getProducts: function(search,page) {
-      return $http.get('productrest/data?search='+search+'&page='+page);
+    getProducts: function(search,page,cat) {
+      return $http.get('productrest/data?search='+search+'&page='+page+'&category_id='+cat);
 
     }
 
@@ -62,6 +62,17 @@ controllers.ProductCtrl = function($scope, $http, productService , brandService,
 console.log('test');
 $scope.search = '';
 
+categoryService.getCategories().success(function(data){
+  $scope.categories = data;
+  $scope.isAll = true
+  for (var i =  $scope.categories.length - 1; i >= 0; i--) {
+     if($scope.categories[i].id == $scope.cat_id) {
+      $scope.categories[i].isCat = true;
+      $scope.isAll = false;
+    }
+  };
+});
+
   function getById(arr, id) {
     for (var d = 0, len = arr.length; d < len; d += 1) {
       if (arr[d].id === id) {
@@ -98,7 +109,7 @@ $scope.search = '';
 
   $scope.next = function(){
     if($scope.currentPage !== $scope.total && $scope.total !== 0) $scope.currentPage += 1;
-    searchService.getProducts($scope.search,$scope.currentPage).success(function(data){
+    searchService.getProducts($scope.search,$scope.currentPage,$scope.cat_id).success(function(data){
       $scope.products = data.data;
       $scope.total = data.last_page;
       brandService.getBrands().success(function(data){
@@ -137,7 +148,7 @@ $scope.search = '';
 
   $scope.prev = function(){
     if($scope.currentPage !== 1 && $scope.total !== 0) $scope.currentPage -= 1;
-    searchService.getProducts($scope.search,$scope.currentPage).success(function(data){
+    searchService.getProducts($scope.search,$scope.currentPage,$scope.cat_id).success(function(data){
       $scope.products = data.data;
       $scope.total = data.last_page;
       brandService.getBrands().success(function(data){
@@ -175,11 +186,12 @@ $scope.search = '';
 
   $scope.$watch('search',function(){
 
-    console.log($scope.search);
+    
     $scope.message = '';
 
-    searchService.getProducts($scope.search,1).success(function(data){
+    searchService.getProducts($scope.search,1,$scope.cat_id).success(function(data){
       $scope.products = data.data;
+      console.log($scope.search+$scope.currentPage+$scope.cat_id);
       $scope.currentPage = 1;
       $scope.total = data.last_page;
       brandService.getBrands().success(function(data){
@@ -213,18 +225,7 @@ $scope.search = '';
 
   });
 
-  $scope.toggle = function(product, index){
 
-
-    $http.get('product/toggle/'+product).success(function(data){
-      $scope.products[index].availability = !($scope.products[index].availability);
-      console.log( $scope.products[index].availability);
-    });
-
-    $scope.message = '';
-
-
-  }
 
 
 }
