@@ -60,7 +60,7 @@ Route::group(array('before' => 'setcookie'),function()
 
 	//shop
 	Route::get( 'shop' , 'ShopController@shop');
-	
+	Route::get( 'shop/attributejson' , 'ShopController@attributes');
 
 
 	Route::filter('auth',function(){

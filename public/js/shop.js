@@ -46,6 +46,16 @@ app.service('categoryService',function($http){
 });
 
 
+app.service('attService',function($http){
+
+  return {
+    getAtt: function(product_id) {
+      return $http.get('shop/attributejson?product_id='+product_id);
+
+    }
+
+  };
+});
 
 
 
@@ -57,15 +67,15 @@ Array.prototype.remove = function(from, to) {
 };
 
 
-controllers.ProductCtrl = function($scope, $http, productService , brandService, categoryService, searchService){
-  
-console.log('test');
-$scope.search = '';
+controllers.ProductCtrl = function($scope, $http, productService, attService , brandService, categoryService, searchService){
 
-categoryService.getCategories().success(function(data){
-  $scope.categories = data;
-  $scope.isAll = true
-  for (var i =  $scope.categories.length - 1; i >= 0; i--) {
+  console.log('test');
+  $scope.search = '';
+
+  categoryService.getCategories().success(function(data){
+    $scope.categories = data;
+    $scope.isAll = true
+    for (var i =  $scope.categories.length - 1; i >= 0; i--) {
      if($scope.categories[i].id == $scope.cat_id) {
       $scope.categories[i].isCat = true;
       $scope.isAll = false;
@@ -81,154 +91,144 @@ categoryService.getCategories().success(function(data){
     }
   }
 
-  $scope.delete_product = function(prodID, name){
-    var confirm_deletion = confirm("Deleting "+name+". Are you sure?");
-
-    if(confirm_deletion){
-
-      $http({method: 'DELETE', url: 'product/'+prodID }).
-      success(function(data) {
-
-      }).
-      error(function(data) {
-      });
 
 
 
-      var index = getById($scope.products, prodID);
-      console.log(index);
-      $scope.products.remove(index);
 
-      $scope.message = name + ' is deleted.';
+$scope.next = function(){
+  if($scope.currentPage !== $scope.total && $scope.total !== 0) $scope.currentPage += 1;
+  searchService.getProducts($scope.search,$scope.currentPage,$scope.cat_id).success(function(data){
+    $scope.products = data.data;
+    $scope.total = data.last_page;
+    brandService.getBrands().success(function(data){
+      var brand_list = {};
 
-    }
+      for (var i = 0; i<data.length; i++) {
+        var obj =data[i];
+        brand_list[obj.id] = obj.name;
+      }
 
+      for (var i = $scope.products.length - 1; i >= 0; i--) {
+        $scope.products[i].brand = brand_list[$scope.products[i].brand_id];
+      };
 
-
-  }
-
-  $scope.next = function(){
-    if($scope.currentPage !== $scope.total && $scope.total !== 0) $scope.currentPage += 1;
-    searchService.getProducts($scope.search,$scope.currentPage,$scope.cat_id).success(function(data){
-      $scope.products = data.data;
-      $scope.total = data.last_page;
-      brandService.getBrands().success(function(data){
-        var brand_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          brand_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].brand = brand_list[$scope.products[i].brand_id];
-        };
-
-      });
-
-      categoryService.getCategories().success(function(data){
-        var category_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          category_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].category = category_list[$scope.products[i].category_id];
-        };
-
-      });
     });
 
-    $scope.message = '';
+    categoryService.getCategories().success(function(data){
+      var category_list = {};
 
+      for (var i = 0; i<data.length; i++) {
+        var obj =data[i];
+        category_list[obj.id] = obj.name;
+      }
 
-  }
+      for (var i = $scope.products.length - 1; i >= 0; i--) {
+        $scope.products[i].category = category_list[$scope.products[i].category_id];
+      };
 
-  $scope.prev = function(){
-    if($scope.currentPage !== 1 && $scope.total !== 0) $scope.currentPage -= 1;
-    searchService.getProducts($scope.search,$scope.currentPage,$scope.cat_id).success(function(data){
-      $scope.products = data.data;
-      $scope.total = data.last_page;
-      brandService.getBrands().success(function(data){
-        var brand_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          brand_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].brand = brand_list[$scope.products[i].brand_id];
-        };
-
-      });
-
-      categoryService.getCategories().success(function(data){
-        var category_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          category_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].category = category_list[$scope.products[i].category_id];
-        };
-
-      });
     });
-    $scope.message = '';
-  }
-
-
-
-  $scope.$watch('search',function(){
-
-    
-    $scope.message = '';
-
-    searchService.getProducts($scope.search,1,$scope.cat_id).success(function(data){
-      $scope.products = data.data;
-      console.log($scope.search+$scope.currentPage+$scope.cat_id);
-      $scope.currentPage = 1;
-      $scope.total = data.last_page;
-      brandService.getBrands().success(function(data){
-        var brand_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          brand_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].brand = brand_list[$scope.products[i].brand_id];
-        };
-
-      });
-
-      categoryService.getCategories().success(function(data){
-        var category_list = {};
-
-        for (var i = 0; i<data.length; i++) {
-          var obj =data[i];
-          category_list[obj.id] = obj.name;
-        }
-
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-          $scope.products[i].category = category_list[$scope.products[i].category_id];
-        };
-
-      });
-    });
-
   });
 
-
+  $scope.message = '';
 
 
 }
+
+$scope.prev = function(){
+  if($scope.currentPage !== 1 && $scope.total !== 0) $scope.currentPage -= 1;
+  searchService.getProducts($scope.search,$scope.currentPage,$scope.cat_id).success(function(data){
+    $scope.products = data.data;
+    $scope.total = data.last_page;
+    brandService.getBrands().success(function(data){
+      var brand_list = {};
+
+      for (var i = 0; i<data.length; i++) {
+        var obj =data[i];
+        brand_list[obj.id] = obj.name;
+      }
+
+      for (var i = $scope.products.length - 1; i >= 0; i--) {
+        $scope.products[i].brand = brand_list[$scope.products[i].brand_id];
+      };
+
+    });
+
+    categoryService.getCategories().success(function(data){
+      var category_list = {};
+
+      for (var i = 0; i<data.length; i++) {
+        var obj =data[i];
+        category_list[obj.id] = obj.name;
+      }
+
+      for (var i = $scope.products.length - 1; i >= 0; i--) {
+        $scope.products[i].category = category_list[$scope.products[i].category_id];
+      };
+
+    });
+  });
+  $scope.message = '';
+}
+
+
+
+$scope.$watch('search',function(){
+
+
+  $scope.message = '';
+
+  searchService.getProducts($scope.search,1,$scope.cat_id).success(function(data){
+    $scope.products = data.data;
+    console.log($scope.search+$scope.currentPage+$scope.cat_id);
+    $scope.currentPage = 1;
+    $scope.total = data.last_page;
+    brandService.getBrands().success(function(data){
+      var brand_list = {};
+
+      for (var i = 0; i<data.length; i++) {
+        var obj =data[i];
+        brand_list[obj.id] = obj.name;
+      }
+
+      for (var i = $scope.products.length - 1; i >= 0; i--) {
+        $scope.products[i].brand = brand_list[$scope.products[i].brand_id];
+      };
+
+    });
+
+    categoryService.getCategories().success(function(data){
+      var category_list = {};
+
+      for (var i = 0; i<data.length; i++) {
+        var obj =data[i];
+        category_list[obj.id] = obj.name;
+      }
+
+      for (var i = $scope.products.length - 1; i >= 0; i--) {
+        $scope.products[i].category = category_list[$scope.products[i].category_id];
+      };
+
+    });
+  });
+
+});
+
+
+$scope.retrieve_attribute = function(product_id){
+  attService.getAtt(product_id).success(function(data){
+    $scope.atts = data;
+    console.log( $scope.atts);
+  });
+}
+
+$scope.submit = function(product_id){
+  console.log(product_id);
+}
+
+
+}
+
+
 
 
 app.controller(controllers);

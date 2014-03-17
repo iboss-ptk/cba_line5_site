@@ -58,6 +58,10 @@ class ConfideSetupUsersTable extends Migration {
             $table->string('username');
             $table->string('email');
             $table->string('password');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('mobilephonenumber');
+            $table->text('address');
             $table->string('confirmation_code');
             $table->boolean('confirmed')->default(false);
             $table->boolean('isadmin')->default(0);
@@ -75,7 +79,6 @@ class ConfideSetupUsersTable extends Migration {
             $table->string('mobilephonenumber');
             $table->text('address');
             $table->boolean('banned')->default(false);
-            $table->unsignedInteger('sp_code')->default(0);
             $table->unsignedInteger('resp_sp_code')->default(0);
             $table->decimal('point',7,2);
             $table->timestamps();
@@ -93,7 +96,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->increments('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('confirmed')->default(0);
-            $table->string('image.path'); 
+            $table->string('image_path'); 
         });
          Schema::create('order_lists',function($table)
         {

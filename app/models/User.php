@@ -20,6 +20,11 @@
 	    );
 
 
+	    public function order() {
+	    	 return $this->hasMany('Order');
+	    }
+
+
 	}
 
 
