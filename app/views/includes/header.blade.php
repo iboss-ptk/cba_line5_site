@@ -60,17 +60,19 @@
 					</a>
 					
 				</li>
-
+				@if(Auth::check()&&Confide::user()->isadmin)
 				<li class="dropdown">
 					<a class="dropdown-toggle" href="#">
 						Manage
 						<i class="icon icon-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="{{URL::to('user')}}">User</a></li>
+						<li><a href="{{URL::to('manage_user')}}">User</a></li>
 						<li><a href="{{URL::to('product')}}">Product</a></li>
 					</ul>
 				</li>
+
+				@endif
 
 				@if(Auth::check())
 				<li>

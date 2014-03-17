@@ -54,7 +54,7 @@ $scope.search = '';
 
     if(confirm_deletion){
 
-      $http({method: 'DELETE', url: 'user/'+userID }).
+      $http({method: 'DELETE', url: 'manage_user/'+userID }).
       success(function(data) {
 
       }).
