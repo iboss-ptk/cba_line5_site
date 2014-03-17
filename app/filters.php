@@ -62,12 +62,12 @@ Route::filter('guest', function()
 /* Admin Filter */
 Route::filter('admin', function()
 {
-	if (!Auth::user() || Auth::user()->admin !=1) return Redirect::to('/');
+	if (!Auth::user() || Auth::user()->isadmin !=1) return Redirect::to('/');
 });
 /* SP */
 Route::filter('sp', function()
 {
-	if (!Auth::user() || Auth::user()->sp !=1) return Redirect::to('/');
+	if (!Auth::user() || Auth::user()->issp !=1) return Redirect::to('/');
 });
 /*
 |--------------------------------------------------------------------------

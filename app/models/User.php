@@ -7,6 +7,8 @@
 	     * Validation rules
 	     */
 		protected $table = 'users';
+
+		protected $guarded = array('id','password');
 	    public static $rules = array(
 	    	'username'=> 'required|alpha_dash',
 	        'email' => 'required|email',
@@ -16,6 +18,8 @@
 	        'mobilephonenumber' =>'required|digits:10',
 	        'address' =>'required'
 	    );
+
+
 	}
 
 

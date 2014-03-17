@@ -72,7 +72,7 @@ CBA -- Sign up
             </div>
              <div class="form-group">
                 <label for="resp_sp_code">Resp_Sp_code</label>
-                <input class="form-control" placeholder={{Cookie::get('sp_code')}} type="text" name="resp_sp_code" id="resp_sp_code" value={{Cookie::get('sp_code')}}>
+                <input class="form-control" placeholder="{{Cookie::get('sp_code')}}" type="text" name="resp_sp_code" id="resp_sp_code" value="{{Cookie::get('sp_code')}}">
             </div>
      
 

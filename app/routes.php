@@ -51,13 +51,13 @@ Route::filter('setcookie',function(){
 Route::group(array('before' => 'setcookie'),function()
 {
 
-	
 	Route::get('/', function()
 	{
 		
 		return View::make('pages.home');
 		
 	});
+	
 
 	Route::get( 'user/login','UserController@login');
 	Route::get( 'user/create',                 'UserController@create');
@@ -118,7 +118,7 @@ Route::group(array('before' => 'auth_admin'), function(){
 	Route::resource('brand', 'BrandController');
 	Route::resource('category', 'CategoryController');
 
-	Route::resource('user', 'UserController'); //on edit
+	Route::resource('manage_user', 'UserEditController'); //on edit
 
 	Route::get( 'product/toggleavailability/{id}' ,function ($id)
 	{
@@ -176,4 +176,4 @@ Route::filter('auth_sp',function(){
 
 Route::group(array('before' => 'auth_sp'), function(){
 
-}
+});

@@ -9,7 +9,7 @@
 |
 */
 
-class UserController extends BaseController {
+class UserEditController extends BaseController {
     public function __construct() {
         $this->beforeFilter('csrf', array('on'=>'post'));
     }
@@ -42,6 +42,22 @@ class UserController extends BaseController {
      * @param  int  $id
      * @return Response
      */
+   /* public function update($id)
+    {
+        //$input = array_except(Input::all(),'_method');
+
+        $input = array_except(Input::all(),'_method');
+
+        
+
+           $user=User::find($id)->update($input);
+             Session::flash('message', $user->errors());
+            return Redirect::to('manage_user');
+
+
+        
+    }*/
+    
     public function update($id)
     {
         $rules = array(
@@ -49,6 +65,7 @@ class UserController extends BaseController {
 
             );
         $validator = Validator::make(Input::all(), $rules);
+
 
         // process the login
         if ($validator->fails()) {
@@ -72,7 +89,7 @@ class UserController extends BaseController {
 
             // redirect
             Session::flash('message', $user->errors());
-            return Redirect::to('user');
+            return Redirect::to('manage_user');
         }
     
 
@@ -88,12 +105,12 @@ class UserController extends BaseController {
         if ($user) {
             $user->delete();
             Session::flash('message', 'Successfully deleted the user!');
-            return Redirect::to('user');
+            return Redirect::to('manage_user');
         }
 
         // redirect
         Session::flash('message', 'Something went wrong, please try again');
-        return Redirect::to('user');
+        return Redirect::to('mange_user');
     }
 
     
