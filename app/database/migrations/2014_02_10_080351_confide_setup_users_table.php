@@ -96,6 +96,15 @@ class ConfideSetupUsersTable extends Migration {
             $table->decimal('total_cost', 8, 2);; 
         });
 
+          Schema::create('order_list_attributes',function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name');
+            $table->string('type');
+            $table->integer('order_list_id')->references('id')->on('order_lists');
+            $table->timestamps();
+        });
+
         // Creates password reminders table
         Schema::create('password_reminders', function($t)
         {
