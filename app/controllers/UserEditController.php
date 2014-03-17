@@ -42,7 +42,7 @@ class UserEditController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-   /* public function update($id)
+    public function update($id)
     {
         //$input = array_except(Input::all(),'_method');
 
@@ -50,14 +50,14 @@ class UserEditController extends BaseController {
 
         
 
-           $user=User::find($id)->update($input);
-             Session::flash('message', $user->errors());
+           User::find($id)->update($input);
+            //Session::flash('message',  User::find($id)->update($input)->errors());
             return Redirect::to('manage_user');
 
 
         
-    }*/
-    
+    }
+    /*
     public function update($id)
     {
         $rules = array(

@@ -172,3 +172,4 @@ Route::resource('posts', 'PostController');
 
 
 Route::group(array('before' => 'auth_sp'), function(){
+});
