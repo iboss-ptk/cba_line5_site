@@ -10,6 +10,7 @@ class ConfideSetupUsersTable extends Migration {
      */
     public function up()
     {
+
         // Creates the products table
         Schema::create('products', function($table)
         {
@@ -49,6 +50,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->string('name');
             $table->timestamps();
         });
+
         // Creates the users table
         Schema::create('users', function($table)
         {
@@ -60,6 +62,14 @@ class ConfideSetupUsersTable extends Migration {
             $table->boolean('confirmed')->default(false);
             $table->boolean('isadmin')->default(0);
             $table->boolean('issp')->default(0);
+            $table->boolean('banned')->default(0);
+            $table->timestamps();
+        });
+         Schema::create('sales',function($table)
+        {
+            $table->increments('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedInteger('sp_code')->unique();
             $table->string('firstname');
             $table->string('lastname');
             $table->string('mobilephonenumber');
@@ -83,7 +93,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->increments('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('confirmed')->default(0);
-            $table->string('image_path'); 
+            $table->string('image.path'); 
         });
          Schema::create('order_lists',function($table)
         {
@@ -111,29 +121,7 @@ class ConfideSetupUsersTable extends Migration {
      * @return void
      */
     public function down()
-    {   
-        Schema::table('products', function(Blueprint $table) {
-            $table->dropForeign('products_brand_id_foreign');
-            $table->dropForeign('products_category_id_foreign');
-            $table->dropForeign('products_product_pic_id_foreign');
-        });
-
-        Schema::table('attributes', function(Blueprint $table) {
-            $table->dropForeign('attributes_attribute_type_id_foreign');
-
-        });
-
-        Schema::table('attribute_links', function(Blueprint $table) {
-            $table->dropForeign('attribute_links_product_id_foreign');
-            $table->dropForeign('attribute_links_attribute_id_foreign');
-        });
-
-        Schema::drop('products');
-        Schema::drop('brands');
-        Schema::drop('categories');
-        Schema::drop('attributes');
-        Schema::drop('attribute_types');
-        Schema::drop('attribute_links');
+    {
         Schema::drop('password_reminders');
         Schema::drop('users');
         Schema::drop('sales');
