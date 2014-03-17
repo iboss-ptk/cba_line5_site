@@ -30,12 +30,14 @@ Route::post('user/reset_password',         'UserController@do_reset_password');
 /////////////////TEST COOKIE//////////////////////////
 Route::get('testCookie',function(){
 
-		$show_sp_code = Cookie::get('sp_code');
-		
+	$show_sp_code = Cookie::get('sp_code');
 
-		return 'sp_code = '.$show_sp_code.' ..';
+
+	return 'sp_code = '.$show_sp_code.' ..';
 });
 ////////////////////////////////////////////////////////
+
+
 
 ///all route that have to set cookie
 Route::group(array('before' => 'setcookie'),function()
@@ -56,6 +58,21 @@ Route::group(array('before' => 'setcookie'),function()
 	Route::get( 'user/reset_password/{token}', 'UserController@reset_password');
 	Route::get( 'user/logout',                 'UserController@logout');
 
+	//shop
+	Route::get( 'shop' , 'ShopController@shop');
+	
+
+
+	Route::filter('auth',function(){
+		if(!Auth::check()) return Redirect::to('user/login');
+	});
+
+	Route::group(array('before' => 'auth'), function(){
+
+		Route::get('shop/cart', 'ShopController@cart');
+	});
+
+
 });
 
 ///end cos is coming to town.
@@ -63,10 +80,10 @@ Route::group(array('before' => 'setcookie'),function()
 
 
 Route::controller('productrest', 'ProductRestController');
-Route::resource('product', 'ProductController');
-Route::resource('brand', 'BrandController');
-Route::resource('category', 'CategoryController');
-Route::get('image/{src}/{w?}/{h?}',function($src,$w=100,$h=100){
+
+Route::controller('userrest', 'UserRestController');
+
+Route::get('image/{src}/{w?}/{h?}',function($src,$w=200,$h=200){
 	//intervention image cache
 
 	//closure and coping anoymous function
@@ -75,7 +92,27 @@ Route::get('image/{src}/{w?}/{h?}',function($src,$w=100,$h=100){
 	},10,true);
 	return Response::make($cacheimage,200,array('Content-Type'=>'image/jpeg'));
 });
-Route::get( 'product/toggle/{id}' ,function ($id)
+
+
+
+
+Route::filter('auth_admin',function(){
+	if(Auth::check()){
+		if(!Confide::user()->isadmin) return "You don't have permission";
+	} else return Redirect::to('user/login');
+
+});
+
+
+Route::group(array('before' => 'auth_admin'), function(){
+
+	Route::resource('product', 'ProductController');
+	Route::resource('brand', 'BrandController');
+	Route::resource('category', 'CategoryController');
+
+	Route::resource('user', 'UserController'); //on edit
+
+	Route::get( 'product/toggleavailability/{id}' ,function ($id)
 	{
 		$product = Prod::find($id);
 		$product->availability = !$product->availability;
@@ -83,14 +120,58 @@ Route::get( 'product/toggle/{id}' ,function ($id)
 		$products = Prod::paginate($limit = 10)->toJson();
 		return $products;
 	});
+	Route::get( 'user/toggleissp/{id}' ,function ($id)
+	{
+		$user = User::find($id);
+		$user->issp = !$user->issp;
+		$user->save();
+		$users = User::paginate($limit = 10)->toJson();
+		return $users;
+	});
+	Route::get( 'user/togglebanned/{id}' ,function ($id)
+	{
+		$user = User::find($id);
+		$user->banned = !$user->banned;
+		$user->save();
+		$users = User::paginate($limit = 10)->toJson();
+		return $users;
+	});
+	Route::get( 'user/toggleconfirmed/{id}' ,function ($id)
+	{
+		$user = User::find($id);
+		$user->confirmed = !$user->confirmed;
+		$user->save();
+		$users = User::paginate($limit = 10)->toJson();
+		return $users;
+	});
+	Route::get( 'user/toggleisadmin/{id}' ,function ($id)
+	{
+		$user = User::find($id);
+		$user->isadmin = !$user->isadmin;
+		$user->save();
+		$users = User::paginate($limit = 10)->toJson();
+		return $users;
+	});
 
 
-Route::get('userdata',function(){
-	$name = Confide::user()->username;
-	$email = Confide::user()->email;
-	return View::make('pages.userData')->with('username',$name);
 });
+
+
+
+Route::filter('auth_sp',function(){
+	if(Auth::check()){
+		if(!Confide::user()->issp) return "You don't have permission";
+	} else return Redirect::to('user/login');
+
+});
+
 
 
 //blog post
 Route::resource('posts', 'PostController');
+
+
+Route::group(array('before' => 'auth_sp'), function(){
+
+});
+

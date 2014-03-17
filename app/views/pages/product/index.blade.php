@@ -37,7 +37,7 @@ CBA -- Products
                 <div class="col-sm-10">
 
                     @foreach($brand_all as $brand)
-                    <input type="checkbox" name="brand" value="{{$brand->id}}">{{$brand->name}}<br>
+                    <input type="checkbox" name="brand[]" value="{{$brand->id}}" ng-checked="selection.indexOf({{$brand->id}}) > -1">{{$brand->name}}<br>
                     @endforeach
 
                 </div>
@@ -47,8 +47,8 @@ CBA -- Products
                 <label for="Category" class="col-sm-2 control-label">Category</label>
                 <div class="col-sm-10">
 
-                    @foreach($brand_all as $category)
-                    <input type="checkbox" name="category" value="{{$category->id}}">{{$category->name}}<br>
+                    @foreach($category_all as $category)
+                    <input type="checkbox" name="category[]" value="{{$category->id}}" ng-checked="selection.indexOf({{$category->id}}) > -1">{{$category->name}}<br>
                     @endforeach
 
                 </div>
@@ -91,12 +91,12 @@ CBA -- Products
     <tr ng-repeat="product in products"> <!-- add class warning -->
         <td>@{{ product.id }}</td>
         <td>@{{ product.name }}</td>
-        <td><img ng-src="image/@{{product.product_pic}}/200/200"/></td> <!--pic-->
+        <td><img style="max-height: 200px; max-width: 200px;" ng-src="@{{product.product_pic}}"/></td> <!--pic-->
         <td>@{{ product.brand }}</td>
         <td>@{{ product.category }}</td>
         <td>@{{ product.price}}</td>
         <td>
-            <a ng-click="toggle(product.id, $index)">
+            <a ng-click="toggleavailability(product.id, $index)">
 
                 <div ng-switch on="product.availability">
                    <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
@@ -118,7 +118,7 @@ CBA -- Products
 
         <a class="btn btn-success btn-block" ng-href="product/@{{product.id}}" target="_blank">Show</a>
 
-        <a class="btn btn-info  btn-block" ng-href="product/@{{product.id}}/edit" target="_blank">Edit</a>
+        <a class="btn btn-info  btn-block" ng-href="product/@{{product.id}}/edit">Edit</a>
 
         <a class="btn btn-warning  btn-block" ng-click="delete_product(product.id, product.name)">Delete</a>
 

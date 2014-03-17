@@ -57,7 +57,7 @@
 						<div class="row">
 							<div class="col-md-1">
 								<a href="index.html" class="logo">
-									<img alt="Porto Website Template" class="img-responsive" src="img/logo-footer.png">
+									<img alt="CBA" class="img-responsive" src="<?php echo asset('img/cbalogo.png')?>">
 								</a>
 							</div>
 							<div class="col-md-7">

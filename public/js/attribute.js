@@ -50,7 +50,7 @@ controllers.AttCtrl = function($scope){
 
 	$scope.types = [];
 
-	$scope.types = [{'name':'test','data':['asdff','asdasd','asasd']},{'name':'test2','data':['assaeff','abbbasd','asdfasd']}];
+	// $scope.types = [{'name':'test','data':['asdff','asdasd','asasd']},{'name':'test2','data':['assaeff','abbbasd','asdfasd']}];
 	// $scope.atts = {};
 
 
@@ -87,6 +87,11 @@ controllers.AttCtrl = function($scope){
 		// console.log($scope.types[t_index].data);
 		// console.log(att_name);
 		$scope.types[t_index].data.remove(att_index);
+	}
+
+	$scope.delete_type = function(index){
+		$scope.types.remove(index);
+
 	}
 }
 

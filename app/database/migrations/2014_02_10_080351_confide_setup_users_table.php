@@ -10,6 +10,47 @@ class ConfideSetupUsersTable extends Migration {
      */
     public function up()
     {
+
+        // Creates the products table
+        Schema::create('products', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name')->unique();
+            $table->decimal('price', 6, 2);
+            $table->integer('brand_id')->references('id')->on('brands');
+            $table->integer('category_id')->references('id')->on('categories');
+            $table->boolean('availability')->default(true);
+            $table->string('product_pic');
+            $table->timestamps();
+        });
+
+        // Creates the attributes table
+        Schema::create('attributes', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name');
+            $table->string('type');
+            $table->integer('product_id')->references('id')->on('products');
+            $table->timestamps();
+        });
+
+
+        // Creates the brands table
+        Schema::create('brands', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        // Creates the categories table
+        Schema::create('categories', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name');
+            $table->timestamps();
+        });
+
         // Creates the users table
         Schema::create('users', function($table)
         {
@@ -29,14 +70,15 @@ class ConfideSetupUsersTable extends Migration {
             $table->increments('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedInteger('sp_code')->unique();
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('mobilephonenumber');
+            $table->text('address');
+            $table->boolean('banned')->default(false);
+            $table->unsignedInteger('sp_code');
+            $table->unsignedInteger('resp_sp_code');
             $table->decimal('point',7,2);
-        });
-          Schema::create('customers',function($table)
-        {
-            $table->increments('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedInteger('resp_sp_id');
-            $table->foreign('resp_sp_id')->references('sp_code')->on('sales')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
         Schema::create('orders',function($table)
         {
