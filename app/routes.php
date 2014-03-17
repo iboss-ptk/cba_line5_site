@@ -16,7 +16,7 @@
 
 
 Route::post('user',                        'UserController@store');
-//Route::get( 'user/login',                  'UserController@login');
+
 Route::post('user/login',                  'UserController@do_login');
 
 Route::post('user/forgot_password',        'UserController@do_forgot_password');
@@ -36,15 +36,6 @@ Route::get('testCookie',function(){
 		return 'sp_code = '.$show_sp_code.' ..';
 });
 ////////////////////////////////////////////////////////
-/// create cookie if don't set sp , sp_value will be 0 and it will not create cookie.
-Route::filter('setcookie',function(){
-
-		$sp_value = Input::get('sp',0);
-		if($sp_value>0){
-			Cookie::queue('sp_code', $sp_value,'forever');
-		}
-		
-});
 
 ///all route that have to set cookie
 Route::group(array('before' => 'setcookie'),function()
@@ -99,3 +90,7 @@ Route::get('userdata',function(){
 	$email = Confide::user()->email;
 	return View::make('pages.userData')->with('username',$name);
 });
+
+
+//blog post
+Route::resource('posts', 'PostController');
