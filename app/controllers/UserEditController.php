@@ -42,22 +42,7 @@ class UserEditController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
-    {
-        //$input = array_except(Input::all(),'_method');
-
-        $input = array_except(Input::all(),'_method');
-
         
-
-           User::find($id)->update($input);
-            //Session::flash('message',  User::find($id)->update($input)->errors());
-            return Redirect::to('manage_user');
-
-
-        
-    }
-    /*
     public function update($id)
     {
         $rules = array(
