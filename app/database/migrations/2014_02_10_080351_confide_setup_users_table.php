@@ -58,6 +58,10 @@ class ConfideSetupUsersTable extends Migration {
             $table->string('username');
             $table->string('email');
             $table->string('password');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('mobilephonenumber');
+            $table->text('address');
             $table->string('confirmation_code');
             $table->boolean('confirmed')->default(false);
             $table->boolean('isadmin')->default(0);
@@ -66,44 +70,50 @@ class ConfideSetupUsersTable extends Migration {
             $table->timestamps();
         });
          Schema::create('sales',function($table)
-        {
-            $table->increments('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+        {   $table->unsignedInteger('user_id');
+            $table->primary('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            
             $table->unsignedInteger('sp_code')->unique();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('mobilephonenumber');
-            $table->text('address');
-            $table->boolean('banned')->default(false);
-            $table->unsignedInteger('sp_code');
-            $table->unsignedInteger('resp_sp_code');
             $table->decimal('point',7,2);
             $table->timestamps();
+        });
+          Schema::create('customers',function($table)
+        {  $table->unsignedInteger('user_id');
+             $table->primary('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            
+            $table->unsignedInteger('resp_sp_code')->references('sp_code')->on('sales')->onUpdate('cascade');
         });
         Schema::create('orders',function($table)
         {
             $table->increments('id');
             $table->integer('status')->default(0);
             $table->timestamps('update_at');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedInteger('user_id')->references('id')->on('users')->onUpdate('cascade');
         });
          Schema::create('confirmations',function($table)
         {
-            $table->increments('order_id');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->increments('order_id')->references('id')->on('orders')->onUpdate('cascade');
             $table->boolean('confirmed')->default(0);
-            $table->string('image.path'); 
+            $table->string('image_path'); 
         });
          Schema::create('order_lists',function($table)
         {
             $table->increments('id');
-            $table->unsignedInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedInteger('order_id')->references('id')->on('orders');
+            $table->unsignedInteger('product_id')->references('id')->on('products');
             $table->unsignedInteger('amount')->default(0);
-            $table->decimal('total_cost', 8, 2);; 
+            $table->decimal('total_cost', 8, 2);
+        });
+
+          Schema::create('order_list_attributes',function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name');
+            $table->string('type');
+            $table->integer('order_list_id')->references('id')->on('order_lists');
+            $table->timestamps();
         });
 
         // Creates password reminders table

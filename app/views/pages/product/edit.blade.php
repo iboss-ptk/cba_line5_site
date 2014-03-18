@@ -75,8 +75,8 @@ CBA -- Edit
 
 
             <div ng-controller="AttCtrl" ng-init='types={{json_encode($atts)}}'>
-                <div ng-repeat="type in types"> <a ng-click="delete_type($index)" style="font-size:8px;">(del)</a></h5>
-                    <h5>@{{type.name}}</h5>
+                <div ng-repeat="type in types"> 
+                    <h5>@{{type.name}} <a ng-click="delete_type($index)" style="font-size:8px;">(del)</a></h5>
                     <input type="hidden" name="@{{'type_'+$index}}" value="@{{type.name}}">
                     <div ng-repeat="att in type.data">
                         <a><i class="fa fa-times" ng-click="delete(type.name,att)"></i></a> @{{att}} <br>

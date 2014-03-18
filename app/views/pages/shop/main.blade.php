@@ -41,7 +41,7 @@ CBA -- Shop
 			<li class="col-md-4 isotope-item websites" ng-repeat="product in products ">
 				<div class="portfolio-price-normal"> <span ng-bind="product.price"></span> ฿</div><!-- price -->
 				<div class="portfolio-item img-thumbnail">
-					<a href="#" class="thumb-info" data-toggle="modal" data-target="#@{{product.id}}"><!-- open -->
+					<a ng-click="retrieve_attribute(product.id)" href="#" class="thumb-info" data-toggle="modal" data-target="#@{{product.id}}"> <!-- open -->
 						<img ng-if="product.product_pic!=='NULL'" alt="@{{product.name}}" class="img-responsive"  ng-src="@{{product.product_pic}}">
 						<img ng-if="product.product_pic==='NULL'" alt="@{{product.name}}" class="img-responsive" src="img/projects/project-3.jpg"><!-- img -->
 						<span class="thumb-info-title">
@@ -72,17 +72,26 @@ CBA -- Shop
 									<div class="thumb-info-type-box"><span class="thumb-info-type">@{{ product.brand }}</span></div><!-- brand -->
 								</span>
 							</div>
+
+							<form name='@{{ product.id }}' id='@{{ product.id }}'>
+								<div class="form-group" ng-repeat="att in atts">
+									<select ng-model="$parent.attribute[att.name]" ng-options="a for a in att.data" class="form-control">
+									</select>
+								</div>
+							</form>
+							<p ng-repeat="(key,val) in attribute">@{{key}} : @{{val}}</p>
+
 							<div class="modal-footer">
-								<button type="submit" form="" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
+								<button type="submit" ng-click="submit(product.id)" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
 							</div>
 						</div>
 					</div>
 				</div>
-			</li>
+			</li>	
 
 
 
-			
+
 		</ul>
 
 	</div>

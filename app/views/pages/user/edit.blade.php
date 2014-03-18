@@ -20,8 +20,7 @@ CBA -- Edit
 
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
-
-        {{ Form::model($user, array('route' => array('user.update', $user->id), 'method' => 'PUT')) }}
+        {{ Form::model($user, array('route' => array('manage_user.update', $user->id), 'method' => 'PUT')) }}
 
         <div class="form-group">
             {{ Form::label('username', 'Username') }}

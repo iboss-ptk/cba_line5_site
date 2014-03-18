@@ -213,17 +213,15 @@ class ProductController extends BaseController {
 
 			$product->save();
 
-
+			Attribute::where('product_id','=',$id)->delete();
+			
 			for ($i=0; Input::has('type_'.$i); $i++) { 
 				for ($j=0; Input::has('att_'.$i.$j); $j++) { 
 					$att = new Attribute;
 					$att->name = Input::get('att_'.$i.$j);
 					$att->type = Input::get('type_'.$i);
 					$att->product_id = $product->id;
-					if(!Attribute::where('name','=',$att->name)
-						->where('type','=',$att->type)
-						->where('product_id','=',$att->product_id))
-						$att->save();
+					$att->save();
 				}
 			}
 
