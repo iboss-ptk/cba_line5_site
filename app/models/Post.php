@@ -8,7 +8,7 @@ class Post extends Eloquent
 		protected $guarded = array();
 
 	    public static $rules = array(
-	    	'title' => 'required|unique:posts',
+	    	'title' => 'required|unique',
 	    	'body' => 'required'
 	    );
 

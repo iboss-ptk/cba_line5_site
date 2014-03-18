@@ -67,44 +67,36 @@ class ConfideSetupUsersTable extends Migration {
             $table->boolean('isadmin')->default(0);
             $table->boolean('issp')->default(0);
             $table->boolean('banned')->default(0);
-            $table->timestamps();
-        });
-         Schema::create('sales',function($table)
-        {   $table->unsignedInteger('user_id');
-            $table->primary('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
-            
-            $table->unsignedInteger('sp_code')->unique();
+            $table->string('sp_code')->default(0);
+            $table->string('resp_sp_code')->default(0);
             $table->decimal('point',7,2);
             $table->timestamps();
         });
-          Schema::create('customers',function($table)
-        {  $table->unsignedInteger('user_id');
-             $table->primary('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
-            
-            $table->unsignedInteger('resp_sp_code')->references('sp_code')->on('sales')->onUpdate('cascade');
-        });
+        
         Schema::create('orders',function($table)
         {
             $table->increments('id');
             $table->integer('status')->default(0);
             $table->timestamps('update_at');
-            $table->unsignedInteger('user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
          Schema::create('confirmations',function($table)
         {
-            $table->increments('order_id')->references('id')->on('orders')->onUpdate('cascade');
+            $table->increments('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('confirmed')->default(0);
             $table->string('image_path'); 
         });
          Schema::create('order_lists',function($table)
         {
             $table->increments('id');
-            $table->unsignedInteger('order_id')->references('id')->on('orders');
-            $table->unsignedInteger('product_id')->references('id')->on('products');
+            $table->unsignedInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedInteger('amount')->default(0);
-            $table->decimal('total_cost', 8, 2);
+            $table->decimal('total_cost', 8, 2);; 
         });
 
           Schema::create('order_list_attributes',function($table)
@@ -134,7 +126,6 @@ class ConfideSetupUsersTable extends Migration {
     {
         Schema::drop('password_reminders');
         Schema::drop('users');
-        Schema::drop('sales');
         Schema::drop('orders');
         Schema::drop('order_lists');
         Schema::drop('confirmations');

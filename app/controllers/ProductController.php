@@ -40,9 +40,13 @@ class ProductController extends BaseController {
 	public function store()
 	{
 		$rules = array(
-			'name'       => 'required',
-
-			);
+			'name'=>'required|min:2',
+			'price'=>'required|numeric',
+			'brand_id'=>'required|integer',
+			'category_id'=>'required|integer',
+			'availability'=>'integer',
+			'product_pic'=>'required|image|mimes:jpeg,jpg,bmp,png,gif'
+		);
 		$validator = Validator::make(Input::all(), $rules);
 
 		// process the login
