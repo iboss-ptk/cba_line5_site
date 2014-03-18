@@ -40,8 +40,8 @@ class UserController extends BaseController {
         $user->lastname = Input::get( 'lastname' );
         $user->mobilephonenumber = Input::get( 'mobilephonenumber' );
         $user->address = Input::get( 'address' );
-        $user->sp_code=Input::get('sp_code');
-        $user->resp_sp_code=Input::get('resp_sp_code');
+       // $user->sp_code=Input::get('sp_code');
+       // $user->resp_sp_code=Input::get('resp_sp_code');
         // The password confirmation will be removed from model
         // before saving. This field will be used in Ardent's
         // auto validation.
