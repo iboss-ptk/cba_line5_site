@@ -9,7 +9,7 @@ class PostController extends \BaseController {
 	 */
 	public function index()
 	{
-		$posts = Post::orderBy('created_at', 'DESC')->paginate(3);
+		$posts = Post::orderBy('created_at', 'DESC')->paginate(5);
         return View::make('posts.index')->with('posts', $posts);
 	}
 
@@ -30,24 +30,52 @@ class PostController extends \BaseController {
 	 */
 	public function store()
 	{
-		$post = new Post;
-		$post->title = Input::get('title');
-		$post->body = Input::get('body');
-		$post->m_keyw = Input::get('m_keyw');
-		$post->m_desc = Input::get('m_desc');
-		$post->slug = Str::slug(Input::get('title'));
-		$post->save();
+		// $post = new Post;
+		// $post->title = Input::get('title');
+		// $post->body = Input::get('body');
+		// $post->m_keyw = Input::get('m_keyw');
+		// $post->m_desc = Input::get('m_desc');
+		// $post->slug = Str::slug(Input::get('title'));
+		// $post->save();
 
-		if($post->id){
-				return Redirect::route('posts.index');
-		}else{
+		// if($post->id){
+		// 		return Redirect::route('posts.index');
+		// }else{
 
-			     $error = $user->errors()->all(':message');
+		// 	     $error = $user->errors()->all(':message');
 
+  //                return Redirect::action('PostController@create')
+  //               ->withInput(Input::all())
+  //               ->with( 'error', $error );
+		// }
+
+		$input = Input::all();
+		$rules = array(
+	    	'title' => 'required|unique:posts',
+	    	'body' => 'required'
+	    );
+
+		$validator = Validator::make($input,$rules);
+
+		if ($validator->fails())
+		{
+    		// The given data did not pass validation
                  return Redirect::action('PostController@create')
                 ->withInput(Input::all())
-                ->with( 'error', $error );
+                ->withErrors($validator);
+
+		}else{
+				$post = new Post;
+				$post->title = Input::get('title');
+				$post->body = Input::get('body');
+				$post->m_keyw = Input::get('m_keyw');
+				$post->m_desc = Input::get('m_desc');
+				$post->slug = Str::slug(Input::get('title'));
+				$post->save();
+
+				return Redirect::route('posts.index');
 		}
+
 	}
 
 	/**
@@ -61,10 +89,10 @@ class PostController extends \BaseController {
 		$post = Post::find($id);
 
 		$date = $post->created_at;
-		setlocale(LC_TIME, 'America/New_York');
+		//setlocale(LC_TIME, 'America/New_York');
 		$date = $date->formatlocalized('%A %d %B %Y');
 
-        return View::make('posts.show')->with('post', $post);
+        return View::make('posts.show')->with('post', $post)->with('date', $date);
 	}
 
 	/**
@@ -93,14 +121,31 @@ class PostController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//$input = array_except(Input::all(),'_method');
+		// $input = array_except(Input::all(),'_method');
+		// Post::find($id)->update($input);
+		// return Redirect::route('posts.index');
 
 		$input = array_except(Input::all(),'_method');
+		$rules = array(
+	    	'title' => 'required',
+	    	'body' => 'required'
+	    );
 
-		
+		$validator = Validator::make($input,$rules);
 
-			Post::find($id)->update($input);
-			return Redirect::route('posts.index');
+		if ($validator->fails())
+		{
+    		// The given data did not pass validation
+                //  return Redirect::action('PostController@create')
+                // ->withInput(Input::all())
+                // ->withErrors($validator);
+
+                return Redirect::route('posts.index')->withErrors($validator);;
+
+		}else{
+				Post::find($id)->update($input);
+				return Redirect::route('posts.index');
+		}
 
 
 		

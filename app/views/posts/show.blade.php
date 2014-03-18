@@ -5,7 +5,9 @@
 	<div class="col-lg-8">
 		<hr>
 		<h1>{{ $post->title }}</h1>
-
+		<hr>
+		<p><span class="glyphicon glyphicon-time"></span> Posted {{ $date }}</p>
+		<!--test time<?php printf("Right now is %s", \Carbon\Carbon::now()->toDateTimeString()); ?>-->
 		<hr>
 		<p class="lead">{{ $post->body }}</p>
 	</div>

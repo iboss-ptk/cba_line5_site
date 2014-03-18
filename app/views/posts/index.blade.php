@@ -13,15 +13,23 @@
         <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
 
+    @if ( Session::get('error') )
+    <div class="alert alert-error alert-danger">
+            @if ( is_array(Session::get('error')) )
+            {{ head(Session::get('error')) }}
+            @endif
+    </div>
+    @endif
+
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <td>Title</td>
                 <td>Description</td>
+                <th>Date Created</th>
                 <td>Preview</td>
                 <td>Edit</td>
                 <td>Delete</td>
-                <!--<td>cos</td>-->
             </tr>
         </thead>
         <tbody>
@@ -31,7 +39,7 @@
             <td>{{ $p->title }}</td>
             <td>{{ substr($p->body, 0, 120). '[...]'}}</td>
 
-
+            <td><span class="label label-info">{{ \Carbon\Carbon::createFromTimestamp(strtotime($p->created_at))->diffForHumans() }}</span></td>
             <!-- we will also add show, edit, and delete buttons -->
             <td>
 
@@ -58,8 +66,10 @@
     @endforeach
     </tbody>
 </table>
-
+    <?php echo $posts->links(); ?>
 </div>
+
+
 </div>
 @stop
 
