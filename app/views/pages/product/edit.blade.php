@@ -33,10 +33,13 @@ CBA -- Edit
 
          {{ Form::label('product_pic', 'Image :') }} 
          <!-- {{ Form::file('product_pic' , Input::old('product_pic'), array('class' => 'form-control'))}} -->
+         <pre>
+         <img src="{{asset($product->product_pic)}}" style="max-height: 500px; max-width: 500px;"> <br><br>
          <input type="radio" name="img_selc" ng-model="img_selc" value="text" checked="true">  URL &nbsp&nbsp
          <input type="radio" name="img_selc" ng-model="img_selc" value="file"> Upload <br/>
          <input ng-if="img_selc=='text'" name="product_pic" type="text" class="form-control" value="{{Input::old('product_pic')}}">
          <input ng-if="img_selc=='file'" name="product_pic" type="file" class="form-control" value="{{Input::old('product_pic')}}">
+        </pre>
      </div>
      <div class="form-group">
         {{ Form::label('price', 'Price') }}
@@ -75,8 +78,8 @@ CBA -- Edit
 
 
             <div ng-controller="AttCtrl" ng-init='types={{json_encode($atts)}}'>
-                <div ng-repeat="type in types"> <a ng-click="delete_type($index)" style="font-size:8px;">(del)</a></h5>
-                    <h5>@{{type.name}}</h5>
+                <div ng-repeat="type in types"> 
+                    <h5>@{{type.name}} <a ng-click="delete_type($index)" style="font-size:8px;">(del)</a></h5>
                     <input type="hidden" name="@{{'type_'+$index}}" value="@{{type.name}}">
                     <div ng-repeat="att in type.data">
                         <a><i class="fa fa-times" ng-click="delete(type.name,att)"></i></a> @{{att}} <br>

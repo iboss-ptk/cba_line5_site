@@ -158,7 +158,7 @@ CBA -- Users
 
         
 
-        <a class="btn btn-info  btn-block" ng-href="user/@{{user.id}}/edit" target="_blank">Edit</a>
+        <a class="btn btn-info  btn-block" ng-href="manage_user/@{{user.id}}/edit" target="_blank">Edit</a>
 
         <a class="btn btn-warning  btn-block" ng-click="delete_user(user.id, user.username)">Delete</a>
 

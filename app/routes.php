@@ -16,7 +16,7 @@
 
 
 Route::post('user',                        'UserController@store');
-//Route::get( 'user/login',                  'UserController@login');
+
 Route::post('user/login',                  'UserController@do_login');
 
 Route::post('user/forgot_password',        'UserController@do_forgot_password');
@@ -36,28 +36,20 @@ Route::get('testCookie',function(){
 	return 'sp_code = '.$show_sp_code.' ..';
 });
 ////////////////////////////////////////////////////////
-/// create cookie if don't set sp , sp_value will be 0 and it will not create cookie.
-Route::filter('setcookie',function(){
 
-	$sp_value = Input::get('sp');
 
-	if(!is_null($sp_value)){
-		Cookie::queue('sp_code', $sp_value,'forever');
-	}
-
-});
 
 ///all route that have to set cookie
 Route::group(array('before' => 'setcookie'),function()
 {
 
-	
 	Route::get('/', function()
 	{
 		
 		return View::make('pages.home');
 		
 	});
+	
 
 	Route::get( 'user/login','UserController@login');
 	Route::get( 'user/create',                 'UserController@create');
@@ -68,7 +60,7 @@ Route::group(array('before' => 'setcookie'),function()
 
 	//shop
 	Route::get( 'shop' , 'ShopController@shop');
-	
+	Route::get( 'shop/attributejson' , 'ShopController@attributes');
 
 
 	Route::filter('auth',function(){
@@ -118,7 +110,7 @@ Route::group(array('before' => 'auth_admin'), function(){
 	Route::resource('brand', 'BrandController');
 	Route::resource('category', 'CategoryController');
 
-	Route::resource('user', 'UserController'); //on edit
+	Route::resource('manage_user', 'UserEditController'); //on edit
 
 	Route::get( 'product/toggleavailability/{id}' ,function ($id)
 	{
@@ -174,6 +166,10 @@ Route::filter('auth_sp',function(){
 });
 
 
-Route::group(array('before' => 'auth_sp'), function(){
 
-}
+//blog post
+Route::resource('posts', 'PostController');
+
+
+Route::group(array('before' => 'auth_sp'), function(){
+});

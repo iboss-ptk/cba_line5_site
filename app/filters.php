@@ -62,12 +62,12 @@ Route::filter('guest', function()
 /* Admin Filter */
 Route::filter('admin', function()
 {
-	if (!Auth::user() || Auth::user()->admin !=1) return Redirect::to('/');
+	if (!Auth::user() || Auth::user()->isadmin !=1) return Redirect::to('/');
 });
 /* SP */
 Route::filter('sp', function()
 {
-	if (!Auth::user() || Auth::user()->sp !=1) return Redirect::to('/');
+	if (!Auth::user() || Auth::user()->issp !=1) return Redirect::to('/');
 });
 /*
 |--------------------------------------------------------------------------
@@ -86,4 +86,16 @@ Route::filter('csrf', function()
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
+});
+
+
+/// create cookie if don't set sp , sp_value will be 0 and it will not create cookie.
+Route::filter('setcookie',function(){
+
+		$sp_value = Input::get('sp');
+
+		if(!is_null($sp_value)){
+			Cookie::queue('sp_code', $sp_value,'forever');
+		}
+		
 });
