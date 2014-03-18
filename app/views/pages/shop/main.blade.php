@@ -75,14 +75,11 @@ CBA -- Shop
 
 							<form name='@{{ product.id }}' id='@{{ product.id }}'>
 								<div class="form-group" ng-repeat="att in atts">
-
-									<select name="brand" id="brand" class="form-control">
-										<option value=null>--- @{{att.name}} ---</option>	
-										<option ng-repeat="value in att.data" value="@{{value}}">@{{value}}</option>
-
+									<select ng-model="$parent.attribute[att.name]" ng-options="a for a in att.data" class="form-control">
 									</select>
 								</div>
 							</form>
+							<p ng-repeat="(key,val) in attribute">@{{key}} : @{{val}}</p>
 
 							<div class="modal-footer">
 								<button type="submit" ng-click="submit(product.id)" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
@@ -90,7 +87,7 @@ CBA -- Shop
 						</div>
 					</div>
 				</div>
-			</li>
+			</li>	
 
 
 

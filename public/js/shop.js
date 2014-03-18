@@ -217,14 +217,18 @@ $scope.$watch('search',function(){
 $scope.retrieve_attribute = function(product_id){
   attService.getAtt(product_id).success(function(data){
     $scope.atts = data;
-    console.log( $scope.atts);
+    $scope.attribute = {};
   });
+
 }
 
 $scope.submit = function(product_id){
   console.log(product_id);
+
+  console.log($scope.attribute);
 }
 
+$scope.attribute = {};
 
 }
 
