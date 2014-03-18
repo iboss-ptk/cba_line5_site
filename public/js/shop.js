@@ -228,7 +228,8 @@ $scope.submit = function(product_id){
   console.log($scope.attribute);
 }
 
-$scope.attribute = {};
+$scope.order_list = {};
+$scope.order_list.attribute = {};
 
 }
 

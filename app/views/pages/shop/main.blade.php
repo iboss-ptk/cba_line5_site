@@ -75,14 +75,21 @@ CBA -- Shop
 
 							<form name='@{{ product.id }}' id='@{{ product.id }}'>
 								<div class="form-group" ng-repeat="att in atts">
-									<select ng-model="$parent.attribute[att.name]" ng-options="a for a in att.data" class="form-control">
+									<select ng-model="$parent.order_list.attribute[att.name]" ng-options="a for a in att.data" class="form-control">
 									</select>
 								</div>
+								<div class="form-group">
+									<input value="@{{product.id}}" ng-model="order_list['product_id']">
+									@if(Auth::check())
+									<input value="{{Auth::user()->id}}" ng-model="order_list['user_id']">  
+									@endif
+									<input type="number" ng-model="order_list['amount']"> 
+								</div>
 							</form>
-							<p ng-repeat="(key,val) in attribute">@{{key}} : @{{val}}</p>
+							<p ng-repeat="(key,val) in order_list.attribute">@{{key}} : @{{val}}</p>
 
 							<div class="modal-footer">
-								<button type="submit" ng-click="submit(product.id)" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
+								<button type="submit" ng-click="submit()" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
 							</div>
 						</div>
 					</div>
