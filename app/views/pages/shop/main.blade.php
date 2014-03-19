@@ -95,7 +95,7 @@ CBA -- Shop
 							@else
 								
 							<div class="modal-footer">
-								<button type="submit" ng-click="window.location.assign('/user/login'); console.log('shit')" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
+								<a href="user/login"><button type="submit" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button></a>
 							</div>
 							@endif
 						</div>
