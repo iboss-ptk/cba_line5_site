@@ -87,10 +87,17 @@ CBA -- Shop
 								</div>
 							</form>
 							<p ng-repeat="(key,val) in order_list.attribute">@{{key}} : @{{val}}</p>
-
+							@if(Auth::check())
 							<div class="modal-footer">
 								<button type="submit" ng-click="submit()" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
 							</div>
+
+							@else
+								
+							<div class="modal-footer">
+								<button type="submit" ng-click="window.location.assign('/user/login'); console.log('shit')" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
+							</div>
+							@endif
 						</div>
 					</div>
 				</div>

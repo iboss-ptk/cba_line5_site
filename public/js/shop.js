@@ -225,7 +225,7 @@ $scope.retrieve_attribute = function(product_id){
 $scope.submit = function(product_id){
   console.log(product_id);
 
-  console.log($scope.attribute);
+  console.log('submit');
 }
 
 $scope.order_list = {};
