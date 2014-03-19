@@ -13,6 +13,8 @@ CBA -- Shop
 @section('content')
 <div class="container" ng-app="shop" ng-controller="ProductCtrl">
 
+
+
 	<h2>Shop </h2>
 	<ul class="nav nav-pills" ng-init="cat_id = '{{Input::get('category_id')}}'">
 		<li ng-class="{active: isAll}"><a href="shop">All</a></li> 
@@ -75,21 +77,18 @@ CBA -- Shop
 
 							<form name='@{{ product.id }}' id='@{{ product.id }}'>
 								<div class="form-group" ng-repeat="att in atts">
+									@{{att.name}}
 									<select ng-model="$parent.order_list.attribute[att.name]" ng-options="a for a in att.data" class="form-control">
 									</select>
 								</div>
 								<div class="form-group">
-									<input value="@{{product.id}}" ng-model="order_list['product_id']">
-									@if(Auth::check())
-									<input value="{{Auth::user()->id}}" ng-model="order_list['user_id']">  
-									@endif
 									<input type="number" ng-model="order_list['amount']"> 
 								</div>
 							</form>
-							<p ng-repeat="(key,val) in order_list.attribute">@{{key}} : @{{val}}</p>
+							<!-- <p ng-repeat="(key,val) in order_list.attribute">@{{key}} : @{{val}}</p> -->
 							@if(Auth::check())
 							<div class="modal-footer">
-								<button type="submit" ng-click="submit()" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
+								<button type="submit" ng-click="submit(product.id,{{Auth::user()->id}})" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
 							</div>
 
 							@else

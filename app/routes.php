@@ -61,7 +61,7 @@ Route::group(array('before' => 'setcookie'),function()
 	//shop
 	Route::get( 'shop' , 'ShopController@shop');
 	Route::get( 'shop/attributejson' , 'ShopController@attributes');
-
+	Route::post( 'shop' , 'ShopController@addtocart');
 
 	Route::filter('auth',function(){
 		if(!Auth::check()) return Redirect::to('user/login');
