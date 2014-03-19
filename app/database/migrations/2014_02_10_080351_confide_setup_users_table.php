@@ -80,14 +80,10 @@ class ConfideSetupUsersTable extends Migration {
             $table->timestamps('update_at');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-        });
-         Schema::create('confirmations',function($table)
-        {
-            $table->increments('order_id');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
-            $table->boolean('confirmed')->default(0);
+             $table->boolean('confirmed')->default(0);
             $table->string('image_path'); 
         });
+         
          Schema::create('order_lists',function($table)
         {
             $table->increments('id');

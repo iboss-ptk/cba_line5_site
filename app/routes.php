@@ -109,9 +109,17 @@ Route::group(array('before' => 'auth_admin'), function(){
 	Route::resource('product', 'ProductController');
 	Route::resource('brand', 'BrandController');
 	Route::resource('category', 'CategoryController');
-
+	Route::resource('order', 'OrderController');
 	Route::resource('manage_user', 'UserEditController'); //on edit
 
+	Route::get( 'product/toggleorderconfirmed/{id}' ,function ($id)
+	{
+		$orderconfirmation = Confirmation::find($id);
+		$product->availability = !$product->availability;
+		$product->save();
+		$products = Prod::paginate($limit = 10)->toJson();
+		return $products;
+	});
 	Route::get( 'product/toggleavailability/{id}' ,function ($id)
 	{
 		$product = Prod::find($id);

@@ -39,15 +39,8 @@ class ProductController extends BaseController {
 	 */
 	public function store()
 	{
-		$rules = array(
-			'name'=>'required|min:2',
-			'price'=>'required|numeric',
-			'brand_id'=>'required|integer',
-			'category_id'=>'required|integer',
-			'availability'=>'integer',
-			'product_pic'=>'required|image|mimes:jpeg,jpg,bmp,png,gif'
-		);
-		$validator = Validator::make(Input::all(), $rules);
+		
+		$validator = Validator::make(Input::all(), Prod::$rules);
 
 		// process the login
 		if ($validator->fails()) {
@@ -76,7 +69,7 @@ class ProductController extends BaseController {
 			}
 
 			$product->save();
-
+ 
 			//waiting for edit
 
 			
@@ -180,11 +173,8 @@ class ProductController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$rules = array(
-			'name'       => 'required',
-
-			);
-		$validator = Validator::make(Input::all(), $rules);
+		
+		$validator = Validator::make(Input::all(), Prod::$rules);
 
 		// process the login
 		if ($validator->fails()) {
