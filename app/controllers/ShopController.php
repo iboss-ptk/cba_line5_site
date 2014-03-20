@@ -15,7 +15,7 @@ class ShopController extends \BaseController {
 	}
 
 	public function addtocart(){
-
+		try {
 		OrderList::unguard();
 
 		$order_list_input = json_decode(Input::get('order_list'));
@@ -26,7 +26,14 @@ class ShopController extends \BaseController {
 		$order_list->total_cost = Prod::find($order_list_input->product_id)->price * $order_list_input->amount;
 		$order_list->save();
 
-		var_dump($order_list);
+
+		
+			$order_list->save();
+		} catch (Exception $e) {
+			echo 'Caught exception: ',  $e->getMessage(), "\n";
+		}
+
+		// var_dump($order_list);
 
 		// return Response::json($order_list_input);
 
