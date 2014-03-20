@@ -2,16 +2,79 @@
 
 class DoOrderController extends \BaseController {
 
+	public function __construct()
+    {
+        $this->beforeFilter(function()
+        {
+            //
+            if (Auth::guest()) return Redirect::to('user/login');
+        });
+    }
+
+	//public function getAdminProfile() {}
+
+
+	public function getUserAddress() {
+
+		$address = Auth::user()->address;
+		return View::make('userOrder.confirmAd')->with('address',$address);
+	}
+
+	public function postUserAddress() {
+
+		//$address = Auth::user()->address;
+		//return View::make('try.confirmAd')->with('address',$address);
+
+		return 'next step:';
+
+	}
+
+	public function getEditUserAddress() {
+
+		$address = Auth::user()->address;
+		//return View::make('try.confirmAd')->with('address',$address);
+		return View::make('userOrder.editAd')->with('address',$address);
+	}
+	public function postEditUserAddress() {
+
+		//$address = Auth::user()->address;
+		//return View::make('try.confirmAd')->with('address',$address);
+		
+		$validator = Validator::make(
+		    array('address' => Input::get('address')),
+		    array('address' => 'required')
+		);
+
+		if ($validator->fails())
+		{
+		    // The given data did not pass validation
+			Redirect::to('doorder/edit-user-address')
+			->withErrors($validator)
+            ->withInput();
+		}else{
+			//store
+			$user = Auth::user();
+			$user->address = Input::get('address');
+			$user->updateUniques();
+
+		}
+
+		// redirect
+        Session::flash('message', 'Successfully update address!');
+        return Redirect::to('doorder/user-address');
+	}
+
+	////////////////////////////////Peerapat zone/////////////////////////
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
-		$orders = Order::All();	
-		$order_lists = Order_list::All();
-		return View::make('pages.order.index',array( 'orders'=> $orders, 'order_list' => $order_lists ) );
+		// $orders = Order::All();	
+		// $order_lists = Order_list::All();
+		// return View::make('pages.order.index',array( 'orders'=> $orders, 'order_list' => $order_lists ) );
 	}
 
 	/**
@@ -19,13 +82,13 @@ class DoOrderController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function confirmation($id)
+	public function getConfirmation($id)
 	{
 		//
-		$order = Order::find($id);  
-		return View::make('pages.order.confirmation',array( 'order' =>$order));
+		// $order = Order::find($id);  
+		// return View::make('pages.order.confirmation',array( 'order' =>$order));
 	}
-	public function updateconfirmation($id)
+	public function postConfirmation($id)
 	{
 		//
 		$rules = array(
@@ -60,52 +123,5 @@ class DoOrderController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-		//
-	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 }
