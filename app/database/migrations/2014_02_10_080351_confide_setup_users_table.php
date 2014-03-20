@@ -77,11 +77,12 @@ class ConfideSetupUsersTable extends Migration {
         {
             $table->increments('id');
             $table->integer('status')->default(0);
-            $table->timestamps('update_at');
+            // $table->timestamps('update_at');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-             $table->boolean('confirmed')->default(0);
+            $table->boolean('confirmed')->default(0);
             $table->string('image_path'); 
+            $table->timestamps();
         });
          
          Schema::create('order_lists',function($table)
@@ -93,6 +94,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedInteger('amount')->default(0);
             $table->decimal('total_cost', 8, 2);; 
+            $table->timestamps();
         });
 
           Schema::create('order_list_attributes',function($table)
