@@ -120,7 +120,7 @@ Route::group(array('before' => 'auth_admin'), function(){
 		$products = Prod::paginate($limit = 10)->toJson();
 		return $products;
 	});
-	Route::get( 'product/toggleavailability/{id}' ,function ($id)
+	Route::get( 'product/toggle/{id}' ,function ($id)
 	{
 		$product = Prod::find($id);
 		$product->availability = !$product->availability;
@@ -181,3 +181,7 @@ Route::resource('posts', 'PostController');
 
 Route::group(array('before' => 'auth_sp'), function(){
 });
+
+
+/////////
+Route::controller('doorder','DoOrderController');

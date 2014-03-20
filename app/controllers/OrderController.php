@@ -9,7 +9,9 @@ class OrderController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$orders = Order::All();	
+		$order_lists = Order_list::All();
+		return View::make('pages.order.index',array( 'orders'=> $orders, 'order_list' => $order_lists ) );
 	}
 
 	/**
@@ -17,9 +19,11 @@ class OrderController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
 		//
+		$users = User::find($id);  
+		return View::make('pages.order.create',array( 'users' =>$users));
 	}
 
 	/**

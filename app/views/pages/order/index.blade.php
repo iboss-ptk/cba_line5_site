@@ -7,15 +7,15 @@
 @stop
 
 @section('title')
-CBA -- Products
+CBA -- orders
 @stop
 
 @section('content')
-<div class="container" ng-app="product_manager"  ng-controller="ProductCtrl">
+<div class="container" ng-app="order_manager"  ng-controller="orderCtrl">
 
 
-    @include('pages.product.frac.nav')
-    <h1>All the product</h1>
+    @include('pages.order.frac.nav')
+    <h1>All the order</h1>
     <!-- Button trigger modal -->
 
 
@@ -30,7 +30,7 @@ CBA -- Products
             <h4 class="modal-title" id="filterLabel">Filter option</h4>
         </div>
         <div class="modal-body">
-            <form class="form-horizontal" id="filter" role="form" method="get" action="{{URL::to('product')}}">
+            <form class="form-horizontal" id="filter" role="form" method="get" action="{{URL::to('order')}}">
 
               <div class="form-group">
                 <label for="Brand" class="col-sm-2 control-label">Brand</label>
@@ -73,7 +73,7 @@ CBA -- Products
    <a class=" pull-right" data-toggle="modal" data-target="#filterModal">
       filter option
   </a>
-  <input id="search" ng-focus="" ng-model="search" placeholder="product name..." class="form-control" >
+  <input id="search" ng-focus="" ng-model="search" placeholder="order name..." class="form-control" >
   <hr>
   <thead>
     <tr>
@@ -88,22 +88,22 @@ CBA -- Products
     </tr>
 </thead>
 <tbody>
-    <tr ng-repeat="product in products"> <!-- add class warning -->
-        <td>@{{ product.id }}</td>
-        <td>@{{ product.name }}</td>
-        <td><img style="max-height: 200px; max-width: 200px;" ng-src="@{{product.product_pic}}"/></td> <!--pic-->
-        <td>@{{ product.brand }}</td>
-        <td>@{{ product.category }}</td>
-        <td>@{{ product.price}}</td>
+    <tr ng-repeat="order in orders"> <!-- add class warning -->
+        <td>@{{ order.id }}</td>
+        <td>@{{ order.name }}</td>
+        <td><img style="max-height: 200px; max-width: 200px;" ng-src="@{{order.order_pic}}"/></td> <!--pic-->
+        <td>@{{ order.brand }}</td>
+        <td>@{{ order.category }}</td>
+        <td>@{{ order.price}}</td>
         <td>
-            <a ng-click="toggleavailability(product.id, $index)">
+            <a ng-click="toggleavailability(order.id, $index)">
 
-                <div ng-switch on="product.availability">
+                <div ng-switch on="order.availability">
                    <button class="btn btn-small btn-block btn-default" ng-switch-when="true"><b>O</b></button>
                    <button class="btn btn-small btn-block btn-danger" ng-switch-when="false"><b>X</b></button>
                    <div ng-switch-default>
-                    <button ng-if="product.availability===1" class="btn btn-small btn-default btn-block"><b>O</b></button>
-                    <button ng-if="product.availability===0" class="btn btn-small btn-primary btn-block"><b>X</b></button>
+                    <button ng-if="order.availability===1" class="btn btn-small btn-default btn-block"><b>O</b></button>
+                    <button ng-if="order.availability===0" class="btn btn-small btn-primary btn-block"><b>X</b></button>
                 </div>
 
             </div>
@@ -116,11 +116,11 @@ CBA -- Products
 
 
 
-        <a class="btn btn-success btn-block" ng-href="product/@{{product.id}}" target="_blank">Show</a>
+        <a class="btn btn-success btn-block" ng-href="order/@{{order.id}}" target="_blank">Show</a>
 
-        <a class="btn btn-info  btn-block" ng-href="product/@{{product.id}}/edit">Edit</a>
+        <a class="btn btn-info  btn-block" ng-href="order/@{{order.id}}/edit">Edit</a>
 
-        <a class="btn btn-warning  btn-block" ng-click="delete_product(product.id, product.name)">Delete</a>
+        <a class="btn btn-warning  btn-block" ng-click="delete_order(order.id, order.name)">Delete</a>
 
 
     </td>
@@ -140,6 +140,6 @@ CBA -- Products
 </div>
 <hr class="tall" />
 <script src="<?php echo asset('vendor/angular.min.js')?>"></script>
-<script src="<?php echo asset('js/product_manager.js')?>"></script>
+<script src="<?php echo asset('js/order_manager.js')?>"></script>
 
 @stop

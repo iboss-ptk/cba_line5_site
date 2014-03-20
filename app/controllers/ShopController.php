@@ -15,9 +15,7 @@ class ShopController extends \BaseController {
 	}
 
 	public function addtocart(){
-
-		OrderList::unguard();
-
+		
 		try {
 
 			$order_list_input = json_decode(Input::get('order_list'));
@@ -55,13 +53,6 @@ class ShopController extends \BaseController {
 			echo $e->getMessage();
 		}
 
-
-		// var_dump(Prod::find($order_list_input->product_id)->price * $order_list_input->amount);
-
-		// return Response::json($order_list_input);
-
-		// $order_list->order_list_attribute()->save($order_list_input->attribute);
-		// echo $order_list;
 	}
 
 

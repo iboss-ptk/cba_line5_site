@@ -66,13 +66,12 @@ CBA -- Sign up
                 <label for="address">Address</label>
                 <textarea class="form-control" name="address" id="address" form="usrform" placeholder="Address">{{{ Input::old('address') }}}</textarea>
             </div>
-            <div class="form-group">
+           <!-- <div class="form-group">
                 <label for="sp_code">Sp_code</label>
                 <input class="form-control" placeholder="SP_Code" type="text" name="sp_code" id="sp_code" value="{{{ Input::old('sp_code') }}}">
-            </div>
+            </div>-->
              <div class="form-group">
-                <label for="resp_sp_code">Resp_Sp_code</label>
-                <input class="form-control" placeholder="{{Cookie::get('sp_code')}}" type="text" name="resp_sp_code" id="resp_sp_code" value="{{Cookie::get('sp_code')}}">
+                <input class="form-control" placeholder="{{Cookie::get('sp_code')}}" type="hidden" name="resp_sp_code" id="resp_sp_code" value="{{Cookie::get('sp_code')}}">
             </div>
      
 
