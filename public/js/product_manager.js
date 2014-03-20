@@ -213,10 +213,10 @@ $scope.search = '';
 
   });
 
-  $scope.toggleavailability = function(product, index){
+  $scope.toggle = function(product, index){
 
 
-    $http.get('product/toggleavailability/'+product).success(function(data){
+    $http.get('product/toggle/'+product).success(function(data){
       $scope.products[index].availability = !($scope.products[index].availability);
       console.log( $scope.products[index].availability);
     });
@@ -225,6 +225,7 @@ $scope.search = '';
 
 
   }
+
 
 
 }

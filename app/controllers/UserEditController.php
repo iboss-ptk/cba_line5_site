@@ -46,7 +46,12 @@ class UserEditController extends BaseController {
     public function update($id)
     {
         $rules = array(
-            'username'       => 'required',
+           'username'=> 'required|alpha_dash',
+            'email' => 'required|email',
+            'firstname' => 'required|alpha',
+            'lastname' => 'required|alpha',
+            'mobilephonenumber' =>'required|digits:10',
+            'address' =>'required'
 
             );
         $validator = Validator::make(Input::all(), $rules);
@@ -54,7 +59,7 @@ class UserEditController extends BaseController {
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('user/create')
+            return Redirect::to('manage_user/'.$id.'/edit')
             ->withErrors($validator)
             ->withInput();
         } else {
@@ -68,12 +73,12 @@ class UserEditController extends BaseController {
             $user->address = Input::get( 'address' );
             
 
-            $user->save();
+            $user->updateUniques    ();
             }
 
 
             // redirect
-            Session::flash('message', $user->errors());
+            Session::flash('message', 'Successfully update the user!');
             return Redirect::to('manage_user');
         }
     
