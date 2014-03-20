@@ -69,7 +69,6 @@ class ProductController extends BaseController {
 			}
 
 			$product->save();
- 
 			//waiting for edit
 
 			
