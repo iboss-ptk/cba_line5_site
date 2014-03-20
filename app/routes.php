@@ -109,7 +109,6 @@ Route::group(array('before' => 'auth_admin'), function(){
 	Route::resource('product', 'ProductController');
 	Route::resource('brand', 'BrandController');
 	Route::resource('category', 'CategoryController');
-	Route::resource('order', 'OrderController');
 	Route::resource('manage_user', 'UserEditController'); //on edit
 
 	Route::get( 'product/toggleorderconfirmed/{id}' ,function ($id)
