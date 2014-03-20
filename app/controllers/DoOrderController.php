@@ -18,6 +18,7 @@ class DoOrderController extends \BaseController {
 
 		$address = Auth::user()->address;
 		return View::make('userOrder.confirmAd')->with('address',$address);
+
 	}
 
 	public function postUserAddress() {
@@ -25,6 +26,7 @@ class DoOrderController extends \BaseController {
 		//$address = Auth::user()->address;
 		//return View::make('try.confirmAd')->with('address',$address);
 
+		//redirect to page that show status of order
 		return 'next step:';
 
 	}
