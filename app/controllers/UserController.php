@@ -31,6 +31,23 @@ class UserController extends BaseController {
      */
     public function store()
     {
+        $rules = array(
+            'username'=> 'required|alpha_dash',
+            'email' => 'required|email',
+            'password' => 'required|between:4,11|confirmed',
+            'firstname' => 'required|alpha',
+            'lastname' => 'required|alpha',
+            'mobilephonenumber' =>'required|digits:10',
+            'address' =>'required'
+        );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return Redirect::to('product/create')
+            ->withErrors($validator)
+            ->withInput();
+        } else {
         $user = new User;
 
         $user->username = Input::get( 'username' );
@@ -40,7 +57,7 @@ class UserController extends BaseController {
         $user->lastname = Input::get( 'lastname' );
         $user->mobilephonenumber = Input::get( 'mobilephonenumber' );
         $user->address = Input::get( 'address' );
-        $user->sp_code=Input::get('sp_code');
+      //  $user->sp_code=Input::get('sp_code');
         $user->resp_sp_code=Input::get('resp_sp_code');
         // The password confirmation will be removed from model
         // before saving. This field will be used in Ardent's
@@ -65,6 +82,7 @@ class UserController extends BaseController {
                         return Redirect::action('UserController@create')
                             ->withInput(Input::except('password'))
                 ->with( 'error', $error );
+        }
         }
     }
 

@@ -220,16 +220,30 @@ $scope.retrieve_attribute = function(product_id){
     $scope.attribute = {};
   });
 
+  $scope.order_list = {};
+  $scope.order_list.attribute = {};
+  $scope.order_list['amount'] = 1;
+
 }
 
-$scope.submit = function(product_id){
-  console.log(product_id);
+$scope.submit = function(product_id,user_id){
+  // console.log(product_id+' '+user_id); //use this
+  $scope.order_list['product_id'] =product_id;
+  $scope.order_list['user_id'] = user_id;
+  // console.log($scope.order_list.attribute);
+  // console.log($scope.order_list['amount']);
+  // console.log($scope.order_list);
+  // console.log($scope.order_list.attribute);
 
-  console.log('submit');
+
+  $http.post('shop', {'order_list':  JSON.stringify($scope.order_list)})
+      .success(function(data) {
+         console.log(data);
+         console.log('yes');
+      });
+
 }
 
-$scope.order_list = {};
-$scope.order_list.attribute = {};
 
 }
 

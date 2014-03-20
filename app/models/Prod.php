@@ -8,8 +8,8 @@
 		public static $rules = array(
 			'name'=>'required|min:2',
 			'price'=>'required|numeric',
-			'brand_id'=>'required|integer',
-			'category_id'=>'required|integer',
+			'brand'=>'required|integer',
+			'category'=>'required|integer',
 			'availability'=>'integer',
 			'product_pic'=>'required|image|mimes:jpeg,jpg,bmp,png,gif'
 		);

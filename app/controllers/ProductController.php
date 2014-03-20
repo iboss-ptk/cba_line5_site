@@ -56,7 +56,6 @@ class ProductController extends BaseController {
 			$product->category_id   = Input::get('category');
 
 
-
 			if(Input::hasFile('product_pic')){
 
 				$image = Input::file('product_pic');

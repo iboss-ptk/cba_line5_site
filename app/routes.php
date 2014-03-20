@@ -61,7 +61,7 @@ Route::group(array('before' => 'setcookie'),function()
 	//shop
 	Route::get( 'shop' , 'ShopController@shop');
 	Route::get( 'shop/attributejson' , 'ShopController@attributes');
-
+	Route::post( 'shop' , 'ShopController@addtocart');
 
 	Route::filter('auth',function(){
 		if(!Auth::check()) return Redirect::to('user/login');
@@ -120,7 +120,7 @@ Route::group(array('before' => 'auth_admin'), function(){
 		$products = Prod::paginate($limit = 10)->toJson();
 		return $products;
 	});
-	Route::get( 'product/toggleavailability/{id}' ,function ($id)
+	Route::get( 'product/toggle/{id}' ,function ($id)
 	{
 		$product = Prod::find($id);
 		$product->availability = !$product->availability;

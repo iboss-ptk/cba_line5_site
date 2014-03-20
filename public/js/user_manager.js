@@ -54,7 +54,7 @@ $scope.search = '';
 
     if(confirm_deletion){
 
-      $http({method: 'DELETE', url: 'user/'+userID }).
+      $http({method: 'DELETE', url: 'manage_user/'+userID }).
       success(function(data) {
 
       }).
@@ -108,17 +108,17 @@ $scope.search = '';
 
     });
 
-  $scope.toggle = function(user, index){
-    $http.get('user/toggleissp/'+user).success(function(data){
-      $scope.users[index].issp = !($scope.users[index].issp);
-      console.log( $scope.users[index].issp);
+  $scope.toggleissp = function(user, index){
+     $http.get('user/toggleissp/'+user).success(function(data){
+       $scope.users[index].issp = !($scope.users[index].issp);
+       console.log( $scope.users[index].issp);
     });
 
     $scope.message = '';
 
 
   }
-  $scope.toggle = function(user, index){
+  $scope.toggleisadmin = function(user, index){
     $http.get('user/toggleisadmin/'+user).success(function(data){
       $scope.users[index].isadmin = !($scope.users[index].isadmin);
       console.log( $scope.users[index].isadmin);
@@ -128,9 +128,16 @@ $scope.search = '';
 
 
   }
+   $scope.toggleconfirmed = function(user, index){
+     $http.get('user/toggleconfirmed/'+user).success(function(data){
+       $scope.users[index].confirmed = !($scope.users[index].confirmed);
+       console.log( $scope.users[index].confirmed);
+     });
+
+    $scope.message = '';
 
 
+  }
 }
-
 
 app.controller(controllers);

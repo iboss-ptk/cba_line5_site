@@ -8,7 +8,6 @@
 	     */
 		protected $table = 'users';
 
-		protected $guarded = array();
 	    public static $rules = array(
 	    	'username'=> 'required|alpha_dash',
 	        'email' => 'required|email',
