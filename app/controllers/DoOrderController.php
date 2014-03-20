@@ -10,9 +10,32 @@ class DoOrderController extends \BaseController {
             if (Auth::guest()) return Redirect::to('user/login');
         });
     }
+    public function getIndex()
+	{
+		$userId = Auth::user()->id;
+		$orders = Order::where('user_id',$userId)->get();
+		return View::make('userOrder.index',array( 'orders'=> $orders));
+	}
 
 	//public function getAdminProfile() {}
+	public function getShowOrderlist($id)
+	{
+		//
+		$orderlists = OrderList::where('order_id',$id)->get(); 
+		$products = Prod::All();	
+		$brand_all = Brand::All();
+		$category_all = Category::All();
+		 return View::make('userOrder.showorderlist',array(  'products'=> $products,'orderlists' =>$orderlists, 'brand_all' => $brand_all, 'category_all' => $category_all ));
+	}
+	public function postShowOrderlist($id) {
 
+		//$address = Auth::user()->address;
+		//return View::make('try.confirmAd')->with('address',$address);
+
+		//redirect to page that show status of order
+		return Redirect::to('doorder/show-orderlist/'.$id);
+
+	}
 
 	public function getUserAddress() {
 
@@ -27,7 +50,7 @@ class DoOrderController extends \BaseController {
 		//return View::make('try.confirmAd')->with('address',$address);
 
 		//redirect to page that show status of order
-		return 'next step:';
+		return Redirect::to('doorder');
 
 	}
 
@@ -72,12 +95,6 @@ class DoOrderController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function getIndex()
-	{
-		// $orders = Order::All();	
-		// $order_lists = Order_list::All();
-		// return View::make('pages.order.index',array( 'orders'=> $orders, 'order_list' => $order_lists ) );
-	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -87,8 +104,8 @@ class DoOrderController extends \BaseController {
 	public function getConfirmation($id)
 	{
 		//
-		// $order = Order::find($id);  
-		// return View::make('pages.order.confirmation',array( 'order' =>$order));
+		$order = Order::find($id);  
+		 return View::make('userOrder.confirmation',array( 'order' =>$order));
 	}
 	public function postConfirmation($id)
 	{
@@ -98,7 +115,7 @@ class DoOrderController extends \BaseController {
 		);
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) {
-			return Redirect::to('product/create')
+			return Redirect::to('doorder/confirmation/'.$id)
 			->withErrors($validator)
 			->withInput();
 		} else {
@@ -117,8 +134,10 @@ class DoOrderController extends \BaseController {
 			$order->status = 3; 
 			$order->save();
 			Session::flash('message', 'Successfully confirmation!');
-			return Redirect::to('page.order.confirmation');
+			
+		return Redirect::to('doorder');
 		}
+
 	}
 	/**
 	 * Store a newly created resource in storage.
