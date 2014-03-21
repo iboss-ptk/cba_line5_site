@@ -77,14 +77,14 @@ class DoOrderController extends \BaseController {
 
 	}
 
-	public function postUserAddress($id) {
+	public function postUserAddress() {
 
 		//$address = Auth::user()->address;
 		//return View::make('try.confirmAd')->with('address',$address);
 
 		//redirect to page that show status of order
-		$order=Order::find($id);
-		$order->status = 3; 
+		//$order=Order::find($id);
+		//$order->status = 3; 
 		return Redirect::to('doorder');
 
 	}
