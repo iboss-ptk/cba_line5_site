@@ -54,11 +54,13 @@
             @endforeach
         <td>{{ $orderlist->amount }}</td>
         <td>{{ $orderlist->total_cost }}<?php $sum=$sum+$orderlist->total_cost; ?></td>    
+       @if ($order->status === 0) 
         <td> {{ Form::open(array('url'=>'doorder/delete-orderlist/'.$orderlist->id,'method'=>'GET')) }}
                 <button type="submit" class="btn btn-warning  btn-block" >
                         Delete
                 </button>
                 {{ Form::close() }}</td>
+                @endif
 
 </tbody>
  <?php $i++; ?>

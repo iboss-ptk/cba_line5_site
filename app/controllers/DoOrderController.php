@@ -25,7 +25,8 @@ class DoOrderController extends \BaseController {
 		$products = Prod::All();	
 		$brand_all = Brand::All();
 		$category_all = Category::All();
-		 return View::make('userOrder.showorderlist',array(  'products'=> $products,'orderlists' =>$orderlists, 'brand_all' => $brand_all, 'category_all' => $category_all ));
+		$order= Order::find($id);
+		 return View::make('userOrder.showorderlist',array( 'order' =>$order,  'products'=> $products,'orderlists' =>$orderlists, 'brand_all' => $brand_all, 'category_all' => $category_all ));
 	}
 	public function postShowOrderlist($id) {
 
