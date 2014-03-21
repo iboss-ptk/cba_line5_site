@@ -10,9 +10,65 @@ class DoOrderController extends \BaseController {
             if (Auth::guest()) return Redirect::to('user/login');
         });
     }
+    public function getIndex()
+	{
+		$userId = Auth::user()->id;
+		$orders = Order::where('user_id',$userId)->get();
+		return View::make('userOrder.index',array( 'orders'=> $orders));
+	}
 
 	//public function getAdminProfile() {}
+	public function getShowOrderlist($id)
+	{
+		//
+		$orderlists = OrderList::where('order_id',$id)->get(); 
+		$products = Prod::All();	
+		$brand_all = Brand::All();
+		$category_all = Category::All();
+		 return View::make('userOrder.showorderlist',array(  'products'=> $products,'orderlists' =>$orderlists, 'brand_all' => $brand_all, 'category_all' => $category_all ));
+	}
+	public function postShowOrderlist($id) {
 
+		//$address = Auth::user()->address;
+		//return View::make('try.confirmAd')->with('address',$address);
+
+		//redirect to page that show status of order
+		return Redirect::to('doorder/show-orderlist/'.$id);
+
+	}
+	public function postDeleteOrderlist($id) {
+
+		$orderlist = OrderList::find($id);
+		$orderId=$orderlist->order_id;
+		if ($orderlist) {
+			
+			$orderlist->delete();
+			Session::flash('message', 'Successfully deleted the OrderList!');
+			return Redirect::to('doorder/show-orderlist/'.$orderId);
+		}
+		
+
+		// redirect
+		Session::flash('message', 'Something went wrong, please try again');
+		return Redirect::to('doorder/show-orderlist/'.$orderId);
+
+	}
+	public function postDeleteOrder($id) {
+
+		$order = Order::find($id);
+		if ($order) {
+			
+			$order->delete();
+			Session::flash('message', 'Successfully deleted the Order!');
+			return Redirect::to('doorder');
+		}
+		
+
+		// redirect
+		Session::flash('message', 'Something went wrong, please try again');
+		return Redirect::to('doorder');
+
+	}
 
 	public function getUserAddress() {
 
@@ -28,6 +84,7 @@ class DoOrderController extends \BaseController {
 
 		//redirect to page that show status of order
 
+
 		$userId = Auth::user()->id;
 		//$shop = Shop::where('name', 'Starbucks')->first();
 
@@ -39,6 +96,7 @@ class DoOrderController extends \BaseController {
 
 		//return $order->status;
 		return 'deaww gu ma tum';
+
 
 	}
 
@@ -67,7 +125,6 @@ class DoOrderController extends \BaseController {
 			->withErrors($validator);
 		}else{
 			//store
-			$user = Auth::user();
 			$user->address = Input::get('address');
 			$user->updateUniques();
 
@@ -86,12 +143,6 @@ class DoOrderController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function getIndex()
-	{
-		// $orders = Order::All();	
-		// $order_lists = Order_list::All();
-		// return View::make('pages.order.index',array( 'orders'=> $orders, 'order_list' => $order_lists ) );
-	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -101,7 +152,9 @@ class DoOrderController extends \BaseController {
 	public function getConfirmation($id)
 	{
 		//
+
 		$order = Order::find($id);
+
 		 return View::make('userOrder.confirmation',array( 'order' =>$order));
 	}
 	public function postConfirmation($id)
@@ -128,10 +181,12 @@ class DoOrderController extends \BaseController {
 				$order->image_path = Input::get('image_path');
 			}
 			$order->confirmed = 1;
-			$order->status = 3; 
+			$order->status = 4; 
 			$order->save();
 			Session::flash('message', 'Successfully confirmation!');
+
 			return 'next step:';
+
 		}
 
 	}
