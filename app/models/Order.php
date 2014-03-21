@@ -4,7 +4,7 @@
 	{
 
 		public function order_list() {
-	    	 return $this->hasMany('Order_list');
+	    	 return $this->hasMany('OrderList');
 	    }
 
 

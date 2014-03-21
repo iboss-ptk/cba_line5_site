@@ -11,6 +11,8 @@ CBA -- Shop
 @stop
 
 @section('content')
+
+
 <div class="container" ng-app="shop" ng-controller="ProductCtrl">
 
 
@@ -68,7 +70,7 @@ CBA -- Shop
 								<h4 class="modal-title" id="filterLabel">@{{product.name}}</h4>
 							</div>
 							<div class="modal-body">
-								<img alt="@{{product.name}}" class="img-responsive" ng-src="@{{product.product_pic}}"><!-- img -->
+								<img alt="@{{product.name}}" class="img-responsive square" ng-src="@{{product.product_pic}}"><!-- img -->
 								<span class="thumb-info-title">
 									<span class="thumb-info-inner">@{{ product.name }}</span><!-- name -->
 									<div class="thumb-info-type-box"><span class="thumb-info-type">@{{ product.brand }}</span></div><!-- brand -->

@@ -239,7 +239,6 @@ $scope.submit = function(product_id,user_id){
   $http.post('shop', {'order_list':  JSON.stringify($scope.order_list)})
       .success(function(data) {
          console.log(data);
-         console.log('yes');
       });
 
 }
