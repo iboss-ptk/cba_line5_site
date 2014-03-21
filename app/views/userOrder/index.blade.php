@@ -30,14 +30,14 @@
         <td>
              @if ($order->status === 0)
              รอการยืนยันอยู่นะจ๊ะ
-              {{ Form::open(array('url'=>'doorder/user-address','method'=>'GET')) }}
+              {{ Form::open(array('url'=>'doorder/user-address/'.$order->id,'method'=>'GET')) }}
                 <button type="submit" class="btn btn-success  " >
                     Confirm
                 </button>
                 {{ Form::close() }}
              @elseif ($order->status === 1)
              รอจ่ายยืนยัน ที่อยู่นะจ๊ะ คลิก ที่ ปุ่ม Address เลยจ้าาา
-            {{ Form::open(array('url'=>'doorder/edit-user-address','method'=>'GET')) }}
+            {{ Form::open(array('url'=>'doorder/user-address/'.$order->id,'method'=>'GET')) }}
                 <button type="submit" class="btn btn-success  " >
                     Address
                 </button>
