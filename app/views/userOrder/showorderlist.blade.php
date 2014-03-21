@@ -25,11 +25,12 @@
         <td>Price</td>
         <td>Amount</td>
         <td>Total</td>
-         
+        <td>
+         </td>
     </tr>
 </thead>
 <tbody>
-    <?php $i=1; ?>
+    <?php $i=1;$sum=0; ?>
     @foreach ($orderlists as $orderlist)
         <td>{{ $i }}</td>
 
@@ -47,17 +48,31 @@
                 <td>{{$category->name}}</td>
                 @endif
                 @endforeach
-             <td>{{$product->price}}</td>
+             <td>{{$product->price}} </td>
              @endif
             
             @endforeach
         <td>{{ $orderlist->amount }}</td>
-        <td>{{ $orderlist->total_cost }}</td>    
-       
+        <td>{{ $orderlist->total_cost }}<?php $sum=$sum+$orderlist->total_cost; ?></td>    
+        <td> {{ Form::open(array('url'=>'doorder/delete-orderlist/'.$orderlist->id)) }}
+                <button type="submit" class="btn btn-warning  btn-block" >
+                        Delete
+                </button>
+                {{ Form::close() }}</td>
 
 </tbody>
  <?php $i++; ?>
 @endforeach
+<td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total Cost</td>
+        <td>{{number_format($sum, 2, '.', ',')}}</td>
+        <td>
+         </td>
 </table>
 
 

@@ -51,7 +51,7 @@
              @elseif ($order->status === 5)
              ส่งอยู่นะครัชชช
         @else
-            Status นี้มาได้ไงครัชชช มันไม่มี
+            Status นี้มาได้ไงครัชชช มันไม่มีนะครัชชชช
           @endif
 
         </td>
@@ -60,6 +60,11 @@
          <td> {{ Form::open(array('url'=>'doorder/show-orderlist/'.$order->id)) }}
                 <button type="submit" class="btn btn-success btn-block" >
                     Show Order List
+                </button>
+                {{ Form::close() }}
+                {{ Form::open(array('url'=>'doorder/delete-order/'.$order->id)) }}
+                <button type="submit" class="btn btn-warning  btn-block" >
+                        Delete 
                 </button>
                 {{ Form::close() }}
                  </td>

@@ -36,6 +36,39 @@ class DoOrderController extends \BaseController {
 		return Redirect::to('doorder/show-orderlist/'.$id);
 
 	}
+	public function postDeleteOrderlist($id) {
+
+		$orderlist = OrderList::find($id);
+		$orderId=$orderlist->order_id;
+		if ($orderlist) {
+			
+			$orderlist->delete();
+			Session::flash('message', 'Successfully deleted the OrderList!');
+			return Redirect::to('doorder/show-orderlist/'.$orderId);
+		}
+		
+
+		// redirect
+		Session::flash('message', 'Something went wrong, please try again');
+		return Redirect::to('doorder/show-orderlist/'.$orderId);
+
+	}
+	public function postDeleteOrder($id) {
+
+		$order = Order::find($id);
+		if ($order) {
+			
+			$order->delete();
+			Session::flash('message', 'Successfully deleted the Order!');
+			return Redirect::to('doorder');
+		}
+		
+
+		// redirect
+		Session::flash('message', 'Something went wrong, please try again');
+		return Redirect::to('doorder');
+
+	}
 
 	public function getUserAddress() {
 
