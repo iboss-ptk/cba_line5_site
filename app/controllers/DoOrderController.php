@@ -17,6 +17,7 @@ class DoOrderController extends \BaseController {
 		return View::make('userOrder.index',array( 'orders'=> $orders));
 	}
 
+
 	//public function getAdminProfile() {}
 	public function getShowOrderlist($id)
 	{
@@ -71,48 +72,49 @@ class DoOrderController extends \BaseController {
 
 	}
 
-	public function getUserAddress() {
+	public function getUserAddress($orderId) {
+
 
 		$address = Auth::user()->address;
-		return View::make('userOrder.confirmAd')->with('address',$address);
+		return View::make('userOrder.confirmAd')->with('address',$address)->with('orderId',$orderId);
 
 	}
 
-	public function postUserAddress() {
+	public function postUserAddress($orderId) {
 
-		//$address = Auth::user()->address;
-		//return View::make('try.confirmAd')->with('address',$address);
+
 
 		//redirect to page that show status of order
 
 
-		$userId = Auth::user()->id;
-		//$shop = Shop::where('name', 'Starbucks')->first();
-
-		//$order = Order::where('user_id',$userId)->max('id');
+		//$userId = Auth::user()->id;
+		
+		$order = Order::find($orderId);
 
 		//set up status to be first status
-		//$order->status = 1;
-		//$order->save();
+		$order->status = 3;
+		$order->save();
 
-		//return $order->status;
-		return 'deaww gu ma tum';
+		
+		return Redirect::to('doorder');
 
 
 	}
 
-	public function getEditUserAddress() {
+	public function getEditUserAddress($orderId) {
 
 		$address = Auth::user()->address;
 		//return View::make('try.confirmAd')->with('address',$address);
 
-		return View::make('userOrder.editAd')->with('address',$address);
+		return View::make('userOrder.editAd')->with('address',$address)->with('orderId',$orderId);
+
 	}
-	public function postEditUserAddress() {
+	public function postEditUserAddress($orderId) {
 
 		//$address = Auth::user()->address;
 		//return View::make('try.confirmAd')->with('address',$address);
-		
+		$user = Auth::user();
+
 		$validator = Validator::make(
 		    array('address' => Input::get('address')),
 		    array('address' => 'required')
@@ -122,7 +124,7 @@ class DoOrderController extends \BaseController {
 		{
 		    // The given data did not pass validation
 		   
-			return Redirect::to('doorder/edit-user-address')
+			return Redirect::to('doorder/edit-user-address/'.$orderId)
 			->withErrors($validator);
 		}else{
 			//store
@@ -130,7 +132,7 @@ class DoOrderController extends \BaseController {
 			$user->updateUniques();
 
 			Session::flash('message', 'Successfully update address!');
-        	return Redirect::to('doorder/user-address');
+        	return Redirect::to('doorder/user-address/'.$orderId);
 
 		}
 
@@ -186,7 +188,7 @@ class DoOrderController extends \BaseController {
 			$order->save();
 			Session::flash('message', 'Successfully confirmation!');
 
-			return 'next step:';
+			return Redirect::to('doorder');
 
 		}
 

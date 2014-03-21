@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="col-md-12">
-	{{ Form::open(array('action' => 'DoOrderController@postUserAddress')) }}
+	{{ Form::open(array('action' => array('DoOrderController@postUserAddress',$orderId))) }}
 	<br>
 	<h1> Confirm your address </h1>
 		    <!-- will be used to show any messages -->
@@ -20,8 +20,7 @@
 	{{ Form::submit('Confirm', array('class' => 'btn btn-success')) }}
 	{{ Form::close() }}
 	<br>
-	<a href="{{ URL::to('doorder/edit-user-address') }}" class="btn btn-success">Edit</a>
-
+	<a href="{{ URL::to('doorder/edit-user-address/'.$orderId) }}" class="btn btn-success">Edit</a>
 
 
 </div>
