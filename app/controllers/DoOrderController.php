@@ -27,7 +27,18 @@ class DoOrderController extends \BaseController {
 		//return View::make('try.confirmAd')->with('address',$address);
 
 		//redirect to page that show status of order
-		return 'next step:';
+
+		$userId = Auth::user()->id;
+		//$shop = Shop::where('name', 'Starbucks')->first();
+
+		//$order = Order::where('user_id',$userId)->max('id');
+
+		//set up status to be first status
+		//$order->status = 1;
+		//$order->save();
+
+		//return $order->status;
+		return 'deaww gu ma tum';
 
 	}
 
@@ -35,6 +46,7 @@ class DoOrderController extends \BaseController {
 
 		$address = Auth::user()->address;
 		//return View::make('try.confirmAd')->with('address',$address);
+
 		return View::make('userOrder.editAd')->with('address',$address);
 	}
 	public function postEditUserAddress() {
@@ -50,20 +62,22 @@ class DoOrderController extends \BaseController {
 		if ($validator->fails())
 		{
 		    // The given data did not pass validation
-			Redirect::to('doorder/edit-user-address')
-			->withErrors($validator)
-            ->withInput();
+		   
+			return Redirect::to('doorder/edit-user-address')
+			->withErrors($validator);
 		}else{
 			//store
 			$user = Auth::user();
 			$user->address = Input::get('address');
 			$user->updateUniques();
 
+			Session::flash('message', 'Successfully update address!');
+        	return Redirect::to('doorder/user-address');
+
 		}
 
-		// redirect
-        Session::flash('message', 'Successfully update address!');
-        return Redirect::to('doorder/user-address');
+	
+        
 	}
 
 	////////////////////////////////Peerapat zone/////////////////////////
@@ -87,8 +101,8 @@ class DoOrderController extends \BaseController {
 	public function getConfirmation($id)
 	{
 		//
-		// $order = Order::find($id);  
-		// return View::make('pages.order.confirmation',array( 'order' =>$order));
+		$order = Order::find($id);
+		 return View::make('userOrder.confirmation',array( 'order' =>$order));
 	}
 	public function postConfirmation($id)
 	{
@@ -98,7 +112,7 @@ class DoOrderController extends \BaseController {
 		);
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) {
-			return Redirect::to('product/create')
+			return Redirect::to('doorder/confirmation/'.$id)
 			->withErrors($validator)
 			->withInput();
 		} else {
@@ -117,9 +131,11 @@ class DoOrderController extends \BaseController {
 			$order->status = 3; 
 			$order->save();
 			Session::flash('message', 'Successfully confirmation!');
-			return Redirect::to('page.order.confirmation');
+			return 'next step:';
 		}
+
 	}
+	
 	/**
 	 * Store a newly created resource in storage.
 	 *
