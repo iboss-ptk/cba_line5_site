@@ -77,12 +77,14 @@ class DoOrderController extends \BaseController {
 
 	}
 
-	public function postUserAddress() {
+	public function postUserAddress($id) {
 
 		//$address = Auth::user()->address;
 		//return View::make('try.confirmAd')->with('address',$address);
 
 		//redirect to page that show status of order
+		$order=Order::find($id);
+		$order->status = 3; 
 		return Redirect::to('doorder');
 
 	}
@@ -111,7 +113,6 @@ class DoOrderController extends \BaseController {
             ->withInput();
 		}else{
 			//store
-			$user = Auth::user();
 			$user->address = Input::get('address');
 			$user->updateUniques();
 
@@ -164,7 +165,7 @@ class DoOrderController extends \BaseController {
 				$order->image_path = Input::get('image_path');
 			}
 			$order->confirmed = 1;
-			$order->status = 3; 
+			$order->status = 4; 
 			$order->save();
 			Session::flash('message', 'Successfully confirmation!');
 			

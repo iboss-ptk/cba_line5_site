@@ -30,10 +30,15 @@
         <td>
              @if ($order->status === 0)
              รอการยืนยันอยู่นะจ๊ะ
+              {{ Form::open(array('url'=>'doorder/user-address','method'=>'GET')) }}
+                <button type="submit" class="btn btn-success  " >
+                    Confirm
+                </button>
+                {{ Form::close() }}
              @elseif ($order->status === 1)
              รอจ่ายยืนยัน ที่อยู่นะจ๊ะ คลิก ที่ ปุ่ม Address เลยจ้าาา
-             { Form::open(array('url'=>'doorder/edit-user-address')) }}
-                <button type="submit" class="btn btn-success btn-block" >
+            {{ Form::open(array('url'=>'doorder/edit-user-address','method'=>'GET')) }}
+                <button type="submit" class="btn btn-success  " >
                     Address
                 </button>
                 {{ Form::close() }}
@@ -41,8 +46,8 @@
               โดนลบแล้วจ้าาาา สั่งมาใหม่น้าาาา
               @elseif ($order->status === 3)
              รอจ่ายตังจ๊ะ  จ่ายแล้วคลิกที่ confirm เพื่ออัพรูปเลยจ้าาาา
-               {{ Form::open(array('url'=>'doorder/confirmation/'.$order->id)) }}
-                <button type="submit" class="btn btn-info  btn-block" >
+               {{ Form::open(array('url'=>'doorder/confirmation/'.$order->id,'method'=>'GET')) }}
+                <button type="submit" class="btn btn-info   " >
                     Confirm
                 </button>
                 {{ Form::close() }}
@@ -57,13 +62,13 @@
         </td>
         <td>{{ HTML::image($order->image_path,'confirmation_pic_' . $order->id, array('class'=>'feature', 'width'=>'100', 'height'=>'100')) }}</td> 
        <!-- <td>{{ $order->confirmed }}</td> มันไม่มีก็ได้--> 
-         <td> {{ Form::open(array('url'=>'doorder/show-orderlist/'.$order->id)) }}
-                <button type="submit" class="btn btn-success btn-block" >
+         <td> {{ Form::open(array('url'=>'doorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
+                <button type="submit" class="btn btn-success  " >
                     Show Order List
                 </button>
                 {{ Form::close() }}
-                {{ Form::open(array('url'=>'doorder/delete-order/'.$order->id)) }}
-                <button type="submit" class="btn btn-warning  btn-block" >
+                {{ Form::open(array('url'=>'doorder/delete-order/'.$order->id,'method'=>'GET')) }}
+                <button type="submit" class="btn btn-warning   " >
                         Delete 
                 </button>
                 {{ Form::close() }}

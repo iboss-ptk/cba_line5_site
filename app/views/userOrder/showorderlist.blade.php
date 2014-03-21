@@ -54,7 +54,7 @@
             @endforeach
         <td>{{ $orderlist->amount }}</td>
         <td>{{ $orderlist->total_cost }}<?php $sum=$sum+$orderlist->total_cost; ?></td>    
-        <td> {{ Form::open(array('url'=>'doorder/delete-orderlist/'.$orderlist->id)) }}
+        <td> {{ Form::open(array('url'=>'doorder/delete-orderlist/'.$orderlist->id,'method'=>'GET')) }}
                 <button type="submit" class="btn btn-warning  btn-block" >
                         Delete
                 </button>
