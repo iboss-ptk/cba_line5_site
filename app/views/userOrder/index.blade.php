@@ -62,10 +62,12 @@
         </td>
         <td>{{ HTML::image($order->image_path,'confirmation_pic_' . $order->id, array('class'=>'feature', 'width'=>'100', 'height'=>'100')) }}</td> 
        <!-- <td>{{ $order->confirmed }}</td> มันไม่มีก็ได้--> 
-         <td> {{ Form::open(array('url'=>'doorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
+       
+            <td> {{ Form::open(array('url'=>'doorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
                 <button type="submit" class="btn btn-success  " >
                     Show Order List
                 </button>
+         @if ($order->status === 0) 
                 {{ Form::close() }}
                 {{ Form::open(array('url'=>'doorder/delete-order/'.$order->id,'method'=>'GET')) }}
                 <button type="submit" class="btn btn-warning   " >
@@ -73,7 +75,7 @@
                 </button>
                 {{ Form::close() }}
                  </td>
-
+        @endif
 </tbody>
 @endforeach
 </table>
