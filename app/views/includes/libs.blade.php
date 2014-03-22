@@ -1,27 +1,29 @@
 <!-- Libs -->
-		<script src="<?php echo asset('vendor/jquery.js')?>"></script>
-		<script src="<?php echo asset('js/plugins.js')?>"></script>
-		<script src="<?php echo asset('vendor/jquery.easing.js')?>"></script>
-		<script src="<?php echo asset('vendor/jquery.appear.js')?>"></script>
-		<script src="<?php echo asset('vendor/jquery.cookie.js')?>"></script>
-		
-		<script src="<?php echo asset('vendor/bootstrap.js')?>"></script>
-		<script src="<?php echo asset('vendor/twitterjs/twitter.js')?>"></script>
-		<script src="<?php echo asset('vendor/rs-plugin/js/jquery.themepunch.plugins.min.js')?>"></script>
-		<script src="<?php echo asset('vendor/rs-plugin/js/jquery.themepunch.revolution.min.js')?>"></script>
-		<script src="<?php echo asset('vendor/owl-carousel/owl.carousel.js')?>"></script>
-		<script src="<?php echo asset('vendor/circle-flip-slideshow/js/jquery.flipshow.js')?>"></script>
-		<script src="<?php echo asset('vendor/magnific-popup/magnific-popup.js')?>"></script>
-		<script src="<?php echo asset('vendor/jquery.validate.js')?>"></script>
+<script src="<?php echo asset('vendor/jquery.js')?>"></script>
+<script src="<?php echo asset('js/plugins.js')?>"></script>
+<script src="<?php echo asset('vendor/jquery.easing.js')?>"></script>
+<script src="<?php echo asset('vendor/jquery.appear.js')?>"></script>
+<script src="<?php echo asset('vendor/jquery.cookie.js')?>"></script>
 
-		<!-- Current Page Scripts -->
-		<script src="<?php echo asset('js/views/view.home.js')?>"></script>
+<script src="<?php echo asset('vendor/bootstrap.js')?>"></script>
+<script src="<?php echo asset('vendor/twitterjs/twitter.js')?>"></script>
+<script src="<?php echo asset('vendor/rs-plugin/js/jquery.themepunch.plugins.min.js')?>"></script>
+<script src="<?php echo asset('vendor/rs-plugin/js/jquery.themepunch.revolution.min.js')?>"></script>
+<script src="<?php echo asset('vendor/owl-carousel/owl.carousel.js')?>"></script>
+<script src="<?php echo asset('vendor/circle-flip-slideshow/js/jquery.flipshow.js')?>"></script>
+<script src="<?php echo asset('vendor/magnific-popup/magnific-popup.js')?>"></script>
+<script src="<?php echo asset('vendor/jquery.validate.js')?>"></script>
 
-		<!-- Theme Initializer -->
-		<script src="<?php echo asset('js/theme.js')?>"></script>
+<!-- Current Page Scripts -->
+<script src="<?php echo asset('js/views/view.home.js')?>"></script>
 
-		<!-- Custom JS -->
-		<script src="<?php echo asset('js/custom.js')?>"></script>
+<!-- Theme Initializer -->
+<script src="<?php echo asset('js/theme.js')?>"></script>
+
+<!-- Custom JS -->
+<script src="<?php echo asset('js/custom.js')?>"></script>
+<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
+<script src="<?php echo asset('js/shop.js')?>"></script>
 
 		<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 		<script type="text/javascript">
@@ -37,4 +39,4 @@
 			})();
 
 		</script>
-		 -->
+	-->

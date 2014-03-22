@@ -5,6 +5,7 @@
 <html> <!--<![endif]-->
 	<head>
 		@include('includes.head')
+		<meta charset='utf-8'>
 		@yield('meta')
 		<title>
 			@yield('title')
