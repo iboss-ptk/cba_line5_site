@@ -13,7 +13,6 @@
 <script src="<?php echo asset('vendor/circle-flip-slideshow/js/jquery.flipshow.js')?>"></script>
 <script src="<?php echo asset('vendor/magnific-popup/magnific-popup.js')?>"></script>
 <script src="<?php echo asset('vendor/jquery.validate.js')?>"></script>
-<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
 
 <!-- Current Page Scripts -->
 <script src="<?php echo asset('js/views/view.home.js')?>"></script>
@@ -23,6 +22,11 @@
 
 <!-- Custom JS -->
 <script src="<?php echo asset('js/custom.js')?>"></script>
+
+
+<script src="<?php echo asset('vendor/angular.min.js')?>"></script>	
+<script src="<?php echo asset('vendor/angular-strap.min.js')?>"></script>	
+<script src="<?php echo asset('vendor/angular-strap.tpl.min.js')?>"></script>	
 
 <script src="<?php echo asset('js/shop.js')?>"></script>
 <script src="<?php echo asset('js/product_manager.js')?>"></script>

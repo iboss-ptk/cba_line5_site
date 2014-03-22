@@ -178,8 +178,8 @@ a.thumb-info span.thumb-info-action-icon i {
 }
 
 .square img{
+	display: block;
 	margin: auto;
-	vertical-align: center;
 }
 
 /*.whats-hot{	
