@@ -34,7 +34,7 @@
 
 
 
-	<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
+	
 @stop
 
 

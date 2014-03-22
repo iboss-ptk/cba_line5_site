@@ -64,7 +64,5 @@ CBA -- Brands
 
 </div>
 
-<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
-<script src="<?php echo asset('js/brand_manager.js')?>"></script>
 
 @stop

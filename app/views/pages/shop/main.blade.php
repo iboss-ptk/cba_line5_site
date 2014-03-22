@@ -46,8 +46,8 @@ CBA -- Shop
 				<div class="portfolio-price-normal"> <span ng-bind="product.price"></span> ฿</div><!-- price -->
 				<div class="portfolio-item img-thumbnail square">
 					<a ng-click="retrieve_attribute(product.id)" href="#" class="thumb-info square" data-toggle="modal" data-target="#@{{product.id}}"> <!-- open -->
-						<img ng-if="product.product_pic!=='NULL'" alt="@{{product.name}}" class="img-responsive square" ng-src="@{{product.product_pic}}">
-						<img ng-if="product.product_pic==='NULL'" alt="@{{product.name}}" class="img-responsive square" src="img/projects/project-3.jpg"><!-- img -->
+						<img ng-if="product.product_pic!=='NULL'" alt="@{{product.name}}" class="img-responsive" ng-src="@{{product.product_pic}}">
+						<img ng-if="product.product_pic==='NULL'" alt="@{{product.name}}" class="img-responsive" src="img/projects/project-3.jpg"><!-- img -->
 						<span class="thumb-info-title">
 							<span class="thumb-info-inner"> <span ng-bind="product.name"></span> </span><!-- name -->
 							<div class="thumb-info-type-box"><span class="thumb-info-type"> <span ng-bind="product.brand"></span></span></div><!-- brand -->
@@ -70,7 +70,9 @@ CBA -- Shop
 								<h4 class="modal-title" id="filterLabel">@{{product.name}}</h4>
 							</div>
 							<div class="modal-body">
-								<img alt="@{{product.name}}" class="img-responsive square" ng-src="@{{product.product_pic}}"><!-- img -->
+								<div class="square">
+									<img alt="@{{product.name}}" class="img-responsive" ng-src="@{{product.product_pic}}"><!-- img -->
+								</div>
 								<span class="thumb-info-title">
 									<span class="thumb-info-inner">@{{ product.name }}</span><!-- name -->
 									<div class="thumb-info-type-box"><span class="thumb-info-type">@{{ product.brand }}</span></div><!-- brand -->

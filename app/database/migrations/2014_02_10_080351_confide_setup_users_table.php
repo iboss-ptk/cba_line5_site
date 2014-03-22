@@ -67,7 +67,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->boolean('isadmin')->default(0);
             $table->boolean('issp')->default(0);
             $table->boolean('banned')->default(0);
-            $table->string('sp_code')->default(0);
+            $table->string('sp_code')->default('admin');
             $table->string('resp_sp_code')->default(0);
             $table->decimal('point',7,2);
             $table->timestamps();

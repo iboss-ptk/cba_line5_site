@@ -64,7 +64,6 @@ CBA -- Categories
 
 </div>
 
-<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
-<script src="<?php echo asset('js/category_manager.js')?>"></script>
+
 
 @stop

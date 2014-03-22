@@ -177,6 +177,10 @@ a.thumb-info span.thumb-info-action-icon i {
 	width: 100%;
 }
 
+.square img{
+	margin: auto;
+	vertical-align: center;
+}
 
 /*.whats-hot{	
 	background: #AAA;
