@@ -138,6 +138,16 @@ $scope.search = '';
 
 
   }
+   $scope.togglebanned = function(user, index){
+     $http.get('user/togglebanned/'+user).success(function(data){
+       $scope.users[index].banned = !($scope.users[index].banned);
+       console.log( $scope.users[index].banned);
+     });
+
+    $scope.message = '';
+
+
+  }
 }
 
 app.controller(controllers);
