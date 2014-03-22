@@ -101,12 +101,12 @@ a.thumb-info span.thumb-info-action-icon {
 	-o-transition: all 0.3s;
 	-webkit-border-radius: 0 0 0 25px;
 	-webkit-transition: all 0.3s;
-	background: #CCC;
+	background: #EF4836;
 	border-radius: 0 0 0 25px;
 	display: inline-block;
 	font-size: 25px;
-	height: 70px;
-	line-height: 80px;
+	height: 65px;
+	line-height: 60px;
 	position: absolute;
 	right: -100px;
 	text-align: center;
@@ -159,7 +159,7 @@ a.thumb-info span.thumb-info-action-icon:hover {
 }
 
 a.thumb-info span.thumb-info-action-icon i {
-	font-size: 50px;
+	font-size: 30px;
 	text-shadow: 3px 3px 3px rgba(0,0,0,.2);
 	left: 0px;
 	position: relative;
@@ -173,7 +173,9 @@ a.thumb-info span.thumb-info-action-icon i {
 	color: rgba(145,145,145, .6);
 }
 
-
+.square{
+	width: 100%;
+}
 
 
 /*.whats-hot{	
@@ -209,3 +211,7 @@ a.thumb-info span.thumb-info-action-icon i {
 	/*margin: 0;
 
 }*/
+
+/*! jQuery-Impromptu - v5.2.3 - 2014-03-09
+* http://trentrichardson.com/Impromptu
+* Copyright (c) 2014 Trent Richardson; Licensed MIT */

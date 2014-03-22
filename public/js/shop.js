@@ -226,7 +226,7 @@ $scope.retrieve_attribute = function(product_id){
 
 }
 
-$scope.submit = function(product_id,user_id){
+$scope.submit = function(product_id,product_name,user_id){
   // console.log(product_id+' '+user_id); //use this
   $scope.order_list['product_id'] =product_id;
   $scope.order_list['user_id'] = user_id;
@@ -239,6 +239,8 @@ $scope.submit = function(product_id,user_id){
   $http.post('shop', {'order_list':  JSON.stringify($scope.order_list)})
       .success(function(data) {
          console.log(data);
+
+         alert('เพิ่ม '+product_name+' จำนวน '+$scope.order_list['amount']+' ชิ้นลงในตะกร้า');
       });
 
 }
