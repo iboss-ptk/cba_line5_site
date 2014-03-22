@@ -77,8 +77,8 @@ class ConfideSetupUsersTable extends Migration {
         {
             $table->increments('id');
             $table->integer('status')->default(0);
-            $table->timestamps('ordered_at'); //nullable?
-            $table->timestamps('paid_at');
+            $table->datetime('ordered_at')->nullable(); //nullable?
+            $table->datetime('paid_at')->nullable();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('confirmed')->default(0);
