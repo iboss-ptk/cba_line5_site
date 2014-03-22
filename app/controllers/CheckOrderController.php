@@ -11,13 +11,13 @@ class CheckOrderController extends \BaseController {
     {
         $this->beforeFilter(function()
         {
-            //
+            
             if (Auth::guest()) return Redirect::to('user/login');
         });
     }
     public function getStatus5No()
 	{
-		//
+		
 		$orders = Order::where('status','=',5)->get(); 
 		$spbanneds = User::where('banned','=',1)->where('issp','=',1)->get();
 		$users = User::All();
@@ -25,7 +25,7 @@ class CheckOrderController extends \BaseController {
 	}
 	  public function getStatus5Yes()
 	{
-		//
+		
 		$orders = Order::where('status','=',5)->get(); 
 		$spnotbanneds = User::where('banned','=',0)->where('issp','=',1)->get();
 		$users = User::All();
@@ -33,7 +33,7 @@ class CheckOrderController extends \BaseController {
 	}
 	public function getShowOrderlist($id)
 	{
-		//
+		
 		$orderlists = OrderList::where('order_id',$id)->get(); 
 		$products = Prod::All();	
 		$brand_all = Brand::All();
