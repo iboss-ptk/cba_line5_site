@@ -42,11 +42,11 @@ CBA -- Shop
 		<ul class="portfolio-list sort-destination" data-sort-id="portfolio">
 
 			<!-- ngrepeat -->
-			<li class="col-md-4 isotope-item websites" ng-repeat="product in products ">
+			<li class="col-md-4 isotope-item websites" ng-repeat="product in products" ng-if="product.availability==1">
 				<div class="portfolio-price-normal"> <span ng-bind="product.price"></span> ฿</div><!-- price -->
-				<div class="portfolio-item img-thumbnail">
-					<a ng-click="retrieve_attribute(product.id)" href="#" class="thumb-info" data-toggle="modal" data-target="#@{{product.id}}"> <!-- open -->
-						<img ng-if="product.product_pic!=='NULL'" alt="@{{product.name}}" class="img-responsive"  ng-src="@{{product.product_pic}}">
+				<div class="portfolio-item img-thumbnail square">
+					<a ng-click="retrieve_attribute(product.id)" href="#" class="thumb-info square" data-toggle="modal" data-target="#@{{product.id}}"> <!-- open -->
+						<img ng-if="product.product_pic!=='NULL'" alt="@{{product.name}}" class="img-responsive" ng-src="@{{product.product_pic}}">
 						<img ng-if="product.product_pic==='NULL'" alt="@{{product.name}}" class="img-responsive" src="img/projects/project-3.jpg"><!-- img -->
 						<span class="thumb-info-title">
 							<span class="thumb-info-inner"> <span ng-bind="product.name"></span> </span><!-- name -->
@@ -70,7 +70,9 @@ CBA -- Shop
 								<h4 class="modal-title" id="filterLabel">@{{product.name}}</h4>
 							</div>
 							<div class="modal-body">
-								<img alt="@{{product.name}}" class="img-responsive square" ng-src="@{{product.product_pic}}"><!-- img -->
+								<div class="square">
+									<img alt="@{{product.name}}" class="img-responsive" ng-src="@{{product.product_pic}}"><!-- img -->
+								</div>
 								<span class="thumb-info-title">
 									<span class="thumb-info-inner">@{{ product.name }}</span><!-- name -->
 									<div class="thumb-info-type-box"><span class="thumb-info-type">@{{ product.brand }}</span></div><!-- brand -->
@@ -90,7 +92,7 @@ CBA -- Shop
 							<!-- <p ng-repeat="(key,val) in order_list.attribute">@{{key}} : @{{val}}</p> -->
 							@if(Auth::check())
 							<div class="modal-footer">
-								<button type="submit" ng-click="submit(product.id,{{Auth::user()->id}})" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
+								<button type="submit" data-dismiss="modal" ng-click="submit(product.id,product.name,{{Auth::user()->id}})" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
 							</div>
 
 							@else
@@ -118,6 +120,5 @@ CBA -- Shop
 <hr class="tall" />
 
 
-<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
-<script src="<?php echo asset('js/shop.js')?>"></script>
+
 @stop

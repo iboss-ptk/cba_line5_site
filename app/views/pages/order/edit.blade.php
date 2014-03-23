@@ -38,6 +38,4 @@ CBA -- Edit
         <hr class="tall" />
 
 
-        <script src="<?php echo asset('vendor/angular.min.js')?>"></script>
-        <script src="<?php echo asset('js/attribute.js')?>"></script>
         @stop

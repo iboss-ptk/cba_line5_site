@@ -17,8 +17,8 @@ class ConfideSetupUsersTable extends Migration {
             $table->increments('id')->unsigned();
             $table->string('name')->unique();
             $table->decimal('price', 6, 2);
-            $table->integer('brand_id')->references('id')->on('brands');
-            $table->integer('category_id')->references('id')->on('categories');
+            $table->integer('brand_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('availability')->default(true);
             $table->string('product_pic');
             $table->timestamps();
@@ -30,7 +30,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->increments('id')->unsigned();
             $table->string('name');
             $table->string('type');
-            $table->integer('product_id')->references('id')->on('products');
+            $table->integer('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
@@ -67,7 +67,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->boolean('isadmin')->default(0);
             $table->boolean('issp')->default(0);
             $table->boolean('banned')->default(0);
-            $table->string('sp_code')->default(0);
+            $table->string('sp_code')->default('admin');
             $table->string('resp_sp_code')->default(0);
             $table->decimal('point',7,2);
             $table->timestamps();
@@ -77,7 +77,8 @@ class ConfideSetupUsersTable extends Migration {
         {
             $table->increments('id');
             $table->integer('status')->default(0);
-            $table->timestamps('ordered_at'); //nullable?
+            $table->datetime('ordered_at')->nullable(); //nullable?
+            $table->datetime('paid_at')->nullable();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('confirmed')->default(0);
@@ -102,7 +103,7 @@ class ConfideSetupUsersTable extends Migration {
             $table->increments('id')->unsigned();
             $table->string('name');
             $table->string('type');
-            $table->integer('order_list_id')->references('id')->on('order_lists');
+            $table->integer('order_list_id')->references('id')->on('order_lists')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
