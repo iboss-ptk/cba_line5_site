@@ -116,48 +116,42 @@ Route::group(array('before' => 'auth_admin'), function(){
 		$orderconfirmation = Confirmation::find($id);
 		$product->availability = !$product->availability;
 		$product->save();
-		$products = Prod::paginate($limit = 10)->toJson();
-		return $products;
+		return $product;
 	});
 	Route::get( 'product/toggle/{id}' ,function ($id)
 	{
 		$product = Prod::find($id);
 		$product->availability = !$product->availability;
 		$product->save();
-		$products = Prod::paginate($limit = 10)->toJson();
-		return $products;
+		return $product;
 	});
 	Route::get( 'user/toggleissp/{id}' ,function ($id)
 	{
 		$user = User::find($id);
 		$user->issp = !$user->issp;
-		$user->save();
-		$users = User::paginate($limit = 10)->toJson();
-		return $users;
+		$user->updateUniques();
+		return $user;
 	});
 	Route::get( 'user/togglebanned/{id}' ,function ($id)
 	{
 		$user = User::find($id);
 		$user->banned = !$user->banned;
-		$user->save();
-		$users = User::paginate($limit = 10)->toJson();
-		return $users;
+		$user->updateUniques();
+		return $user;
 	});
 	Route::get( 'user/toggleconfirmed/{id}' ,function ($id)
 	{
 		$user = User::find($id);
 		$user->confirmed = !$user->confirmed;
-		$user->save();
-		$users = User::paginate($limit = 10)->toJson();
-		return $users;
+		$user->updateUniques();
+		return $user;
 	});
 	Route::get( 'user/toggleisadmin/{id}' ,function ($id)
 	{
 		$user = User::find($id);
 		$user->isadmin = !$user->isadmin;
-		$user->save();
-		$users = User::paginate($limit = 10)->toJson();
-		return $users;
+		$user->updateUniques();
+		return $user;
 	});
 
 

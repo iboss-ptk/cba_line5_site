@@ -100,6 +100,7 @@ $scope.next = function(){
   searchService.getProducts($scope.search,$scope.currentPage,$scope.cat_id).success(function(data){
     $scope.products = data.data;
     $scope.total = data.last_page;
+
     brandService.getBrands().success(function(data){
       var brand_list = {};
 
@@ -116,7 +117,6 @@ $scope.next = function(){
 
     categoryService.getCategories().success(function(data){
       var category_list = {};
-
       for (var i = 0; i<data.length; i++) {
         var obj =data[i];
         category_list[obj.id] = obj.name;
@@ -125,8 +125,8 @@ $scope.next = function(){
       for (var i = $scope.products.length - 1; i >= 0; i--) {
         $scope.products[i].category = category_list[$scope.products[i].category_id];
       };
-
     });
+
   });
 
   $scope.message = '';

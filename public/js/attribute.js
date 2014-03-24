@@ -88,6 +88,10 @@ controllers.AttCtrl = function($scope){
 		// console.log(att_name);
 		$scope.types[t_index].data.remove(att_index);
 	}
+	
+	$scope.delete_type = function(index){
+		$scope.types.remove(index);
+	}
 }
 
 app.controller(controllers);

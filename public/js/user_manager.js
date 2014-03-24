@@ -109,6 +109,7 @@ $scope.search = '';
     });
 
   $scope.toggleissp = function(user, index){
+  console.log('sp');
      $http.get('user/toggleissp/'+user).success(function(data){
        $scope.users[index].issp = !($scope.users[index].issp);
        console.log( $scope.users[index].issp);
@@ -119,6 +120,7 @@ $scope.search = '';
 
   }
   $scope.toggleisadmin = function(user, index){
+  console.log('admin');
     $http.get('user/toggleisadmin/'+user).success(function(data){
       $scope.users[index].isadmin = !($scope.users[index].isadmin);
       console.log( $scope.users[index].isadmin);
@@ -129,6 +131,7 @@ $scope.search = '';
 
   }
    $scope.toggleconfirmed = function(user, index){
+   console.log('con');
      $http.get('user/toggleconfirmed/'+user).success(function(data){
        $scope.users[index].confirmed = !($scope.users[index].confirmed);
        console.log( $scope.users[index].confirmed);
@@ -139,6 +142,8 @@ $scope.search = '';
 
   }
    $scope.togglebanned = function(user, index){
+   
+   console.log('ban');
      $http.get('user/togglebanned/'+user).success(function(data){
        $scope.users[index].banned = !($scope.users[index].banned);
        console.log( $scope.users[index].banned);

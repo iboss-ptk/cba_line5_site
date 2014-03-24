@@ -72,7 +72,7 @@ class UserController extends BaseController {
         {
             // Redirect with success message, You may replace "Lang::get(..." for your custom message.
                         return Redirect::action('UserController@login')
-                            ->with( 'notice', 'ลงทะเบียนเรียบร้อย กรุณากดลิ้งค์ยืนยันที่อีเมลของคุณ (อาจอยู่ในเ junk mail)' );
+                            ->with( 'notice', 'ลงทะเบียนเรียบร้อย กรุณากดลิ้งค์ยืนยันที่อีเมลของคุณ (อาจอยู่ใน junk mail)' );
         }
         else
         {

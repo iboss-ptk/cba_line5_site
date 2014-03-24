@@ -13,12 +13,16 @@ class ProductRestController extends \BaseController {
 			$cat_id = Input::get('category_id');
 			if(!$search){
 				$products = Prod::where('category_id','=',$cat_id)
+					->orderBy('brand_id','desc')
+					->orderBy('name','desc')
 					->paginate($limit = 15)
 					->toJson();
 					return $products;
 				}else{
 					$products = Prod::where('name', 'LIKE', '%'.$search.'%')
 					->where('category_id','=',$cat_id)
+					->orderBy('brand_id','desc')
+					->orderBy('name','desc')
 					->paginate(15)
 					->toJson();
 					return $products;
@@ -26,10 +30,15 @@ class ProductRestController extends \BaseController {
 			} else{
 
 				if(!$search){
-					$products = Prod::paginate($limit = 15)->toJson();
+					$products = Prod::orderBy('brand_id','desc')
+					->orderBy('name','desc')
+					->paginate($limit = 15)
+					->toJson();
 					return $products;
 				}else{
 					$products = Prod::where('name', 'LIKE', '%'.$search.'%')
+					->orderBy('brand_id','desc')
+					->orderBy('name','desc')
 					->paginate(15)
 					->toJson();
 					return $products;
@@ -51,7 +60,7 @@ class ProductRestController extends \BaseController {
 
 		public function getCategory()
 		{
-			$categories = category::All()->toJson();
+			$categories = Category::All()->toJson();
 			return $categories;
 		}
 
