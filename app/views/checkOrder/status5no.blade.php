@@ -83,4 +83,8 @@
 
 </div>
 <hr class="tall" />
+
+<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
+<script src="<?php echo asset('js/user_manager.js')?>"></script>
+
 @stop

@@ -94,8 +94,15 @@ Route::filter('setcookie',function(){
 
 		$sp_value = Input::get('sp');
 
-		if(!is_null($sp_value)){
+		//if(User::where('sp_code','=',$sp_value)->where('issp','=',1)->get()->first()) return 'hey';
+
+		if((!is_null($sp_value))&&!is_null(User::where('sp_code','=',$sp_value)->where('issp','=',1)->get()->first())){
 			Cookie::queue('sp_code', $sp_value,'forever');
+		}else if((!is_null($sp_value))){
+
+			Cookie::queue('sp_code', 0,'forever');
 		}
+
+		//return var_dump(is_null(User::where('sp_code','=',$sp_value)->where('issp','=',1)->get()->first()));
 		
 });

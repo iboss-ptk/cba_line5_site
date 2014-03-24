@@ -105,7 +105,10 @@ Route::filter('auth_admin',function(){
 
 
 Route::group(array('before' => 'auth_admin'), function(){
+
+
 	Route::controller('checkorder','CheckOrderController');
+
 	Route::resource('product', 'ProductController');
 	Route::resource('brand', 'BrandController');
 	Route::resource('category', 'CategoryController');
