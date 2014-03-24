@@ -66,7 +66,7 @@ class ProductController extends BaseController {
 			}else if (Input::has('product_pic')) {
 				$product->product_pic = Input::get('product_pic');
 			}
-
+			$product->description   = Input::get('description');
 			$product->save();
 			//waiting for edit
 
@@ -202,7 +202,7 @@ class ProductController extends BaseController {
 				$product->product_pic = Input::get('product_pic');
 			}
 
-
+			$product->description   = Input::get('description');
 			$product->save();
 
 			Attribute::where('product_id','=',$id)->delete();

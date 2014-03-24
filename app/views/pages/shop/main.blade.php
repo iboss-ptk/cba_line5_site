@@ -78,6 +78,8 @@ CBA -- Shop
 									<div class="thumb-info-type-box"><span class="thumb-info-type">@{{ product.brand }}</span></div><!-- brand -->
 								</span>
 							</div>
+							
+							<pre ng-if="product.description">@{{product.description}}</pre>
 
 							<form name='@{{ product.id }}' id='@{{ product.id }}'>
 								<div class="form-group" ng-repeat="att in atts">

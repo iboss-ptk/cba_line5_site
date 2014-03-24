@@ -1,0 +1,12 @@
+//Change log !!
+
+run this on cba database
+ALTER TABLE products ADD description TEXT
+
+product/
+create
+edit
+
+productcontroller
+
+main.blade
