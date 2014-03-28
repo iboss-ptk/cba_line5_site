@@ -26,27 +26,32 @@ CBA -- Edit
 
         <div class="form-group">
             {{ Form::label('name', 'Name') }}
-            {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
+            {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'id' => 'form')) }}
         </div>
 
         <div class="form-group">
 
-         {{ Form::label('product_pic', 'Image :') }} 
-         <!-- {{ Form::file('product_pic' , Input::old('product_pic'), array('class' => 'form-control'))}} -->
-         <pre>
-         <img src="{{asset($product->product_pic)}}" style="max-height: 500px; max-width: 500px;"> <br><br>
-         <input type="radio" name="img_selc" ng-model="img_selc" value="text" checked="true">  URL &nbsp&nbsp
-         <input type="radio" name="img_selc" ng-model="img_selc" value="file"> Upload <br/>
-         <input ng-if="img_selc=='text'" name="product_pic" type="text" class="form-control" value="{{Input::old('product_pic')}}">
-         <input ng-if="img_selc=='file'" name="product_pic" type="file" class="form-control" value="{{Input::old('product_pic')}}">
-        </pre>
-     </div>
-     <div class="form-group">
+           {{ Form::label('product_pic', 'Image :') }} 
+           <!-- {{ Form::file('product_pic' , Input::old('product_pic'), array('class' => 'form-control'))}} -->
+           <pre>
+               <img src="{{asset($product->product_pic)}}" style="max-height: 500px; max-width: 500px;"> <br><br>
+               <input type="radio" name="img_selc" ng-model="img_selc" value="text" checked="checked"/>  URL &nbsp&nbsp
+               <input type="radio" name="img_selc" ng-model="img_selc" value="file"> Upload <br/>
+               <input ng-if="img_selc=='text'" name="product_pic" type="text" class="form-control" value="{{$product->product_pic}}">
+               <input ng-if="img_selc=='file'" name="product_pic" type="file" class="form-control" value="{{Input::old('product_pic')}}">
+           </pre>
+       </div>
+       <div class="form-group">
         {{ Form::label('price', 'Price') }}
         <div class="input-group">
             {{ Form::text('price', Input::old('price'), array('class' => 'form-control')) }}
             <span class="input-group-addon">฿</span>
         </div>
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('Description', 'Description') }}
+        {{ Form::textarea('description', $product->description , array('class' => 'form-control', 'placeholder' => 'Description')) }}
     </div>
 
     <div class="form-group">
@@ -101,4 +106,4 @@ CBA -- Edit
         </div>
         <hr class="tall" />
 
-       @stop
+        @stop

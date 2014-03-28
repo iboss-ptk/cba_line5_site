@@ -47,7 +47,6 @@ Array.prototype.remove = function(from, to) {
 
 controllers.orderCtrl = function($scope, $http, orderService , order_listService, searchService){
 	
-console.log('test');
 $scope.search = '';
 
   function getById(arr, id) {
@@ -115,7 +114,7 @@ $scope.search = '';
       $scope.total = data.last_page;
     });
 
-
+});
 }
 
 

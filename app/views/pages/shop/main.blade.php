@@ -42,7 +42,7 @@ CBA -- Shop
 		<ul class="portfolio-list sort-destination" data-sort-id="portfolio">
 
 			<!-- ngrepeat -->
-			<li class="col-md-4 isotope-item websites" ng-repeat="product in products" ng-if="product.availability==1">
+			<li class="col-md-4 isotope-item websites" ng-repeat="product in products">
 				<div class="portfolio-price-normal"> <span ng-bind="product.price"></span> ฿</div><!-- price -->
 				<div class="portfolio-item img-thumbnail square">
 					<a ng-click="retrieve_attribute(product.id)" href="#" class="thumb-info square" data-toggle="modal" data-target="#@{{product.id}}"> <!-- open -->
@@ -78,6 +78,8 @@ CBA -- Shop
 									<div class="thumb-info-type-box"><span class="thumb-info-type">@{{ product.brand }}</span></div><!-- brand -->
 								</span>
 							</div>
+							
+							<pre ng-if="product.description">@{{product.description}}</pre>
 
 							<form name='@{{ product.id }}' id='@{{ product.id }}'>
 								<div class="form-group" ng-repeat="att in atts">

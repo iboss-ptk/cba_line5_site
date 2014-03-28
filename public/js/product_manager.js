@@ -215,10 +215,13 @@ $scope.search = '';
 
   $scope.toggle = function(product, index){
 
+     $scope.products[index].availability = !$scope.products[index].availability;
 
     $http.get('product/toggle/'+product).success(function(data){
-      $scope.products[index].availability = !($scope.products[index].availability);
+     $scope.products[index].availability = data.availability;
       console.log( $scope.products[index].availability);
+    }).error(function(){
+    	console.log('fail');
     });
 
     $scope.message = '';
