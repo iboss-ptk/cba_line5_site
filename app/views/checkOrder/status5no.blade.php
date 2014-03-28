@@ -25,29 +25,48 @@
     </tr>
 </thead>
 <tbody>
-    @foreach ($ordersNo as $order)
-        <td>{{ $order->id }}</td>
-        <td> {{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
-                <button type="submit" class="btn btn-success  " >
-                    Show Order List
-                </button>
-         
-                {{ Form::close() }}
-        </td>
-        <td>{{ $order->user_id }}</td>
-        
+    @foreach($orders as $order)
+            @foreach($users as $user)
+                @if($order -> user_id == $user -> id)
 
-</tbody>
-@endforeach
+                    @if($user->resp_sp_code == '0')
+                            <td>{{ $order->id }}</td>
+                            <td> {{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
+                                    <button type="submit" class="btn btn-success  " >
+                                        Show Order List
+                                    </button>
+                             
+                                    {{ Form::close() }}
+                            </td>
+                            <td>{{ $order->user_id }}</td>                   
+                    @else
+                        @foreach($spbanneds as $spbanned)
+                        
+                            @if($user->resp_sp_code == $spbanned->sp_code)
+                                    <td>{{ $order->id }}</td>
+                                    <td> {{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
+                                            <button type="submit" class="btn btn-success  " >
+                                                Show Order List
+                                            </button>
+                                     
+                                            {{ Form::close() }}
+                                    </td>
+                                    <td>{{ $order->user_id }}</td>
+                            @endif
+                        
+                        @endforeach
+                    
+                    @endif
+
+                @endif
+            @endforeach
+            </tbody>
+        @endforeach
 </table>
 
 
 </div>
 <hr class="tall" />
-<<<<<<< HEAD
-<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
-<script src="<?php echo asset('js/user_manager.js')?>"></script>
-=======
->>>>>>> origin/master
+
 
 @stop
