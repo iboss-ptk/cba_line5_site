@@ -25,7 +25,8 @@
         <td>User_mobilephonenumber</td>
         <td>resp_sp_code</td> 
         <td>ordered_at</td>        
-        <td>paid_at</td>                     
+        <td>paid_at</td>     
+        <td>recv_location </td>               
     </tr>
 </thead>
 <tbody>
@@ -48,7 +49,8 @@
                             <td>{{ $user->mobilephonenumber }}</td>  
                             <td>{{ $user->resp_sp_code }}</td>   
                             <td>{{ $order->ordered_at }}</td>   
-                            <td>{{ $order->paid_at }}</td>                 
+                            <td>{{ $order->paid_at }}</td>
+                            <td>{{ $order->recv_location }}</td>                   
                     @else
                         @foreach($spbanneds as $spbanned)
                         
@@ -67,7 +69,8 @@
                             <td>{{ $user->mobilephonenumber }}</td>  
                             <td>{{ $user->resp_sp_code }}</td>   
                             <td>{{ $order->ordered_at }}</td>   
-                            <td>{{ $order->paid_at }}</td>    
+                            <td>{{ $order->paid_at }}</td>
+                            <td>{{ $order->recv_location }}</td>      
                             @endif
                         
                         @endforeach
