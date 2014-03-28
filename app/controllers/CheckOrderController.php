@@ -15,14 +15,52 @@ class CheckOrderController extends \BaseController {
 		$orders = Order::where('status','=',5)->get(); 
 		$spbanneds = User::where('banned','=',1)->where('issp','=',1)->get();
 		$users = User::All();
-		 return View::make('checkOrder.status5no',array( 'orders' =>$orders,  'spbanneds'=> $spbanneds,'users' =>$users));
+		$ordersNo = array();
+		foreach($orders as $order){
+			foreach($users as $user){
+				if($order -> user_id == $user -> id){
+
+					if($user->resp_sp_code == '0')
+					{$ordersNo[] = $order;}
+					else{
+						foreach($spbanneds as $spbanned)
+						{
+							if($user->resp_sp_code == $spbanned->sp_code)
+							{
+								$ordersNo[] = $order;
+							}
+						}
+					}
+
+				}
+			}
+		}
+		 return View::make('checkOrder.status5no',array( 'ordersNo' =>$ordersNo));
 	}
 	  public function getStatus5Yes()
 	{
+		$ordersYes = array();
 		$orders = Order::where('status','=',5)->get(); 
 		$spnotbanneds = User::where('banned','=',0)->where('issp','=',1)->get();
 		$users = User::All();
-		 return View::make('checkOrder.status5yes',array( 'orders' =>$orders,  'spnotbanneds'=> $spbanneds,'users' =>$users));
+		foreach($orders as $order){
+			foreach($users as $user){
+				if($order -> user_id == $user -> id){
+
+					if($user->resp_sp_code != '0')
+					{
+						foreach($spnotbanneds as $spnotbanned)
+						{
+							if($user->resp_sp_code == $spnotbanned->sp_code)
+							{
+								$ordersYes[] = $order;
+							}
+						}
+					}
+				}
+			}
+		}
+		 return View::make('checkOrder.status5yes',array( 'ordersYes' =>$ordersYes));
 	}
 	public function getShowOrderlist($id)
 	{

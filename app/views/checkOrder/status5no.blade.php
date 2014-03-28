@@ -5,7 +5,7 @@
 <div class="col-md-12" ng-app>
 
     <br>
-    <h1>All order</h1>
+    <h1>Check confirmation</h1>
     <!-- Button trigger modal -->
 
 <!-- will be used to show any messages -->
@@ -18,64 +18,25 @@
   <thead>
     <tr>
         <td>Order_ID</td>
-        <td>Status</td>
+        <td>Orederlist</td>
+        <td>User_ID</td>
         <td>Confirmed_Image</td>
-        <!--    <td>Confirmed</td>มันไม่มีก็ได้--> 
-         <td></td>
+        <td>check</td>         
     </tr>
 </thead>
 <tbody>
-    @foreach ($orders as $order)
+    @foreach ($ordersNo as $order)
         <td>{{ $order->id }}</td>
-        <td>
-             @if ($order->status === 0)
-             รอการยืนยันอยู่นะจ๊ะ
-              {{ Form::open(array('url'=>'doorder/user-address/'.$order->id,'method'=>'GET')) }}
-                <button type="submit" class="btn btn-success  " >
-                    Confirm
-                </button>
-                {{ Form::close() }}
-             @elseif ($order->status === 1)
-             รอจ่ายยืนยัน ที่อยู่นะจ๊ะ คลิก ที่ ปุ่ม Address เลยจ้าาา
-            {{ Form::open(array('url'=>'doorder/user-address/'.$order->id,'method'=>'GET')) }}
-                <button type="submit" class="btn btn-success  " >
-                    Address
-                </button>
-                {{ Form::close() }}
-              @elseif ($order->status === 2)
-              โดนลบแล้วจ้าาาา สั่งมาใหม่น้าาาา
-              @elseif ($order->status === 3)
-             รอจ่ายตังจ๊ะ  จ่ายแล้วคลิกที่ confirm เพื่ออัพรูปเลยจ้าาาา
-               {{ Form::open(array('url'=>'doorder/confirmation/'.$order->id,'method'=>'GET')) }}
-                <button type="submit" class="btn btn-info   " >
-                    Confirm
-                </button>
-                {{ Form::close() }}
-             @elseif ($order->status === 4)
-             รอตรวจสอบจ้าาาา
-             @elseif ($order->status === 5)
-             ส่งอยู่นะครัชชช
-        @else
-            Status นี้มาได้ไงครัชชช มันไม่มีนะครัชชชช
-          @endif
-
-        </td>
-        <td>{{ HTML::image($order->image_path,'confirmation_pic_' . $order->id, array('class'=>'feature', 'width'=>'100', 'height'=>'100')) }}</td> 
-       <!-- <td>{{ $order->confirmed }}</td> มันไม่มีก็ได้--> 
-       
-            <td> {{ Form::open(array('url'=>'doorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
+        <td> {{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
                 <button type="submit" class="btn btn-success  " >
                     Show Order List
                 </button>
-         @if ($order->status === 0) 
+         
                 {{ Form::close() }}
-                {{ Form::open(array('url'=>'doorder/delete-order/'.$order->id,'method'=>'GET')) }}
-                <button type="submit" class="btn btn-warning   " >
-                        Delete 
-                </button>
-                {{ Form::close() }}
-                 </td>
-        @endif
+        </td>
+        <td>{{ $order->user_id }}</td>
+        
+
 </tbody>
 @endforeach
 </table>
@@ -83,7 +44,6 @@
 
 </div>
 <hr class="tall" />
-
 <script src="<?php echo asset('vendor/angular.min.js')?>"></script>
 <script src="<?php echo asset('js/user_manager.js')?>"></script>
 
