@@ -17,11 +17,15 @@
   <hr>
   <thead>
     <tr>
-        <td>Order_ID</td>
+         <td>Order_ID</td>
         <td>Orederlist</td>
         <td>User_ID</td>
-        <td>Confirmed_Image</td>
-        <td>check</td>         
+        <td>User_firstname</td>
+        <td>User_lastname </td>
+        <td>User_mobilephonenumber</td>
+        <td>resp_sp_code</td> 
+        <td>ordered_at</td>        
+        <td>paid_at</td>       
     </tr>
 </thead>
 <tbody>
@@ -35,15 +39,21 @@
                         
                             @if($user->resp_sp_code == $spnotbanned->sp_code)
                             
-                               <td>{{ $order->id }}</td>
-                                <td>{{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
-                                        <button type="submit" class="btn btn-success  " >
-                                            Show Order List
-                                        </button>
-                                 
-                                        {{ Form::close() }}
-                                </td>
-                                <td>{{ $order->user_id }}</td>       
+                              <td>{{ $order->id }}</td>
+                            <td> {{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
+                                    <button type="submit" class="btn btn-success  " >
+                                        Show Order List
+                                    </button>
+                             
+                                    {{ Form::close() }}
+                            </td>
+                            <td>{{ $order->user_id }}</td> 
+                            <td>{{ $user->firstname }}</td>
+                            <td>{{ $user->lastname }}</td>
+                            <td>{{ $user->mobilephonenumber }}</td>  
+                            <td>{{ $user->resp_sp_code }}</td>   
+                            <td>{{ $order->ordered_at }}</td>   
+                            <td>{{ $order->paid_at }}</td>    
                             
                             @endif
                         
