@@ -84,7 +84,7 @@ CBA -- Shop
 							<form name='@{{ product.id }}' id='@{{ product.id }}'>
 								<div class="form-group" ng-repeat="att in atts">
 									@{{att.name}}
-									<select ng-model="$parent.order_list.attribute[att.name]" ng-options="a for a in att.data" class="form-control">
+									<select ng-init="$parent.order_list.attribute[att.name]=null" ng-model="$parent.order_list.attribute[att.name]" ng-options="a for a in att.data" class="form-control">
 									</select>
 								</div>
 								<div class="form-group">
@@ -94,7 +94,7 @@ CBA -- Shop
 							<!-- <p ng-repeat="(key,val) in order_list.attribute">@{{key}} : @{{val}}</p> -->
 							@if(Auth::check())
 							<div class="modal-footer">
-								<button type="submit" data-dismiss="modal" ng-click="submit(product.id,product.name,{{Auth::user()->id}})" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
+								<button type="submit" ng-click="submit(product.id,product.name,{{Auth::user()->id}})" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
 							</div>
 
 							@else

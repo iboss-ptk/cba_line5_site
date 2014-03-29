@@ -7,11 +7,11 @@
 		protected $fillable = array('order_id','product_id','amount','total_cost');
 
 		public function order_list_attribute() {
-	    	 return $this->hasMany('Order_list_attribute');
+	    	 return $this->hasMany('OrderListAttribute');
 	    }
 
 	    public function product(){
-	    	return $this->hasOne('Prod');
+	    	return $this->belongsTo('Prod');
 	    }
 
 

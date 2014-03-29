@@ -1,9 +1,9 @@
 @extends('layouts.default')
 
 @section('meta')
-<meta name="keywords" content="HTML5 Template" />
-<meta name="description" content="Porto - Responsive HTML5 Template - 2.5.0">
-<meta name="author" content="okler.net">
+<meta name="keywords" content="" />
+<meta name="description" content="">
+<meta name="author" content="">
 @stop
 
 @section('title')

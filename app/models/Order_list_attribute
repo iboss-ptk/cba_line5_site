@@ -1,6 +1,0 @@
-<?php
-
-	class Order_list_attribute extends Eloquent
-	{
-
-	}
