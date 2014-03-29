@@ -41,19 +41,6 @@
 					</a>
 				</li>
 
-				<li class="dropdown">
-					<a class="dropdown-toggle" href="#">
-						Shop
-						<i class="icon icon-angle-down"></i>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="{{URL::to('/shop')}}">All</a></li>
-						@foreach(Category::All() as $category)
-						<li><a href="{{URL::to('/shop?category_id='.$category->id)}}">{{$category->name }}</a></li>
-						@endforeach
-					</ul>
-				</li>
-
 				<li>
 					<a class="dropdown-toggle" href="#">
 						Secret Tips
@@ -75,7 +62,27 @@
 
 				@endif
 
+				<li class="dropdown">
+					<a class="dropdown-toggle" href="#">
+						Shop
+						<i class="icon icon-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{{URL::to('/shop')}}">All</a></li>
+						@foreach(Category::All() as $category)
+						<li><a href="{{URL::to('/shop?category_id='.$category->id)}}">{{$category->name }}</a></li>
+						@endforeach
+					</ul>
+				</li>
+
+				
+
 				@if(Auth::check())
+				<li class="dropdown" id="home">
+					<a href="{{URL::to('/shop/cart')}}">
+						Cart
+					</a>
+				</li>
 				<li>
 					<a href="{{URL::to('user/profile')}}">
 						Profile

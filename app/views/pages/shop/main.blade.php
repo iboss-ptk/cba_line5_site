@@ -25,8 +25,8 @@ CBA -- Shop
 
 	<hr />
 
-	<input id="search" ng-focus="" ng-model="search" placeholder="product name..." class="form-control" >
-
+	<input value="{{Input::get('search')}}" id="search" ng-focus="" ng-model="search" placeholder="product name..." class="form-control" >
+{{Input::get('search')}}
 	<div>
 		<ul class="pager">
 			<li class="previous" ng-click="prev()"><a href="">&larr; Previous</a></li>
@@ -37,7 +37,7 @@ CBA -- Shop
 
 	<hr />
 
-	<div class="row">
+	<div class="row" href="#top">
 
 		<ul class="portfolio-list sort-destination" data-sort-id="portfolio">
 
@@ -94,7 +94,7 @@ CBA -- Shop
 							<!-- <p ng-repeat="(key,val) in order_list.attribute">@{{key}} : @{{val}}</p> -->
 							@if(Auth::check())
 							<div class="modal-footer">
-								<button type="submit" ng-click="submit(product.id,product.name,{{Auth::user()->id}})" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
+								<button type="submit" ng-click="submit(product.id,product.name,{{Auth::user()->id}})" form="@{{ product.id }}" class="btn btn-primary" data-dismiss="modal">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button>
 							</div>
 
 							@else
@@ -112,12 +112,20 @@ CBA -- Shop
 
 
 		</ul>
-
+		<div>
+		<ul class="pager">
+			<a class="scroll-to-top" href="#top"><li class="previous" ng-click="prev()"><a href="">&larr; Previous</a></li></a>
+			<li>Pages :  <span ng-bind="currentPage"></span> /  <span ng-bind="total"></span></li>
+			<a class="scroll-to-top" href="#top"><li class="next" ng-click="next()"><a href="">Next &rarr;</a></li></a>
+		</ul>
+	</div>
 	</div>
 
 </div>
 
 </div>
+
+	
 
 <hr class="tall" />
 

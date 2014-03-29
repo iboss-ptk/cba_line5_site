@@ -70,6 +70,7 @@ Route::group(array('before' => 'setcookie'),function()
 	Route::group(array('before' => 'auth'), function(){
 
 		Route::get('shop/cart', 'ShopController@cart');
+		Route::get('shop/deleteorder/{id}', 'ShopController@deleteorder');
 	});
 
 

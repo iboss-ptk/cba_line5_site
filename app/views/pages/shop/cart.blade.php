@@ -12,54 +12,132 @@ CBA -- Cart
 
 @section('content')
 <div class="container">
-    <div class='row'>
-        <div class="col-md-8 col-md-offset-2 ">
+  <div class='row'>
+    <div class="col-md-8 col-md-offset-2 ">
 
-            <div class="page-header">
-                <h1>Cart</h1>
-            </div>
-
-            @if ( Session::get('error') )
-            <div class="alert alert-error alert-danger">
-                @if ( is_array(Session::get('error')) )
-                {{ head(Session::get('error')) }}
-                @endif
-            </div>
-            @endif
-
-            @if ( Session::get('notice') )
-            <div class="alert alert-info">{{ Session::get('notice') }}</div>
-            @endif
-
-            <table class="table table-striped">
-
-                @foreach($order_list as $order)
-                <div class='row'>
-                    <div class="col-md-4">
-                        <img  alt="{{$order->product->name}}" class="img-responsive" src="{{$order->product->product_pic}}">
-                    </div>
-                    <div class="col-md-8">
-                        <dl>
-                          <dt>Brand</dt>
-                          <dd>{{$order->product->brand->name}}</dd>
-                      </dl>                  
-
-                      <dl>
-                          <dt>Product</dt>
-                          <dd>{{$order->product->name}}
-                            @foreach($order->order_list_attribute->All() as $ol)
-                                {{$ol->type}}$nbsp{{$ol->name}}&nbsp
-                            @endforeach
-
-                          </dd>
-                      </dl>  
-                  </div>
-              </div>
-              <hr>
-              @endforeach
-
-          </table>
+      <div class="page-header">
+        <h1>Cart</h1>
       </div>
+
+      @if ( Session::get('error') )
+      <div class="alert alert-error alert-danger">
+        @if ( is_array(Session::get('error')) )
+        {{ head(Session::get('error')) }}
+        @endif
+      </div>
+      @endif
+
+      @if ( Session::get('notice') )
+      <div class="alert alert-info">{{ Session::get('notice') }}</div>
+      @endif
+
+      <table class="table table-striped">
+        @if($order_list)
+        @foreach($order_list as $order)
+        <div class='row'>
+          <div class="col-md-4">
+            <img  alt="{{$order->product->name}}" class="img-responsive" src="{{$order->product->product_pic}}">
+          </div>
+
+          <div class="col-md-8">
+            <button class="pull-right btn btn-default" data-toggle="modal" data-target="#{{$order->id}}">Delete</button>
+
+            <div class="modal fade" id="{{$order->id}}" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="filterLabel">ทำการลบ</h4>
+                  </div>
+                  <div class="modal-body">
+                    ลบ {{$order->product->name}}
+                    @if(!is_null($order->order_list_attribute()->get()))
+                    @foreach($order->order_list_attribute()->get() as $ol)
+                    {{$ol->type}} {{$ol->name}} 
+                    @endforeach
+                    @endif
+                    <br>
+                    แน่ใจแล้วนะ ?
+
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="{{URL::to('shop/deleteorder/'.$order->id)}}"><button class="btn btn-primary">ตกลง</button></a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+            <dl>
+              <dt>Brand</dt>
+              <dd>{{$order->product->brand->name}}</dd>
+            </dl>                  
+
+            <dl>
+              <dt>Product</dt>
+              <dd>{{$order->product->name}}
+                @if(!is_null($order->order_list_attribute()->get()))
+                @foreach($order->order_list_attribute()->get() as $ol)
+                {{$ol->type}} {{$ol->name}} 
+                @endforeach
+                @endif
+              </dd>
+            </dl>
+            <dl>
+              <dt>Price</dt>
+              <dd>
+                {{$order->product->price}} ฿
+              </dd>
+            </dl>    
+            <dl>
+              <dt>Amount</dt>
+              <dd>
+                {{$order->amount}}
+              </dd>
+            </dl>
+            <dl>
+              <dt>Total cost</dt>
+              <dd>
+                {{$order->total_cost}}
+              </dd>
+            </dl>    
+          </div>
+        </div>
+        <hr>
+         
+        @endforeach
+
+              <button class="pull-right btn btn-success" data-toggle="modal" data-target="#confirm">ยืนยัน <i class="fa fa-check-circle-o"></i></button>
+            
+            <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="filterLabel">เลิอกสถานที่รับของ</h4>
+                  </div>
+                  <div class="modal-body">
+                    เลิอก 123
+
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href=""><button class="btn btn-success">ตกลง</button></a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+        @else
+        <center><h2>คุณยังไม่ได้เลือกสินค้าเลย ลอง<a href="{{URL::to('/shop')}}">เลือกซื้อ</a>ดูก่อนนะคะ :D</h1></center>
+        @endif
+
+      </table>
+
+
+    </div>
   </div>
 </div>
 <hr class="tall" />
