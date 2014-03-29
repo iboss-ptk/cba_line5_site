@@ -186,7 +186,7 @@ class DoOrderController extends \BaseController {
 			$order->confirmed = 1;
 			$order->status = 4; 
 			$order->save();
-			Session::flash('message', 'Successfully confirmation!');
+			Session::flash('message', 'Successfully sent!');
 
 			return Redirect::to('doorder');
 

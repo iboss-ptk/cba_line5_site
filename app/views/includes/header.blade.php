@@ -84,7 +84,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="{{URL::to('user/profile')}}">
+					<a href="{{URL::to('doorder')}}">
 						Profile
 					</a>
 				</li>

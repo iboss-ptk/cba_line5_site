@@ -199,14 +199,14 @@ class ShopController extends \BaseController {
 								$order_list = OrderList::where('order_id','=',$order->id)
 								->get()->All();
 
-								return View::make('pages.shop.cart')->with('order_list',$order_list);
+								return View::make('pages.shop.cart')->with(array('order_list'=>$order_list, 'orderall'=> $order));
 							}
 
 
 						}
 
 						return View::make('pages.shop.cart')->with('order_list',null);
-			
+
 
 
 					}
@@ -214,5 +214,19 @@ class ShopController extends \BaseController {
 					public function deleteorder($id){
 						OrderList::find($id)->delete();
 						return Redirect::to('/shop/cart');
+					}
+
+					public function tos1($id){
+						if (!is_null(Input::get('recv_location'))) {
+							$order = Order::find($id);
+							$order->status = 1;
+							$order->recv_location = Input::get('recv_location');
+							$order->save();
+							return Redirect::to('/doorder');
+						}
+						Session::flash('error','เลือกสถานที่ด้วยนะคะ');
+						return Redirect::to('/shop/cart');
+						
+						
 					}
 				}
