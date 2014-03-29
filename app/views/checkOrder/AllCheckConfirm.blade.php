@@ -5,7 +5,7 @@
 <div class="col-md-12" ng-app>
 
     <br>
-    <h1>Check confirmation</h1>
+    <h1>Status 4</h1>
     <!-- Button trigger modal -->
 
 <!-- will be used to show any messages -->
@@ -31,7 +31,7 @@
                 <button type="submit" class="btn btn-success  " >
                     Show Order List
                 </button>
-         
+                    
                 {{ Form::close() }}
         </td>
         <td>{{ $order->user_id }}</td>
@@ -51,5 +51,7 @@
 
 </div>
 <hr class="tall" />
+<script src="<?php echo asset('vendor/angular.min.js')?>"></script>
+<script src="<?php echo asset('js/user_manager.js')?>"></script>
 
 @stop

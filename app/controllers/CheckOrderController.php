@@ -8,21 +8,28 @@ class CheckOrderController extends \BaseController {
 	 * @return Response
 	 */
 
-
+	  public function getIndex()
+	{
+		
+		return View::make('checkOrder.index');
+	}
     public function getStatus5No()
 	{
 	
 		$orders = Order::where('status','=',5)->get(); 
 		$spbanneds = User::where('banned','=',1)->where('issp','=',1)->get();
 		$users = User::All();
-		 return View::make('checkOrder.status5no',array( 'orders' =>$orders,  'spbanneds'=> $spbanneds,'users' =>$users));
+	
+		 return View::make('checkOrder.status5no',array( 'orders' =>$orders,'spbanneds'=>$spbanneds,'users'=>$users));
 	}
 	  public function getStatus5Yes()
 	{
+		$ordersYes = array();
 		$orders = Order::where('status','=',5)->get(); 
 		$spnotbanneds = User::where('banned','=',0)->where('issp','=',1)->get();
 		$users = User::All();
-		 return View::make('checkOrder.status5yes',array( 'orders' =>$orders,  'spnotbanneds'=> $spbanneds,'users' =>$users));
+		
+		 return View::make('checkOrder.status5yes',array( 'orders' =>$orders,'spnotbanneds'=>$spnotbanneds,'users'=>$users));
 	}
 	public function getShowOrderlist($id)
 	{
