@@ -41,7 +41,7 @@
                             @if($user->resp_sp_code == $spnotbanned->sp_code)
                             
                               <td>{{ $order->id }}</td>
-                            <td> {{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
+                            <td> {{ Form::open(array('url'=>'spcheckorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
                                     <button type="submit" class="btn btn-success  " >
                                         Show Order List
                                     </button>

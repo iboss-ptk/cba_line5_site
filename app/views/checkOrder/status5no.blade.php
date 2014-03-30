@@ -34,7 +34,7 @@
             @foreach($users as $user)
                 @if($order -> user_id == $user -> id)
 
-                    @if($user->resp_sp_code == '0')
+                    @if($user->resp_sp_code == '0' || $user->resp_sp_code == '' )
                             <td>{{ $order->id }}</td>
                             <td> {{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
                                     <button type="submit" class="btn btn-success  " >
