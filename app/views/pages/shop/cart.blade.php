@@ -21,16 +21,16 @@ CBA -- Cart
 
       @if ( Session::get('error') )
       <div class="alert alert-error alert-danger">
-      
+
         {{ Session::get('error') }}
-       
+
       </div>
       @endif
 
       @if ( Session::get('notice') )
       <div class="alert alert-info">{{ Session::get('notice') }}</div>
       @endif
-
+      <?php $sum=0?>
       <table class="table table-striped">
         @if($order_list)
         @foreach($order_list as $order)
@@ -60,11 +60,11 @@ CBA -- Cart
                     แน่ใจแล้วนะ ?
 
                   </div>
-
+                  <form action="{{URL::to('shop/deleteorder/'.$order->id)}}" method="POST">
                   <div class="modal-footer">
-                    <a href="{{URL::to('shop/deleteorder/'.$order->id)}}"><button class="btn btn-primary">ตกลง</button></a>
+                    <button class="btn btn-primary" type="submit">ตกลง</button>
                   </div>
-
+                  </form>
                 </div>
               </div>
             </div>
@@ -101,6 +101,7 @@ CBA -- Cart
               <dt>Total cost</dt>
               <dd>
                 {{$order->total_cost}}
+                <?php $sum += $order->total_cost ?>
               </dd>
             </dl>    
           </div>
@@ -109,8 +110,13 @@ CBA -- Cart
 
         @endforeach
 
-        <button class="pull-right btn btn-success" data-toggle="modal" data-target="#confirm">ยืนยัน <i class="fa fa-check-circle-o"></i></button>
+              <span class="pull-right"><strong>grand total:</strong> {{$sum}} ฿ <br>
+                <button class="pull-right btn btn-success" data-toggle="modal" data-target="#confirm">ยืนยัน <i class="fa fa-check-circle-o"></i></button>
 
+              </span>
+
+
+        
         <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -121,31 +127,31 @@ CBA -- Cart
               <div class="modal-body">
                 สะดวกรับของที่ไหนดีคะ
                 <form id="loc" method="POST" action="{{URL::to('/shop/cart/confirm/'.$orderall->id)}}">
-                <select multiple class="form-control" form="loc" name="recv_location">
-                  <option value="ออฟฟิศบริษัทจำลองจุฬา">ออฟฟิศบริษัทจำลองจุฬา</option>
-                  <option value="จามจุรีสแควร์">จามจุรีสแควร์</option>
-                  <option value="สยาม">สยาม</option>
+                  <select multiple class="form-control" form="loc" name="recv_location">
+                    <option value="ออฟฟิศบริษัทจำลองจุฬา">ออฟฟิศบริษัทจำลองจุฬา</option>
+                    <option value="จามจุรีสแควร์">จามจุรีสแควร์</option>
+                    <option value="สยาม">สยาม</option>
 
-                </select>
+                  </select>
+
+                </div>
+
+                <div class="modal-footer">
+                  <a href=""><button type="submit" form="loc" class="btn btn-success">ตกลง</button></a>
+                </div>
 
               </div>
-
-              <div class="modal-footer">
-                <a href=""><button type="submit" form="loc" class="btn btn-success">ตกลง</button></a>
-              </div>
-
             </div>
           </div>
-        </div>
-        @else
-        <center><h2>คุณยังไม่ได้เลือกสินค้าเลย ลอง<a href="{{URL::to('/shop')}}">เลือกซื้อ</a>ดูก่อนนะคะ :D</h1></center>
-        @endif
+          @else
+          <center><h2>คุณยังไม่ได้เลือกสินค้าเลย ลอง<a href="{{URL::to('/shop')}}">เลือกซื้อ</a>ดูก่อนนะคะ :D</h1></center>
+          @endif
 
-      </table>
+        </table>
 
 
+      </div>
     </div>
   </div>
-</div>
-<hr class="tall" />
-@stop
+  <hr class="tall" />
+  @stop

@@ -41,12 +41,7 @@
 					</a>
 				</li>
 
-				<li>
-					<a class="dropdown-toggle" href="#">
-						Secret Tips
-					</a>
-					
-				</li>
+				
 				@if(Auth::check()&&Confide::user()->isadmin)
 				<li class="dropdown">
 					<a class="dropdown-toggle" href="#">
@@ -56,6 +51,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="{{URL::to('manage_user')}}">User</a></li>
 						<li><a href="{{URL::to('product')}}">Product</a></li>
+						<li><a href="{{URL::to('checkorder')}}">Order</a></li>
 						<li><a href="{{URL::to('posts')}}">Post</a></li>
 					</ul>
 				</li>
@@ -75,7 +71,12 @@
 					</ul>
 				</li>
 
-				
+				<li>
+					<a class="dropdown-toggle" href="{{URL::to('secrettips')}}">
+						Secret Tips
+					</a>
+					
+				</li>
 
 				@if(Auth::check())
 				<li class="dropdown" id="home">
@@ -85,7 +86,7 @@
 				</li>
 				<li>
 					<a href="{{URL::to('doorder')}}">
-						Profile
+						Order list
 					</a>
 				</li>
 				<li>
@@ -94,6 +95,13 @@
 					</a>
 				</li>
 				@else
+
+				<li>
+					<a class="dropdown-toggle" href="{{URL::to('secrettips')}}">
+						Secret Tips
+					</a>
+					
+				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" href="#">
 						Login
@@ -105,8 +113,59 @@
 					</ul>
 				</li>
 				@endif
-				
+
+				<li class="dropdown" id="home">
+					<a href="{{URL::to('/about')}}">
+						About
+					</a>
+				</li>
+				<?php
+				function curPageURL() {
+					$pageURL = 'http';
+					$pageURL .= "://";
+					if ($_SERVER["SERVER_PORT"] != "80") {
+						$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+					} else {
+						$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+					}
+					if(count($_GET)==0) $pageURL .= '?';
+					else $pageURL .= '&';
+					return $pageURL;
+				}
+				?>
+
+				@if(Auth::check()&&Confide::user()->issp)
+				<li class="active">
+					<a href="#" data-toggle="modal" data-target="#myModal">
+						SP share <i class="fa fa-share-square"></i>
+					</a>
+
+				</li>
+
+
+				@endif
+
 			</ul>
 		</nav>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Share</h4>
+			</div>
+			<div class="modal-body">
+				Share this link to get reference<br><br>
+
+				<input value="<?php if(Auth::check()) echo curPageURL().'sp='.Auth::user()->sp_code ?>" class="form-control">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
 	</div>
 </div>

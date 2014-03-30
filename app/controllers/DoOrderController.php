@@ -13,7 +13,7 @@ class DoOrderController extends \BaseController {
     public function getIndex()
 	{
 		$userId = Auth::user()->id;
-		$orders = Order::where('user_id',$userId)->get();
+		$orders = Order::where('user_id',$userId)->orderBy('id','desc')->get();
 		return View::make('userOrder.index',array( 'orders'=> $orders));
 	}
 
@@ -184,7 +184,7 @@ class DoOrderController extends \BaseController {
 				$order->image_path = Input::get('image_path');
 			}
 			$order->confirmed = 1;
-			$order->status = 4; 
+			$order->status = 4;
 			$order->save();
 			Session::flash('message', 'Successfully sent!');
 

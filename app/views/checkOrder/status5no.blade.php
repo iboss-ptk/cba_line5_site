@@ -5,7 +5,7 @@
 <div class="col-md-12" ng-app>
 
     <br>
-    <h1>Status 5 No resp_sp</h1>
+    <h1>Admin's order</h1>
     <!-- Button trigger modal -->
 
 <!-- will be used to show any messages -->

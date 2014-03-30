@@ -5,7 +5,7 @@
 <div class="col-md-12" ng-app>
 
     <br>
-    <h1>Status 5 have resp_sp</h1>
+    <h1>SP's order</h1>
     <!-- Button trigger modal -->
 
 <!-- will be used to show any messages -->
@@ -32,7 +32,7 @@
 <tbody>
     @foreach($orders as $order)
             @foreach($users as $user)
-                @if($order -> user_id == $user -> id)
+                @if($order -> user_id == $user -> id)   
                     @if($user->resp_sp_code != '0' || $user->resp_sp_code != '' )
 
                     
