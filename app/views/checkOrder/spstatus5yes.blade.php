@@ -33,15 +33,15 @@
     @foreach($orders as $order)
             @foreach($users as $user)
                 @if($order -> user_id == $user -> id)
-                    @if($user->resp_sp_code != '0' || $user->resp_sp_code != '' )
 
+                    @if($user->resp_sp_code != '0' && $user->resp_sp_code != '' )
                     
                         @foreach($spnotbanneds as $spnotbanned)
                         
                             @if($user->resp_sp_code == $spnotbanned->sp_code)
                             
                               <td>{{ $order->id }}</td>
-                            <td> {{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
+                            <td> {{ Form::open(array('url'=>'spcheckorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
                                     <button type="submit" class="btn btn-success  " >
                                         Show Order List
                                     </button>

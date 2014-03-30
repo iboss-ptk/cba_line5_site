@@ -171,7 +171,9 @@ Route::filter('auth_sp',function(){
 
 });
 
-
+Route::group(array('before' => 'auth_sp'), function(){
+ Route::controller('spcheckorder','SpCheckOrderController');
+});
 
 //blog post
 Route::resource('posts', 'PostController');
