@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="col-md-12" ng-app>
+<div class="col-md-6 col-md-offset-3" ng-app>
     {{Form::open(array('action' => array('DoOrderController@postConfirmation', $order->id),'files'=> true))}}
     <br>
     <h1> Confirmation </h1>
@@ -15,20 +15,17 @@
     @endif
     <div class="form-group">
     {{ Form::label('image_path', 'Image :') }} 
-         <!-- {{ Form::file('image_path' , Input::old('image_path'), array('class' => 'form-control'))}} -->
-         <input type="radio" name="img_selc" ng-model="img_selc" value="text" checked="true">  URL &nbsp&nbsp
-         <input type="radio" name="img_selc" ng-model="img_selc" value="file"> Upload <br/>
-         <input ng-if="img_selc=='text'" name="image_path" type="text" class="form-control" value="{{Input::old('image_path')}}">
-         <input ng-if="img_selc=='file'" name="image_path" type="file" class="form-control" value="{{Input::old('image_path')}}">
+       
+         <input name="image_path" type="file" class="form-control" value="{{Input::old('image_path')}}">
      </div>
 
 
     <br>
     
-    {{ Form::submit('Submit', array('class' => 'btn btn-success')) }}
+    {{ Form::submit('Submit', array('class' => 'btn btn-success btn-block')) }}
 
     {{ Form::close() }}
-
+<hr>
 </div>
 
 

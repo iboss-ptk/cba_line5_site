@@ -25,8 +25,8 @@ CBA -- Shop
 
 	<hr />
 
-	<input value="{{Input::get('search')}}" id="search" ng-focus="" ng-model="search" placeholder="product name..." class="form-control" >
-{{Input::get('search')}}
+	<input ng-init="search={{Input::get('search')}}" id="search" ng-focus="" ng-model="search" placeholder="product name..." class="form-control" >
+
 	<div>
 		<ul class="pager">
 			<li class="previous" ng-click="prev()"><a href="">&larr; Previous</a></li>
@@ -98,7 +98,7 @@ CBA -- Shop
 							</div>
 
 							@else
-								
+							
 							<div class="modal-footer">
 								<a href="user/login"><button type="submit" form="@{{ product.id }}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbspสั่งซื้อ <i class="fa fa-shopping-cart fa-lg"></i>&nbsp&nbsp&nbsp&nbsp</button></a>
 							</div>
@@ -113,19 +113,20 @@ CBA -- Shop
 
 		</ul>
 		<div>
+			
+		</div>
 		<ul class="pager">
 			<a class="scroll-to-top" href="#top"><li class="previous" ng-click="prev()"><a href="">&larr; Previous</a></li></a>
 			<li>Pages :  <span ng-bind="currentPage"></span> /  <span ng-bind="total"></span></li>
 			<a class="scroll-to-top" href="#top"><li class="next" ng-click="next()"><a href="">Next &rarr;</a></li></a>
 		</ul>
 	</div>
-	</div>
 
 </div>
 
 </div>
 
-	
+
 
 <hr class="tall" />
 

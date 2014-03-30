@@ -23,10 +23,8 @@
         <td>User_firstname</td>
         <td>User_lastname </td>
         <td>User_mobilephonenumber</td>
-        <td>resp_sp_code</td> 
-        <td>ordered_at</td>        
         <td>paid_at</td>     
-        <td>recv_location </td>               
+        <td>สถานที่รับของ </td>               
     </tr>
 </thead>
 <tbody>
@@ -34,7 +32,7 @@
             @foreach($users as $user)
                 @if($order -> user_id == $user -> id)
 
-                    @if($user->resp_sp_code == '0')
+                  @if($user->resp_sp_code == '0' || $user->resp_sp_code == '' )
                             <td>{{ $order->id }}</td>
                             <td> {{ Form::open(array('url'=>'checkorder/show-orderlist/'.$order->id,'method'=>'GET')) }}
                                     <button type="submit" class="btn btn-success  " >
@@ -47,8 +45,6 @@
                             <td>{{ $user->firstname }}</td>
                             <td>{{ $user->lastname }}</td>
                             <td>{{ $user->mobilephonenumber }}</td>  
-                            <td>{{ $user->resp_sp_code }}</td>   
-                            <td>{{ $order->ordered_at }}</td>   
                             <td>{{ $order->paid_at }}</td>
                             <td>{{ $order->recv_location }}</td>                   
                     @else

@@ -219,7 +219,7 @@ class ShopController extends \BaseController {
 					public function tos1($id){
 						if (!is_null(Input::get('recv_location'))) {
 							$order = Order::find($id);
-							$order->status = 1;
+							$order->status = 3;
 							$order->recv_location = Input::get('recv_location');
 							$order->save();
 							return Redirect::to('/doorder');

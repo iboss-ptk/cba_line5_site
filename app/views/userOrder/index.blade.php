@@ -40,21 +40,18 @@
                 โดนลบแล้วจ้าาาา สั่งมาใหม่น้าาาา
                 @elseif ($order->status === 3)
                 กรุณายืนยันการชำระเงินภายใน 24 ชั่วโมงค่ะ
-                {{ Form::open(array('url'=>'doorder/confirmation/'.$order->id,'method'=>'GET')) }}
-                <button type="submit" class="btn btn-info   " >
-                    คลิกที่นี่เพื่อยืนยัน
-                </button>
-                {{ Form::close() }}
+                <a href="doorder/confirmation/{{$order->id}}">ส่งหลักฐานการชำระเงิน</a>
+
                 @elseif ($order->status === 4)
                 กำลังดำเนินการค่ะ ตรวจสอบภาพที่ส่งมาได้
-                <a data-toggle="modal" data-target="#confirm">ที่นี่ <i class="fa fa-check-circle-o"></i></a>
+                <a data-toggle="modal" data-target="#confirm">ที่นี่ <i class="fa fa-picture-o"></i></a>
 
                 <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="filterLabel">หลักฐาน</h4>
+                        <h4 class="modal-title" id="filterLabel">หลักฐานการชำระเงิน</h4>
                     </div>
                     <div class="modal-body col-md-12">
                             <center><img src="{{$order->image_path}}" class="img-responsive"></center>
