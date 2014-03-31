@@ -71,13 +71,6 @@
 					</ul>
 				</li>
 
-				<li>
-					<a class="dropdown-toggle" href="{{URL::to('secrettips')}}">
-						Secret Tips
-					</a>
-					
-				</li>
-
 				@if(Auth::check())
 				<li class="dropdown" id="home">
 					<a href="{{URL::to('/shop/cart')}}">
@@ -88,6 +81,12 @@
 					<a href="{{URL::to('doorder')}}">
 						Order list
 					</a>
+				</li>
+				<li>
+					<a class="dropdown-toggle" href="{{URL::to('secrettips')}}">
+						Secret Tips
+					</a>
+					
 				</li>
 				<li>
 					<a href="{{URL::to('user/logout')}}">

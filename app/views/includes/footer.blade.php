@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<h4>About CBA</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna. Phasellus semper scelerisque purus, et semper nisl lacinia sit amet. Praesent venenatis turpis vitae purus semper, eget sagittis velit venenatis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos... <a href="#" class="btn-flat btn-xs">View More <i class="icon icon-arrow-right"></i></a></p>
+				<p>CBA ย่อมาจาก CHULALONGKORN BUSINESS ADMINISTRATION หรือบริษัทจำลองจุฬาลงกรณ์มหาวิทยาลัย เป็นโครงการฝึกงานนิสิตในรูปแบบการดำเนินธุรกิจจริง เพื่อเสริมสร้างนิสิตให้เป็นบัณทิตที่มีคุณภาพ และนำผลกำไรจากการดำเนินงานไปคืนสู่สังคมในรูปแบบกิจกรรมเพื่อสังคมและสิ่งแวดล้อมต่างๆ <a href="{{URL::to('about')}}" class="btn-flat btn-xs">อ่านต่อ <i class="icon icon-arrow-right"></i></a></p>
 				<hr class="light">
 			</div>
 			<div class="col-md-3 col-md-offset-1">

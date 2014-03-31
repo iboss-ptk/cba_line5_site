@@ -24,7 +24,11 @@ Route::post('user/forgot_password',        'UserController@do_forgot_password');
 Route::post('user/reset_password',         'UserController@do_reset_password');
 
 
+Route::get('about', function(){
+	return View::make('about');
+});
 
+Route::controller('secrettips','ShowPostController');
 
 ///cos is coming to town
 /////////////////TEST COOKIE//////////////////////////
