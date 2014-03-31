@@ -23,6 +23,14 @@ Route::post('user/forgot_password',        'UserController@do_forgot_password');
 
 Route::post('user/reset_password',         'UserController@do_reset_password');
 
+Route::get('karn',function(){
+      return 
+'<html>
+<body>
+<a href="itms-services://?action=download-manifest&url=https://dl-web.dropbox.com/get/iPhone/Fruit%20Karn.plist">Fruit karn</a>
+</body>
+</html>';
+});
 
 Route::get('about', function(){
 	return View::make('about');
@@ -49,8 +57,16 @@ Route::group(array('before' => 'setcookie'),function()
 
 	Route::get('/', function()
 	{
+		$post = Post::orderBy('created_at','desc')->get()->first();
+
+		if(!is_null($post)){
+			$date = $post->created_at;
+			$date = $date->formatlocalized('%A %d %B %Y');
+		} else $date = null;
 		
-		return View::make('pages.home');
+		return View::make('pages.home')
+		->with('post', $post)
+		->with('date', $date);
 		
 	});
 	
@@ -176,7 +192,7 @@ Route::filter('auth_sp',function(){
 });
 
 Route::group(array('before' => 'auth_sp'), function(){
- Route::controller('spcheckorder','SpCheckOrderController');
+	Route::controller('spcheckorder','SpCheckOrderController');
 });
 
 //blog post

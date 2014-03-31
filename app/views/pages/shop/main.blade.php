@@ -25,7 +25,7 @@ CBA -- Shop
 
 	<hr />
 
-	<input ng-init="search={{Input::get('search')}}" id="search" ng-focus="" ng-model="search" placeholder="product name..." class="form-control" >
+	<input ng-init="search='{{Input::get('search')}}'"  id="search" ng-focus="" ng-model="search" placeholder="product name..." class="form-control" >
 
 	<div>
 		<ul class="pager">
@@ -123,16 +123,17 @@ CBA -- Shop
             
             
         </ul> 
-        
-    </div> 
+    </div>
+    <ul class="pager">
+        <a class="scroll-to-top" href="#top"><li class="previous" ng-click="prev()"><a href="">&larr; Previous</a></li></a>
+        <li>Pages :  <span ng-bind="currentPage"></span> /  <span ng-bind="total"></span></li>
+        <a class="scroll-to-top" href="#top"><li class="next" ng-click="next()"><a href="">Next &rarr;</a></li></a>
+    </ul>   
+</div>
 
-</div>
-<ul class="pager">
-	<a class="scroll-to-top" href="#top"><li class="previous" ng-click="prev()"><a href="">&larr; Previous</a></li></a>
-	<li>Pages :  <span ng-bind="currentPage"></span> /  <span ng-bind="total"></span></li>
-	<a class="scroll-to-top" href="#top"><li class="next" ng-click="next()"><a href="">Next &rarr;</a></li></a>
-</ul>	
-</div>
+</div> 
+
+
 
 </div>
 

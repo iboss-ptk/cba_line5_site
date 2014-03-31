@@ -113,6 +113,15 @@
 				</li>
 				@endif
 
+				@if(Auth::check()&&Confide::user()->issp)
+				<li>
+					<a class="dropdown-toggle" href="{{URL::to('spcheckorder')}}">
+						Customer's order
+					</a>
+					
+				</li>
+				@endif
+
 				<li class="dropdown" id="home">
 					<a href="{{URL::to('/about')}}">
 						About

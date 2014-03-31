@@ -2,10 +2,10 @@
 
 @section('content')
 
-<div class="col-md-12" ng-app>
+<div class="col-md-10 col-md-offset-1" ng-app>
 
     <br>
-    <h1>Status 5 have resp_sp</h1>
+    <h1>Order request to SP</h1>
     <!-- Button trigger modal -->
 
 <!-- will be used to show any messages -->
@@ -17,16 +17,15 @@
   <hr>
   <thead>
     <tr>
-         <td>Order_ID</td>
+         <td>Order ID</td>
         <td>Orederlist</td>
-        <td>User_ID</td>
-        <td>User_firstname</td>
-        <td>User_lastname </td>
-        <td>User_mobilephonenumber</td>
-        <td>resp_sp_code</td> 
-        <td>ordered_at</td>        
-        <td>paid_at</td>     
-        <td>recv_location </td>  
+        <td>ID</td>
+        <td>firstname</td>
+        <td>lastname </td>
+        <td>mobile</td>
+        <td>SP</td>      
+        <td>paid at</td>     
+        <td>recieve location </td>  
     </tr>
 </thead>
 <tbody>
@@ -52,8 +51,7 @@
                             <td>{{ $user->firstname }}</td>
                             <td>{{ $user->lastname }}</td>
                             <td>{{ $user->mobilephonenumber }}</td>  
-                            <td>{{ $user->resp_sp_code }}</td>   
-                            <td>{{ $order->ordered_at }}</td>   
+                            <td>{{ $user->resp_sp_code }}</td>  
                             <td>{{ $order->paid_at }}</td>   
                             <td>{{ $order->recv_location }}</td>   
                             

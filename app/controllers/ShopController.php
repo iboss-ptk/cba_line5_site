@@ -221,6 +221,8 @@ class ShopController extends \BaseController {
 							$order = Order::find($id);
 							$order->status = 3;
 							$order->recv_location = Input::get('recv_location');
+							$order->touch();
+							$order->ordered_at = $order->updated_at;
 							$order->save();
 							return Redirect::to('/doorder');
 						}

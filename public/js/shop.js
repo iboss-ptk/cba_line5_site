@@ -69,7 +69,7 @@ Array.prototype.remove = function(from, to) {
 
 controllers.ProductCtrl = function($scope, $http, productService, attService , brandService, categoryService, searchService){
 
-  $scope.search = '';
+  // $scope.search = '';
 
   categoryService.getCategories().success(function(data){
     $scope.categories = data;
